@@ -1,15 +1,19 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
+
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-  { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
-  { languageOptions: { globals: globals.browser } },
+  {
+    extends: "@mate-academy/eslint-config",
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+    },
+  },
+  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
+  {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
-  eslintPluginPrettierRecommended,
 ];

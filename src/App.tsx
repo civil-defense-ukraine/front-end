@@ -1,5 +1,19 @@
-import React from 'react';
+import { Outlet } from 'react-router-dom';
+
+import './App.scss';
+import { Footer } from './components/Footer';
+import { TopBar } from './components/TopBar';
+
+
 
 export const App = () => {
-  return <h1> Civil Defense Uktaine</h1>;
+
+
+  return (
+    <>
+      <TopBar />
+      <Outlet />
+      <Footer />
+    </>
+  );
 };
