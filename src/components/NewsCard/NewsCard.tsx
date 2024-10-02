@@ -25,20 +25,23 @@ const normalizeData = {
   }
 }
 export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
-  const { id, img, type, title, date, text } = newsData;
+  const { id, image, type, title, publicationDate, text } = newsData;
+  const date = new Date(publicationDate);
   const titleForLink = title.split(' ').join('-');
 
   console.log(date);
 
 
   return <article className={styles.container} style={style}>
-    <img className={styles.img} src={img} alt={title} />
+    <div className={styles.info}>
+    <img className={styles.img} src={image} alt={title} />
     <div className={styles.tag}>{type}</div>
     <div className={`${styles.header}`}>
-      <h3 className={`${styles.heading} heading--3`}>{normalizeData.title(title)}</h3>
+      <h3 className={`${styles.heading} heading--h3`}>{normalizeData.title(title)}</h3>
       <p className={styles.date}> {normalizeData.date(date)} </p>
     </div>
     <p className={styles.mainText}>{text}</p>
+    </div>
     <a href={`/news/${titleForLink}`} className={`${styles.button} button--withArrow`}>
       <p>read more</p><div className='icon icon--arrow button--withArrow-icon'></div>
     </a>

@@ -1,0 +1,94 @@
+@import '../../../../styles/styles.scss';
+
+.info {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 24px;
+  margin-bottom: 46px;
+
+  @include on-tablet {
+    padding-bottom: 0;
+  }
+
+  @include on-desktop {
+    align-items: flex-start;
+  }
+
+  &__text {
+    color: $white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    @include on-desktop {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    &:hover > div {
+      background-color: $yellow;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.location {
+  background-image: url('../../../../imgs/about-us/bg-location.png');
+  background-size: cover;
+  background-position: center;
+  color: $white;
+
+  &__container {
+    background-color: rgba(7, 17, 28, 0.7);
+    @include padding-inline;
+    padding-block: 88px;
+    text-align: center;
+
+    & > h2 {
+      @include on-tablet {
+        text-align: left;
+      }
+    }
+  }
+
+  &__header {
+    padding-bottom: 32px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    @include on-desktop {
+      flex-direction: row;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__img {
+    background-image: url(../../../../imgs/about-us/location.png);
+    height: 397px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    flex-grow: 0;
+
+    @include on-tablet {
+      background-image: url(../../../../imgs/about-us/location-tablet.png);
+    }
+
+    @include on-desktop {
+      width: 547px;
+    }
+  }
+}

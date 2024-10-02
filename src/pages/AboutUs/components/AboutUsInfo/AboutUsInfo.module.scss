@@ -1,0 +1,64 @@
+@import '../../../../styles/styles.scss';
+
+.container {
+  @include padding-inline;
+
+  @include on-desktop {
+    padding-inline: 162px;
+    box-sizing: border-box;
+  }
+}
+
+.article {
+  padding: 16px;
+  margin-bottom: 24px;
+
+  @include on-tablet {
+    display: flex;
+    gap: 32px;
+  }
+
+  @include on-desktop {
+    padding: 24px;
+  }
+
+  &:nth-of-type(2) {
+    flex-direction: row-reverse;
+  }
+
+  &:last-child {
+    margin-bottom: 35px;
+  }
+
+  &__header {
+    padding-bottom: 16px;
+
+    @include on-desktop {
+      padding-bottom: 32px;
+    }
+  }
+
+  &__img {
+    height: 314px;
+    padding-bottom: 32px;
+
+    @include on-tablet {
+      padding-bottom: 0;
+      height: 311px;
+    }
+
+    @include on-desktop {
+      height: 501px;
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 21px;
+
+    @include on-desktop {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+}

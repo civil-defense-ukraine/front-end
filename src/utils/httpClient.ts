@@ -1,4 +1,4 @@
-const BASE_URL = 'https://mate.academy/students-api';
+const BASE_URL = 'http://localhost:3000/api';
 
 
 export async function request<T>(path: string, method = 'GET', data?: any):Promise<T> {
@@ -11,12 +11,10 @@ export async function request<T>(path: string, method = 'GET', data?: any):Promi
     }
   }
   
-  return fetch(BASE_URL + path, options).then((response) => {
+  return fetch(`${BASE_URL}/${path}`, options).then((response) => {
     if (!response.ok) {
       throw new Error('Something went wrong!')
     }
-
-    console.log(response);
     
 
     return response.json();

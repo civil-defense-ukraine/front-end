@@ -1,8 +1,8 @@
 export type News = {
   id: number,
-  img: string,
-  type: 'news' | 'report' | 'event',
+  image: string,
+  type: string,
   title: string,
-  date: Date,
+  publicationDate: string,
   text: string,
 }

@@ -53,7 +53,9 @@
   }
 
   &--arrow {
-    background-image: url('../../imgs/icons/arrow.svg');
+    -webkit-mask-image: url('../../imgs/icons/arrow.svg');
+    mask-image: url('../../imgs/icons/arrow.svg');
+    // background-image: url('../../imgs/icons/arrow.svg');
   }
 
   &--location {

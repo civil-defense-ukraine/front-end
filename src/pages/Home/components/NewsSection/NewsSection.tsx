@@ -1,38 +1,24 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { News } from '../../../../types/News';
 import styles from './News.module.scss';
 import { useWidth } from '../../../../hooks/useWidth';
 import { NewsCard } from '../../../../components/NewsCard';
 import { Link } from 'react-router-dom';
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
+import { news } from '../../../../services/news';
 
 export const NewsSection = () => {
-  const newsArticles: News[] = [{
-    id: 1,
-    img: './imgs/news/image_1.png',
-    type: 'news',
-    title: '1 creative Dage Exhibition',
-    date: new Date(2024, 9, 1),
-    text: 'Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. ',
-  }, {
-    id: 2,
-    img: './imgs/news/image_1.png',
-    type: 'news',
-    title: '2 creative Dage Exhibition',
-    date: new Date(2024, 9, 2),
-    text: 'Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. ',
-  }, {
-    id: 3,
-    img: './imgs/news/image_1.png',
-    type: 'news',
-    title: '3 creative Dage Exhibition',
-    date: new Date(2024, 9, 3),
-    text: 'Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. ',
-  }];
+  const [currentNews, setCurrentNews] = useState<News[]>([]);
 
-  const news = JSON.stringify(newsArticles);
+  useEffect(() => { 
+    news.get().then((newFromServer) => {
+      setCurrentNews(newFromServer);
 
-  console.log(news);
+      console.log(newFromServer);
+      
+      
+    })
+  }, [])
 
   const [displayIndex, setDisplayIndex] = useState(0);
   const width = useWidth();
@@ -43,10 +29,10 @@ export const NewsSection = () => {
     <section ref={container}  className={styles.container}>
       <h2 className={`${styles.header} heading--h2`}>Latest News</h2>
       <div className={`${styles.articles} hide--bottom ${isVisible ? 'show' : ''}`}>
-        {newsArticles.map((article, curIndex) => (
+        {currentNews.map((article, curIndex) => (
           <NewsCard
             newsData={article}
-            key={article.date.toDateString()}
+            key={article.id}
             style={{
               transform: `translateX(calc(-100% * ${displayIndex} - 16px * ${displayIndex}))`
             }}
@@ -61,7 +47,7 @@ export const NewsSection = () => {
       </button>
       <button
         className={styles.button}
-        disabled={displayIndex > newsArticles.length - 2}
+        disabled={displayIndex > currentNews.length - 2}
         onClick={() => {
           setDisplayIndex(prev => prev + 1)
         }}>

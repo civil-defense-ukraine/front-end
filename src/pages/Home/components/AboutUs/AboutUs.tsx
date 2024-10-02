@@ -17,7 +17,7 @@ export const AboutUs = () => {
     </picture>
 
     <div className={`${styles.text} hide--right ${isVisible ? 'show' : ''}`}>
-      <h2 className={styles.title}>About Us</h2>
+      <h2 className={`${styles.title} heading--h2`}>About Us</h2>
       <p>Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. </p>
 
       <Link to="about-us" className='button--withArrow'>
