@@ -1,23 +1,27 @@
 [
   {
-    "img": "./imgs/news/image_1.png",
-    "type": "news",
-    "title": "creative Dage Exhibition",
-    "date": "2024-10-03T21:00:00.000Z",
-    "text": "Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. "
+    "id": 1,
+    "image": "imgs/news/image_1.png",
+    "publicationDate": "2024-09-28T12:00:00",
+    "text": "Good people truly make the world go round! We are incredibly grateful to the local hospital in Fredericia for once again supporting us with much-needed equipment, and to our amazing supporters who helped Jurij load everything this morning The wheelchairs, medications, and sanitary supplies are now on their way to Ukraine.",
+    "title": "News from Denmark",
+    "type": "NEWS"
   },
   {
-    "img": "./imgs/news/image_1.png",
-    "type": "news",
-    "title": "creative Dage Exhibition",
-    "date": "2024-10-03T21:00:00.000Z",
-    "text": "Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. "
+    "id": 2,
+    "image": "imgs/news/image_1.png",
+    "publicationDate": "2024-09-28T12:00:00",
+    "text": "Dear followers, together with you we supported 73 окремий батальйон Територіальної оборони Закарпаття with a power station. Thank you, and let’s keep doing! Together we are stronger Slava Ukraini!",
+    "title": "Report electricity",
+    "type": "REPORT"
   },
+
   {
-    "img": "./imgs/news/image_1.png",
-    "type": "news",
-    "title": "creative Dage Exhibition",
-    "date": "2024-10-03T21:00:00.000Z",
-    "text": "Civil Defense Ukraine is a charity organization that raises funds and humanitarian help to Ukraine. It is founded at 2022 in Fredericia, Denmark. Currently there are 25 people working volunteerly in our organisation. We are from Ukraine and spending our spare time to help to people in need. "
+    "id": 3,
+    "image": "imgs/news/image_1.png",
+    "publicationDate": "2024-09-28T12:00:00",
+    "text": "It was a great honor for us at Civil Defense Ukraine to participate in the Ukrainian Culture Day charity event organized by Ukrainsk forening i Kolding. A big thank you to the organizers for hosting this event, where over 250 guests enjoyed delicious food, listened to Ukrainian music, socialized, and made different memorable purchases to support our defenders.",
+    "title": "Event Culture Day",
+    "type": "EVENT"
   }
 ]

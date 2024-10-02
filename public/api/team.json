@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "image": "imgs/team/image_1.png",
+    "name": "Jurij Gabedov",
+    "position": "Founder CDU"
+  },
+  {
+    "id": 2,
+    "image": "imgs/team/image_2.png",
+    "name": "Anna Gabedov",
+    "position": "Founder CDU"
+  },
+
+  {
+    "id": 3,
+    "image": "imgs/team/image_3.png",
+    "name": "Kateryna Kharchenko",
+    "position": "Volunteer of CDU since 2022"
+  },
+  {
+    "id": 4,
+    "image": "imgs/team/image_2.png",
+    "name": "Anna Gabedov",
+    "position": "Founder CDU"
+  },
+
+  {
+    "id": 5,
+    "image": "imgs/team/image_3.png",
+    "name": "Kateryna Kharchenko",
+    "position": "Volunteer of CDU since 2022"
+  }
+]
