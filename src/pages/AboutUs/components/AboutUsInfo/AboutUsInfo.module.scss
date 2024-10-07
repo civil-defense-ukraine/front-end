@@ -2,8 +2,14 @@
 
 .container {
   @include padding-inline;
+  padding-bottom: 35px;
+
+  @include on-tablet {
+    padding-bottom: 38px;
+  }
 
   @include on-desktop {
+    padding-bottom: 150px;
     padding-inline: 162px;
     box-sizing: border-box;
   }
@@ -12,10 +18,12 @@
 .article {
   padding: 16px;
   margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
 
   @include on-tablet {
-    display: flex;
     gap: 32px;
+    flex-direction: row;
   }
 
   @include on-desktop {
@@ -23,7 +31,9 @@
   }
 
   &:nth-of-type(2) {
-    flex-direction: row-reverse;
+    @include on-tablet {
+      flex-direction: row-reverse;
+    }
   }
 
   &:last-child {
@@ -39,7 +49,6 @@
   }
 
   &__img {
-    height: 314px;
     padding-bottom: 32px;
 
     @include on-tablet {

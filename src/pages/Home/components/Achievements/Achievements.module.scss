@@ -1,7 +1,7 @@
 @import '../../../../styles/styles.scss';
 
 .container {
-  background-image:    url('../../../../imgs/achievements-bg.jpg') ;
+  background-image: url('../../../../imgs/achievements-bg.jpg');
   background-size: cover;
   background-position: center;
   color: $white;
@@ -23,7 +23,6 @@
     @include on-desktop {
       padding-inline: 48px;
     }
-
   }
 }
 
@@ -36,6 +35,7 @@
   justify-items: center;
 
   @include on-tablet {
+    display: grid;
     grid-template-columns: repeat(2, 395px);
     grid-template-rows: repeat(2, 1fr);
   }
@@ -49,6 +49,11 @@
   padding: 24px 24px 30px;
   width: 100%;
   border-radius: 24px;
+
+  &__first {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
 
   @include on-tablet {
     width: 335px;

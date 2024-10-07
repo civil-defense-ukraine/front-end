@@ -5,16 +5,25 @@
   flex-direction: column;
   gap: 32px;
   align-items: center;
+  padding-inline: 18px;
+  padding-bottom: 100px;
+
+  @include on-tablet {
+    padding-inline: 70px;
+    padding-bottom: 144px;
+  }
+
+  @include on-desktop {
+    padding-inline: 48px;
+    padding-bottom: 150px;
+  }
 }
 
 .team {
-  display: flex;
-  height: 100%;
-  transition: height 2s;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
   @include on-tablet {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     column-gap: 24px;
     row-gap: 32px;
   }
@@ -23,12 +32,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  &__short {
-    height: 932px;
-
-    @include on-tablet {
-      height: 584px;
-    }
+  &__rest {
+    max-height: 1px;
+    overflow: hidden;
+    transition: max-height 3s;
   }
 }
 

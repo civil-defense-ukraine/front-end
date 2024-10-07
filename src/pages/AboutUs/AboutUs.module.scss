@@ -1,45 +1,27 @@
 @import '../../styles/styles.scss';
 
-
-
 .header {
   background-image: url('../../imgs/about-us/bg.png');
   background-size: cover;
   background-position: center;
   height: 190px;
-  padding-top: 25px;
+  padding-top: 26px;
   padding-left: 18px;
 
   @include gap-btw-blocks;
 
   @include on-tablet {
     background-image: url('../../imgs/about-us/bg-tablet.png');
+    background-position: center;
+    padding-top: 26px;
+    padding-left: 70px;
   }
 
   @include on-desktop {
     background-image: url('../../imgs/about-us/bg-desktop.png');
     height: 348px;
+    padding-top: 32px;
+    padding-left: 48px;
     margin-bottom: 100px;
   }
 }
-
-.breadcrmbs {
-  color: $white;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  &__arrow {
-    background-color: $white;
-    height: 10px;
-    width: 5px;
-  }
-
-  &__text_disabled {
-    color: $grey;
-  }
-}
-
-
-
-

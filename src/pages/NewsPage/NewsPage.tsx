@@ -1,27 +1,29 @@
 import { useLocation } from 'react-router-dom';
 import styles from './NewsPage.module.scss';
-import { useEffect, useState } from 'react';
-import { News } from '../../types/News';
-import { news } from '../../services/news'; 
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { loadNews } from '../../features/newsSlice';
+import { NewsCatalog } from './components/NewsCatalog';
+import { LatestArticle } from './components/LatestArticle';
 
 export const NewsPage = () => {
   const { pathname } = useLocation();
-  
+  const { news, latestSingleNews, loading, error } = useAppSelector(
+    state => state.news,
+  );
+  const dispatch = useAppDispatch();
 
-  console.log(new Date("2024-09-28T12:00:00"));
-  
-  
+  useEffect(() => {
+    dispatch(loadNews());
+  }, []);
 
-  return (<section className={styles.container}>
-    <div className={styles.header}>
-      <div className={styles.breadcrmbs}> <p>home</p>{
-        pathname.slice(1).split('/').map((path) => {
-          return <>
-            <div className='icon icon--arrow icon--small'></div>
-            <p>{path}</p>
-          </>
-        })}</div>
-    </div>
-    <h1>News Page</h1>
-  </section>)
-}
+  console.log(news);
+
+  return (
+    <section className={styles.container}>
+      <h2 className={`${styles.heading} heading--h3`}>Latest Article</h2>
+      {latestSingleNews && <LatestArticle newsData={latestSingleNews} />}
+      <NewsCatalog news={news} />
+    </section>
+  );
+};

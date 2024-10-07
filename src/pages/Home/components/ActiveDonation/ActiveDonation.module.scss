@@ -41,13 +41,11 @@
   }
 
   &__img {
-    width:100%;
+    width: 100%;
     grid-column: 2 / span 4;
 
-
     @include on-desktop {
-      grid-column:span 5;
+      grid-column: span 5;
     }
   }
-
 }

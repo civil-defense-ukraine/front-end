@@ -1,3 +1,10 @@
+import { Breadcrumbs } from '../../components/Breadcrumbs';
+import styles from './NewsArticle.module.scss';
+
 export const NewsArticle = () => {
-  return (<h1>News Article</h1>);
-}
+  return (
+    <div className={styles.container}>
+      <Breadcrumbs />
+    </div>
+  );
+};

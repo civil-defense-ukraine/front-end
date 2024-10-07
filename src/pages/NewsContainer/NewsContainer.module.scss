@@ -1,0 +1,26 @@
+@import '/src/styles/styles.scss';
+
+.header {
+  background-image: url('../../imgs/news/bg.png');
+  height: 90px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 26px;
+  padding-left: 18px;
+  box-sizing: border-box;
+
+  @include on-tablet {
+    background-image: url('../../imgs/news/bg-tablet.png');
+    height: 190px;
+    padding-top: 26px;
+    padding-left: 70px;
+  }
+
+  @include on-desktop {
+    background-image: url('../../imgs/news/bg-desktop.png');
+    height: 354px;
+    padding-top: 32px;
+    padding-left: 48px;
+  }
+}

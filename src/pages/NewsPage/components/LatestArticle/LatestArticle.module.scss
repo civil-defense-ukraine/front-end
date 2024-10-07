@@ -1,0 +1,99 @@
+@import '../../../../styles/styles.scss';
+
+.container {
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  transition: transform 2s;
+  width: 100%;
+  // justify-content: stretch;
+  
+
+  @include on-tablet {
+    flex-direction: row;
+    align-items: center;
+    // width: 100%;
+  }
+}
+
+.img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 24px;
+  flex-basis: 314px;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  @include on-tablet {
+    flex-basis: 311px;
+    height: 296px;
+  }
+
+  @include on-desktop {
+    flex-basis: 501px;
+    height: 501px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tag {
+  color: $blue;
+  text-transform: uppercase;
+  font-weight: 700;
+  height: 37px;
+  line-height: 37px;
+  width: 77px;
+  text-align: center;
+
+  border: 1px solid $blue;
+  border-radius: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.heading {
+  max-width: 200px;
+
+  @include on-tablet {
+    max-width: auto;
+    font-size: 32px;
+  }
+}
+
+.date {
+  font-size: 14px;
+  color: $grey;
+}
+
+.mainText {
+  font-size: 14px;
+  line-height: 1.5em;
+  height: 126px;
+  // display: -webkit-box;
+  // -webkit-line-clamp: 6; /* Number of lines to display before truncating */
+  // -webkit-box-orient: vertical;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // word-break: normal; /* Ensure wrapping happens at word boundaries */
+  // overflow-wrap: break-word; /* A fallback for word-breaking */
+  // height: 150px; /* Adjust based on your text size and line-height */
+  // line-height: 1.5; /* Adjust line-height as needed */
+  // max-height: calc(1.5em * 6); /* 3 is the same as the number of lines */
+
+
+  @include on-tablet {
+    font-size: 16px;
+  }
+}

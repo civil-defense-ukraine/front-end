@@ -1,0 +1,18 @@
+@import '../../styles/styles.scss';
+
+.container {
+  color: $white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow {
+  background-color: $white;
+  height: 10px;
+  width: 5px;
+}
+
+.text_disabled {
+  color: $grey;
+}

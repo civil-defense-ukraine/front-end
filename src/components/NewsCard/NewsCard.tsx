@@ -1,49 +1,41 @@
-import { CSSProperties } from "react";
-import { News } from "../../types/News";
+import { CSSProperties, useMemo } from 'react';
+import { News } from '../../types/News';
 import styles from './NewsCard.module.scss';
+import { getNormalized } from '../../utils/getNormalized';
 
 type Props = {
-  newsData: News
-  style?: CSSProperties
-}
+  newsData: News;
+  style?: CSSProperties;
+};
 
-const normalizeData = {
-  title(title: string) {
-    return title
-      .split(' ')
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(' ');
-  },
-  date(date: Date) {
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-
-    return new Intl.DateTimeFormat('en-US', options).format(date);
-  }
-}
 export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
   const { id, image, type, title, publicationDate, text } = newsData;
   const date = new Date(publicationDate);
-  const titleForLink = title.split(' ').join('-');
+  const titleForLink = getNormalized.link(title);
+  const normalizedText = getNormalized.slicedText(text);
 
-  console.log(date);
-
-
-  return <article className={styles.container} style={style}>
-    <div className={styles.info}>
-    <img className={styles.img} src={image} alt={title} />
-    <div className={styles.tag}>{type}</div>
-    <div className={`${styles.header}`}>
-      <h3 className={`${styles.heading} heading--h3`}>{normalizeData.title(title)}</h3>
-      <p className={styles.date}> {normalizeData.date(date)} </p>
-    </div>
-    <p className={styles.mainText}>{text}</p>
-    </div>
-    <a href={`/news/${titleForLink}`} className={`${styles.button} button--withArrow`}>
-      <p>read more</p><div className='icon icon--arrow button--withArrow-icon'></div>
-    </a>
-  </article>
-} 
+  return (
+    <article className={styles.container} style={style}>
+      <img className={styles.img} src={image} alt={title} loading="lazy" />
+      <div className={styles.info}>
+        <div className={styles.info__container}>
+          <div className={styles.tag}>{type}</div>
+          <div className={`${styles.header}`}>
+            <h3 className={`${styles.heading} heading--h3`}>
+              {`${id} ${getNormalized.title(title)}`}
+            </h3>
+            <p className={styles.date}> {getNormalized.date(date)} </p>
+          </div>
+          <p className={styles.mainText}>{normalizedText}</p>
+        </div>
+        <a
+          href={`/news/${titleForLink}`}
+          className={`${styles.button} button--withArrow`}
+        >
+          <p>read more</p>
+          <div className="icon icon--arrow button--withArrow-icon"></div>
+        </a>
+      </div>
+    </article>
+  );
+};

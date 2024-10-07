@@ -1,13 +1,14 @@
 .heading {
-&--h1 {
-  font-size: 36px;
-  line-height: 1.2em;
-  font-family: 'Figtree', sans-serif;
+  &--h1 {
+    font-size: 36px;
+    line-height: 1.2em;
+    font-weight: 600;
+    font-family: 'Figtree', sans-serif;
 
-  @include on-tablet {
-    font-size: 48px;
+    @include on-tablet {
+      font-size: 48px;
+    }
   }
-}
 
   &--h2 {
     font-size: 32px;

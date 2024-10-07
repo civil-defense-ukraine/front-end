@@ -4,13 +4,11 @@ export function useElementOnScreen() {
   const [isVisible, setIsVisible] = useState(false);
   const container = useRef<null | any>(null);
 
-  const callbackFunction: IntersectionObserverCallback = (entries) => {
+  const callbackFunction: IntersectionObserverCallback = entries => {
     const [entry] = entries;
     if (entry.isIntersecting) {
       setIsVisible(true);
-    };
-
-    
+    }
   };
 
   useEffect(() => {
@@ -19,7 +17,6 @@ export function useElementOnScreen() {
     if (container.current) {
       observer.observe(container.current);
     }
-
 
     return () => {
       if (currentEl) {

@@ -43,6 +43,15 @@
   background-size: cover;
   background-position: center;
   color: $white;
+  margin-bottom: 100px;
+
+  @include on-tablet {
+    margin-bottom: 88px;
+  }
+
+  @include on-desktop {
+    margin-bottom: 162px;
+  }
 
   &__container {
     background-color: rgba(7, 17, 28, 0.7);

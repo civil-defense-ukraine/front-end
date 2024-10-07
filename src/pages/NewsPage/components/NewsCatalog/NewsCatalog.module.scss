@@ -1,0 +1,14 @@
+@import '../../../../styles/styles.scss';
+
+.container {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr;
+
+  @include on-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
