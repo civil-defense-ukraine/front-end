@@ -2,7 +2,7 @@ import styles from './Footer.module.scss';
 
 export const Footer = () => {
   return (
-    <footer className={styles.container}>
+    <footer className={`${styles.container} footer`}>
       <img
         className={styles.logo}
         loading="lazy"

@@ -2,19 +2,18 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { News } from '../types/News';
 import { news } from '../services/news';
 import { sortNewsByDate } from '../utils/getSortedNews';
+import { getNormalized } from '../utils/getNormalized';
 
 type InitialState = {
   loading: boolean;
   error: string;
   news: News[];
-  latestSingleNews: News | null;
 };
 
 const initialState: InitialState = {
   loading: false,
   error: '',
   news: [],
-  latestSingleNews: null,
 };
 
 export const newsSlice = createSlice({
@@ -37,14 +36,20 @@ export const newsSlice = createSlice({
         } else {
           const sortedNews = action.payload.sort(sortNewsByDate);
 
-          state.news = sortedNews;
-          state.latestSingleNews = sortedNews[0];
+          state.news = [...sortedNews, ...sortedNews, ...sortedNews].map(
+            (news, id) => {
+              const link = getNormalized.link(news.title);
+              return { ...news, id, link };
+            },
+          );
+          state.loading = false;
         }
       },
     );
 
     builder.addCase(loadNews.rejected, (state, action) => {
       state.error = action.error.message || 'Something went wrong!';
+      state.loading = false;
     });
   },
 });

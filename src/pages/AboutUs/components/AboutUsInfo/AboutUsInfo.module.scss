@@ -24,10 +24,12 @@
   @include on-tablet {
     gap: 32px;
     flex-direction: row;
+    align-items: center;
   }
 
   @include on-desktop {
     padding: 24px;
+    align-items: start;
   }
 
   &:nth-of-type(2) {
@@ -42,6 +44,11 @@
 
   &__header {
     padding-bottom: 16px;
+    text-align: center;
+
+    @include on-tablet {
+      text-align: left;
+    }
 
     @include on-desktop {
       padding-bottom: 32px;

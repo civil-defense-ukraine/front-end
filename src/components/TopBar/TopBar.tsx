@@ -11,7 +11,7 @@ const getLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export const TopBar = () => {
   return (
-    <div className={styles.topBar}>
+    <div className={`${styles.topBar} header`}>
       <Link to="/">
         <img
           className={styles.topBar__logo}

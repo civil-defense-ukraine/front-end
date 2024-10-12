@@ -8,13 +8,10 @@
   gap: 32px;
   transition: transform 2s;
   width: 100%;
-  // justify-content: stretch;
-  
 
   @include on-tablet {
     flex-direction: row;
     align-items: center;
-    // width: 100%;
   }
 }
 
@@ -24,6 +21,7 @@
   object-position: center;
   border-radius: 24px;
   flex-basis: 314px;
+  max-height: 350px;
   flex-grow: 0;
   flex-shrink: 0;
 
@@ -80,18 +78,6 @@
 .mainText {
   font-size: 14px;
   line-height: 1.5em;
-  height: 126px;
-  // display: -webkit-box;
-  // -webkit-line-clamp: 6; /* Number of lines to display before truncating */
-  // -webkit-box-orient: vertical;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // word-break: normal; /* Ensure wrapping happens at word boundaries */
-  // overflow-wrap: break-word; /* A fallback for word-breaking */
-  // height: 150px; /* Adjust based on your text size and line-height */
-  // line-height: 1.5; /* Adjust line-height as needed */
-  // max-height: calc(1.5em * 6); /* 3 is the same as the number of lines */
-
 
   @include on-tablet {
     font-size: 16px;

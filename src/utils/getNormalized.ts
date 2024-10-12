@@ -1,15 +1,15 @@
 export const getNormalized = {
-  slicedText(text: string, maxLengthOfText= 270) {
+  slicedText(text: string, maxLengthOfText = 270) {
     if (text.length <= maxLengthOfText) {
       return text;
     }
 
     const updatedString = text.slice(0, maxLengthOfText);
 
-    return `${updatedString.slice(0, updatedString.lastIndexOf(' '))}...`
+    return `${updatedString.slice(0, updatedString.lastIndexOf(' '))}...`;
   },
   link(title: string) {
-    return title.split(' ').join('-');
+    return title.toLowerCase().split(' ').join('-');
   },
   title(title: string) {
     return title
@@ -26,4 +26,4 @@ export const getNormalized = {
 
     return new Intl.DateTimeFormat('en-US', options).format(date);
   },
-}
+};

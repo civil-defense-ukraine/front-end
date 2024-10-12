@@ -1,13 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import styles from './TeamSection.module.scss';
-import { TeamMember } from '../../../../types/TeamMember';
-import { team as team1 } from '../../../../services/team';
 import { useWidth } from '../../../../hooks/useWidth';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { loadTeam } from '../../../../features/teamSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../app/store';
 import { Loader } from '../../../../components/Loader';
 import { Error } from '../../../../components/Error';
 
@@ -28,6 +24,20 @@ export const TeamSection = () => {
   }, [width, team]);
   const visibleTeam = useMemo(() => team.slice(0, itemsPerPage), [width, team]);
   const restOfTeam = useMemo(() => team.slice(itemsPerPage), [width, team]);
+  const getMaxHeight = useMemo(() => {
+    if (!showAllTeam) {
+      return 0;
+    }
+
+    if (width >= 1240) {
+      return Math.ceil(restOfTeam.length * itemsPerPage) * (584 + 24);
+    }
+
+    if (width > 834) {
+      return Math.ceil(restOfTeam.length * itemsPerPage) * (454 + 32);
+    }
+    return restOfTeam.length * (454 + 32);
+  }, [showAllTeam, width, restOfTeam]);
 
   useEffect(() => {
     dispath(loadTeam());
@@ -66,7 +76,7 @@ export const TeamSection = () => {
           <div
             className={classNames(`${styles.team__rest} ${styles.team}`)}
             style={{
-              maxHeight: `${showAllTeam ? Math.ceil(restOfTeam.length / itemsPerPage) * 600 : 0}px`,
+              maxHeight: `${getMaxHeight}px`,
             }}
           >
             {restOfTeam.map(person => {
@@ -89,7 +99,7 @@ export const TeamSection = () => {
             })}
           </div>
           <button
-            className="button button--transparent"
+            className={`${styles.button} button button--transparent`}
             disabled={team.length <= visibleTeam.length || error.length !== 0}
             onClick={() => {
               setShowAllTeam(prevState => !prevState);

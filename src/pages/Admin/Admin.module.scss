@@ -1,0 +1,16 @@
+@import '../../styles/styles.scss';
+
+.container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(366px, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: $blue;
+  color: $white;
+  padding-block: 56px;
+  padding-inline: 48px;
+  grid-column: 1/2;
+}

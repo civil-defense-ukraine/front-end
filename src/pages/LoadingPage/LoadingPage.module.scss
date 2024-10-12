@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+
+  & :last-child {
+    transform: scale(2) rotate(-45deg);
+  }
+}

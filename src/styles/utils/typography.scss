@@ -15,7 +15,7 @@
     line-height: 1.2em;
     font-weight: 600;
 
-    @include on-tablet {
+    @include on-desktop {
       font-size: 40px;
     }
   }

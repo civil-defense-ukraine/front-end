@@ -41,14 +41,15 @@
 }
 
 .tag {
+  align-self: start;
+  display: inline-block;
   color: $blue;
   text-transform: uppercase;
   font-weight: 700;
   height: 37px;
   line-height: 37px;
-  width: 77px;
   text-align: center;
-
+  padding-inline: 16px;
   border: 1px solid $blue;
   border-radius: 24px;
 }
@@ -72,6 +73,14 @@
 .mainText {
   font-size: 14px;
   line-height: 1.5em;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  max-height: calc(1.5em * 6);
 
   @include on-tablet {
     font-size: 16px;

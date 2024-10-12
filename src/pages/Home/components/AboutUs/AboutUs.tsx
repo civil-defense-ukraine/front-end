@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
 import styles from './AboutUs.module.scss';
+import { ReadMore } from '../../../../components/Buttons/ReadMore';
 
 export const AboutUs = () => {
   const { isVisible, container } = useElementOnScreen();
@@ -29,17 +29,15 @@ export const AboutUs = () => {
       <div className={`${styles.text} hide--right ${isVisible ? 'show' : ''}`}>
         <h2 className={`${styles.title} heading--h2`}>About Us</h2>
         <p>
-          Civil Defense Ukraine is a charity organization that raises funds and
-          humanitarian help to Ukraine. It is founded at 2022 in Fredericia,
-          Denmark. Currently there are 25 people working volunteerly in our
-          organisation. We are from Ukraine and spending our spare time to help
-          to people in need.{' '}
+          Civil Defense Ukraine is a charitable organization founded in
+          February-March 2022, when the war began. Our mission is to assist
+          civilians in Ukraine who took up arms to defend the country. That`s
+          why we are called Civil Defense. <br /> We now live in Denmark, but we
+          are Ukrainians, dedicating our free time to support the people of our
+          native country.
         </p>
 
-        <Link to="about-us" className="button--withArrow">
-          <p>read more</p>
-          <div className="icon icon--arrow button--withArrow-icon"></div>
-        </Link>
+        <ReadMore pathname="about-us" />
       </div>
     </section>
   );

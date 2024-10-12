@@ -27,8 +27,7 @@ export const Location = () => {
                     className={`${styles.info__icon} icon icon--small icon--hover icon--location`}
                   ></div>
                   <p className={`${styles.info__text} link`}>
-                    Munkemolestrade 20, 5000,
-                    <br /> Odense, Denmark
+                    7000 Fredericia, Denmark
                   </p>
                 </a>
               </li>

@@ -1,0 +1,62 @@
+@import '../../../../styles/styles.scss';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-evenly;
+  width: 100%;
+
+  @include on-tablet {
+    justify-content: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.button {
+  height: 32px;
+  width: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid $grey;
+  cursor: pointer;
+
+  &__selected {
+    border: 1px solid $blue;
+    color: $blue;
+  }
+}
+
+.arrowButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 32px;
+  cursor: pointer;
+
+  &:first-child {
+    & :first-child {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__icon {
+    background-color: black;
+    height: 15px;
+    width: 6px;
+
+    &__disabled {
+      background-color: $grey;
+    }
+  }
+
+  &__disabled {
+    cursor: not-allowed;
+    color: $grey;
+  }
+}

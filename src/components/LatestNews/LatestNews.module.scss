@@ -1,4 +1,4 @@
-@import '../../../../styles/styles.scss';
+@import '../../styles/styles.scss';
 
 .container {
   padding-inline: 18px;
@@ -31,12 +31,17 @@
   }
 }
 
+.center {
+  grid-area: main;
+}
+
 .articles {
   grid-area: main;
   display: flex;
   overflow: hidden;
   gap: 16px;
   width: $news-card-width;
+  padding-bottom: 24px;
 
   @include on-tablet {
     width: calc($news-card-width * 2);
@@ -65,12 +70,21 @@
   grid-area: button2;
   justify-self: end;
 
+  & :first-child {
+    background-color: $blue;
+  }
+
   &:hover {
     box-shadow: 0px 1px 4px 0px #0c0c0d1a;
   }
 
   &:disabled {
     cursor: not-allowed;
+    box-shadow: none;
+
+    & :first-child {
+      background-color: $grey;
+    }
   }
 
   & > div {

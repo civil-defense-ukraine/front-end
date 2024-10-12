@@ -1,11 +1,12 @@
-import { Footer } from '../../components/Footer';
+import { useMemo } from 'react';
+import { useAppSelector } from '../../app/hooks';
 import { Form } from '../../components/Form';
+import { LatestNews } from '../../components/LatestNews';
 import { AboutUs } from './components/AboutUs';
 import { Achievements } from './components/Achievements';
 import { ActiveDonation } from './components/ActiveDonation';
 import { Donate } from './components/Donate';
 import { Header } from './components/Header';
-import { NewsSection } from './components/NewsSection';
 
 export const Home = () => {
   return (
@@ -14,7 +15,7 @@ export const Home = () => {
       <AboutUs />
       <Achievements />
       <ActiveDonation />
-      <NewsSection />
+      <LatestNews />
       <Donate />
       <Form />
     </>

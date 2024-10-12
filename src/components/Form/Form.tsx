@@ -51,7 +51,7 @@ export const Form = () => {
     <section className={styles.container} id="contact-form">
       <h2 className={`${styles.header} heading--h2`}>Contact Us</h2>
       <form
-        className={styles.form}
+        className="form"
         autoComplete="off"
         noValidate
         onSubmit={handleSubmit}
@@ -60,8 +60,8 @@ export const Form = () => {
           Your email adress
           <br />
           <input
-            className={classNames(`${styles.formFiled}`, {
-              [`${styles.notValid}`]: errors.email,
+            className={classNames(`formField`, {
+              formField__notValid: errors.email,
             })}
             value={field.email}
             onChange={e => {
@@ -73,7 +73,7 @@ export const Form = () => {
             placeholder="email@gmail.com"
           />
           {errors.email && (
-            <p className={styles.notValid__text}>{errors.email}</p>
+            <p className="formField__notValid--text">{errors.email}</p>
           )}
         </label>
 
@@ -83,8 +83,8 @@ export const Form = () => {
           <input
             type="text"
             name="suject"
-            className={classNames(`${styles.formFiled}`, {
-              [`${styles.notValid}`]: errors.subject,
+            className={classNames(`formField`, {
+              formField__notValid: errors.subject,
             })}
             value={field.subject}
             onChange={e => {
@@ -94,11 +94,11 @@ export const Form = () => {
             placeholder="Type the topic of your request"
           />
           {errors.subject && (
-            <p className={styles.notValid__text}>{errors.subject}</p>
+            <p className="formField__notValid--text">{errors.subject}</p>
           )}
         </label>
 
-        <label htmlFor="volunteer">
+        <label htmlFor="volunteer" className="form__checkbox--label">
           <input
             type="checkbox"
             name="volunteer"
@@ -111,8 +111,8 @@ export const Form = () => {
           Description
           <br />
           <textarea
-            className={classNames(`${styles.textArea} ${styles.formFiled}`, {
-              [`${styles.notValid}`]: errors.message,
+            className={classNames(`form__textArea formField`, {
+              formField__notValid: errors.message,
             })}
             placeholder="Type your notes..."
             value={field.message}
@@ -121,7 +121,7 @@ export const Form = () => {
             }}
           ></textarea>
           {errors.message && (
-            <p className={styles.notValid__text}>{errors.message}</p>
+            <p className="formField__notValid--text">{errors.message}</p>
           )}
           <p className={styles.text}>
             Please enter the details of your request. A member of our support
@@ -130,7 +130,7 @@ export const Form = () => {
         </label>
         <button
           type="submit"
-          className={`${styles.button} button--yellow button--secondary`}
+          className={`form__button button--yellow button--secondary`}
         >
           SUBMIT
         </button>

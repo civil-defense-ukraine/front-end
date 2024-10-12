@@ -7,8 +7,8 @@
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    padding-top: 66px;
-    padding-bottom: 98px;
+    padding-block: 56px;
+
     @include gap-btw-blocks;
 
     display: flex;
@@ -17,13 +17,13 @@
     justify-content: center;
     gap: 32px;
     color: $white;
-    @include padding-inline;
     text-align: center;
+    @include padding-inline;
 
     @include on-tablet {
       min-height: calc(100vh - $header-height);
-      padding-top: 50px;
-      padding-bottom: 74px;
+      padding-top: 40px;
+      padding-bottom: 82x;
       padding-inline: 85px;
     }
 
@@ -35,11 +35,6 @@
     & > p {
       max-width: 432px;
     }
-  }
-
-  &__icons {
-    display: flex;
-    gap: 24px;
   }
 
   &__title {
@@ -57,14 +52,16 @@
   }
 
   &__button {
+    font-family: 'Figtree', sans-serif;
     background-color: $yellow;
     height: 48px;
     line-height: 48px;
-    width: 100%;
+    width: 90%;
     border-radius: 24px;
     color: $black;
     font-size: 15px;
     font-weight: 700;
+    animation: wigle 4s ease-in-out 2s infinite;
 
     margin-top: 16px;
     text-decoration: none;
@@ -74,5 +71,39 @@
       line-height: 60px;
       width: 204px;
     }
+  }
+
+  &__text {
+    @include on-desktop {
+      font-size: 16px;
+    }
+  }
+}
+
+@keyframes wigle {
+  5%,
+  50% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  15% {
+    transform: scale(1.15);
+  }
+  20% {
+    transform: scale(1.15) rotate(-5deg);
+  }
+  25% {
+    transform: scale(1.15) rotate(5deg);
+  }
+  30% {
+    transform: scale(1.15) rotate(-3deg);
+  }
+  35% {
+    transform: scale(1.15) rotate(2deg);
+  }
+  40% {
+    transform: scale(1.15) rotate(0);
   }
 }

@@ -7,10 +7,10 @@ export const useWidth = () => {
       setWidth(document.documentElement.clientWidth);
     };
 
-    document.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      document.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

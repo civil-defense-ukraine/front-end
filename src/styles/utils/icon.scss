@@ -3,6 +3,8 @@
   mask-repeat: no-repeat;
   background-size: contain;
   mask-size: contain;
+  background-position: center;
+  mask-position: center;
   transition: all 1s;
 
   &--little {
@@ -54,7 +56,6 @@
   &--arrow {
     -webkit-mask-image: url('../../imgs/icons/arrow.svg');
     mask-image: url('../../imgs/icons/arrow.svg');
-    // background-image: url('../../imgs/icons/arrow.svg');
   }
 
   &--location {
