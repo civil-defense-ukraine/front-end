@@ -2,12 +2,14 @@ import { FormEvent, useState } from 'react';
 import styles from './Form.module.scss';
 import classNames from 'classnames';
 import { checkFormField } from '../../utils/checkFormFields';
+import { form } from '../../services/public/form';
+import { FormFields } from '../../types/FormFields';
 
 export const Form = () => {
-  const [field, setField] = useState({
+  const [field, setField] = useState<FormFields>({
     email: '',
     subject: '',
-    volunteerToBe: false,
+    isVolunteer: false,
     message: '',
   });
 
@@ -39,12 +41,19 @@ export const Form = () => {
       return;
     }
 
-    setField({
-      email: '',
-      subject: '',
-      volunteerToBe: false,
-      message: '',
-    });
+    form.post(field).then((response) => {
+      console.log(response);
+    }).catch((e) => {
+      console.log(e);
+    })
+
+
+    // setField({
+    //   email: '',
+    //   subject: '',
+    //   isVolunteer: false,
+    //   message: '',
+    // });
   };
 
   return (

@@ -12,15 +12,24 @@ import { loadArticle } from '../../features/articleSlice';
 import { Error } from '../../components/Error';
 
 const NewsArticle = () => {
-  // const { newsId } = useParams();
-  const article = {
-    id: 1,
-    image: 'imgs/news/image_1.jfif',
-    publicationDate: '2020-09-28T12:00:00',
-    text: 'Good people truly make the world go round! We are incredibly grateful to the local hospital in Fredericia for once again supporting us with much-needed equipment, and to our amazing supporters who helped Jurij load everything this morning The wheelchairs, medications, and sanitary supplies are now on their way to Ukraine.',
-    title: 'News from Denmark',
-    type: 'NEWS',
-  };
+  const { newsId } = useParams();
+  const dispatch = useAppDispatch();
+  if (!newsId) {
+    return <p>No such article</p>
+  }
+
+  if (newsId) {
+    return <p>{newsId}</p>
+  }
+  const { article } = useAppSelector(state => state.article);
+
+  if (!article) {
+    return <p>No such article</p>
+  }
+
+  useEffect(() => {
+    dispatch(loadArticle(newsId.split('-').join('%')));
+  }, []);
   const { id, image, type, title, publicationDate, text } = article;
   const date = new Date(publicationDate);
   const copyLink = () => {

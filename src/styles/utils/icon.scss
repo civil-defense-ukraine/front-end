@@ -96,12 +96,19 @@
   &--search {
     background-image: url('../../imgs/icons/search.svg');
   }
+
+  &--support {
+    background-image: url('../../imgs/icons/support.svg');
+  }
+
+  &--copy {
+    background-image: url('../../imgs/icons/copy.svg');
+  }
 }
 
 .logo {
   height: 38px;
   width: 78px;
-
 
   @include on-tablet {
     height: 50px;

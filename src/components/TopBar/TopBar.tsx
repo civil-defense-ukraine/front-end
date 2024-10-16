@@ -13,35 +13,34 @@ const getLinkClass = ({ isActive }: { isActive: boolean }) =>
     'link--active': isActive,
   });
 
-  
-
 export const TopBar = () => {
   const { showMenu, setShowMenu } = useContext(MenuContext);
   const { pathname, state } = useLocation();
 
   console.log(state, pathname);
-  
+
   const width = useWidth();
   const getBarClass = (order: number) =>
     classNames(`${styles.bar} ${styles[`bar__${order}`]}`, {
       [styles[`bar__${order}__selected`]]: showMenu,
     });
 
-
   return (
-    <div className={classNames(`${styles.topBar} header`, {
-      [styles.topBar__menu]: showMenu
-    })}
+    <div
+      className={classNames(`${styles.topBar} header`, {
+        [styles.topBar__menu]: showMenu,
+      })}
     >
       <Link to="/">
-        {!showMenu ? <Logo /> :
+        {!showMenu ? (
+          <Logo />
+        ) : (
           <img
-          className='logo'
-          src={require("../../imgs/logo-blue.png")}
-          alt="CDU logo"
-        />
-        }
-
+            className="logo"
+            src={require('../../imgs/logo-blue.png')}
+            alt="CDU logo"
+          />
+        )}
       </Link>
       <ul className={`${styles.topBar__nav} ${styles.nav}`}>
         <li className={styles.nav__item}>
@@ -67,7 +66,7 @@ export const TopBar = () => {
       </ul>
       <HashLink
         className={classNames(`${styles.topBar__button}`, {
-          [styles.topBar__button__menu]: showMenu
+          [styles.topBar__button__menu]: showMenu,
         })}
         onClick={() => setShowMenu(false)}
         to="/#contact-form"

@@ -11,8 +11,8 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { lazy, Suspense } from 'react';
 import { LoadingPage } from './pages/LoadingPage/LoadingPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import { RequireAuth } from './pages/RequireAuth/RequireAuth';
+import LoginPage from './pages/Admin/LoginPage/LoginPage';
+import { RequireAuth } from './pages/Admin/RequireAuth/RequireAuth';
 import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './pages/ErrorBoundary/ErrorBoundary';
 import { ErrorPage } from './pages/ErrorPage';
@@ -36,6 +36,7 @@ export const Root = () => {
                   <Route index element={<NewsPage />} />
                   <Route path=":newsId" element={<NewsArticle />} />
                 </Route>
+                <Route path="*" element={<ErrorPage />} />
 
                 {/* <Route path="admin" element={<RequireAuth />}>
                   <Route index element={<Admin />} />
@@ -43,10 +44,10 @@ export const Root = () => {
                 </Route> */}
 
                 <Route path="login" element={<LoginPage />} />
-                </Route>
+              </Route>
               <Route path="admin" element={<Admin />} />
 
-              <Route path="*" element={<ErrorPage />} />
+
             </Routes>
           </Suspense>
         </Router>

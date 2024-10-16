@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import styles from './LoginPage.module.scss';
 import { FormEvent, useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');

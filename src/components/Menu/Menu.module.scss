@@ -1,12 +1,12 @@
 @import '../../styles/styles.scss';
 
 .container {
-  min-height:calc(100vh -  $header-height);
+  min-height: calc(100vh - $header-height);
   padding-block: 140px 60px;
   display: flex;
   flex-direction: column;
   gap: 40px;
- 
+
   align-items: center;
   background-color: $white;
   box-sizing: border-box;

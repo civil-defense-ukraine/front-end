@@ -1,4 +1,4 @@
-import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
+import { useElementOnScreen } from '../../hooks/useElementOnScreen';
 import styles from './Donate.module.scss';
 
 export const Donate = () => {

@@ -10,14 +10,19 @@ export async function request<T>(
   if (data !== undefined) {
     options.body = JSON.stringify(data);
     options.headers = {
-      'Content-Type': 'application/json; charset=utf-8',
+      "Content-Type": "application/json; charset=utf-8",
     };
   }
+
+  console.log(`${BASE_URL}/${path}`, options);
 
   return fetch(`${BASE_URL}/${path}`, options).then(response => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
+
+    console.log(response);
+    
 
     return response.json();
   });

@@ -125,12 +125,20 @@
 
 .button {
   height: 48px;
+  padding-inline: 10px;
+  box-sizing: border-box;
   color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 
   @include on-tablet {
     position: fixed;
     right: 24px;
     bottom: 24px;
     background: $blue;
+    gap: 10px;
+    width: 140px;
   }
 }
