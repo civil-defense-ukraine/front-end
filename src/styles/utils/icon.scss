@@ -76,4 +76,42 @@
     -webkit-mask-image: url('../../imgs/icons/email.svg');
     mask-image: url('../../imgs/icons/email.svg');
   }
+
+  &--edit {
+    background-image: url('../../imgs/icons/edit.svg');
+  }
+
+  &--delete {
+    background-image: url('../../imgs/icons/delete.svg');
+  }
+
+  &--upload {
+    background-image: url('../../imgs/icons/upload.svg');
+  }
+
+  &--close {
+    background-image: url('../../imgs/icons/close.svg');
+  }
+
+  &--search {
+    background-image: url('../../imgs/icons/search.svg');
+  }
+}
+
+.logo {
+  height: 38px;
+  width: 78px;
+
+
+  @include on-tablet {
+    height: 50px;
+    width: 102px;
+  }
+
+  &--big {
+    @include on-desktop {
+      height: 76px;
+      width: 156px;
+    }
+  }
 }

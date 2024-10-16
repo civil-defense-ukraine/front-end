@@ -1,0 +1,81 @@
+@import '../../../../../styles/styles.scss';
+
+.label {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.label__date {
+  position: relative;
+}
+
+.label__image {
+  display: flex;
+  gap: 10px;
+  width: 167px;
+  color: #a6aeb7;
+  cursor: pointer;
+
+  &__text {
+    font-weight: 400;
+  }
+
+  &__button {
+    display: none;
+  }
+}
+
+.imageInput {
+  visibility: hidden;
+  height: 1px;
+
+  & > img {
+    height: 1px;
+  }
+
+  & > div {
+    display: none;
+  }
+  &__active {
+    position: relative;
+    visibility: initial;
+    margin-block: 8px;
+    height: 60px;
+
+    & > img {
+      height: 60px;
+    }
+
+    & > div {
+      display: flex;
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      box-sizing: border-box;
+      background-color: $white;
+      border-radius: 50%;
+      cursor: pointer;
+      top: -9px;
+      right: -9px;
+      z-index: 2;
+      box-shadow: 0px 1px 2px 0px #0000004d;
+      box-shadow: 0px 1px 3px 1px #00000026;
+
+      & > div {
+        height: 9px;
+        width: 9px;
+        margin: auto;
+      }
+    }
+  }
+}
+
+.date {
+  width: 18px;
+  outline: none;
+  border: none;
+  position: absolute;
+  background-color: $white-bg;
+  top: 60%;
+  right: 20px;
+}

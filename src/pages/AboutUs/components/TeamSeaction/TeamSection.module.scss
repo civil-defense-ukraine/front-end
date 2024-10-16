@@ -41,12 +41,12 @@
 }
 
 .article {
-  height: 454px;
+  max-height: 454px;
   box-sizing: border-box;
   padding: 16px;
 
   @include on-desktop {
-    height: 584px;
+    max-height: 584px;
   }
 
   &__img {
@@ -55,6 +55,11 @@
 
     @include on-desktop {
       height: 425px;
+    }
+
+    &__default {
+      max-height: 180px;
+      max-width: 150px;
     }
   }
 

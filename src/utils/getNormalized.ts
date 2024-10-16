@@ -26,4 +26,7 @@ export const getNormalized = {
 
     return new Intl.DateTimeFormat('en-US', options).format(date);
   },
+  dateForAdmin(date: Date) {
+    return new Intl.DateTimeFormat(['ban', 'id']).format(date);
+  },
 };

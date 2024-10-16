@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { loadTeam } from '../../../../features/teamSlice';
 import { Loader } from '../../../../components/Loader';
 import { Error } from '../../../../components/Error';
+import { TeamCard } from './components/TeamCard';
 
 export const TeamSection = () => {
   const [showAllTeam, setShowAllTeam] = useState(false);
@@ -54,24 +55,9 @@ export const TeamSection = () => {
       {error.length === 0 && !loading && (
         <>
           <div className={styles.team}>
-            {visibleTeam.map(person => {
-              const { id, image, name, position } = person;
-
-              return (
-                <article className={styles.article} key={id}>
-                  <img
-                    className={styles.article__img}
-                    loading="lazy"
-                    src={image}
-                    alt={name}
-                  />
-                  <p className={`${styles.article__name} heading--h3`}>
-                    {name}
-                  </p>
-                  <p className={styles.article__text}>{position}</p>
-                </article>
-              );
-            })}
+            {visibleTeam.map(person => (
+              <TeamCard person={person} key={person.id} />
+            ))}
           </div>
           <div
             className={classNames(`${styles.team__rest} ${styles.team}`)}
@@ -79,27 +65,12 @@ export const TeamSection = () => {
               maxHeight: `${getMaxHeight}px`,
             }}
           >
-            {restOfTeam.map(person => {
-              const { id, image, name, position } = person;
-
-              return (
-                <article className={styles.article} key={id}>
-                  <img
-                    className={styles.article__img}
-                    loading="lazy"
-                    src={image}
-                    alt={name}
-                  />
-                  <p className={`${styles.article__name} heading--h3`}>
-                    {name}
-                  </p>
-                  <p className={styles.article__text}>{position}</p>
-                </article>
-              );
-            })}
+            {restOfTeam.map(person => (
+              <TeamCard person={person} key={person.id} />
+            ))}
           </div>
           <button
-            className={`${styles.button} button button--transparent`}
+            className={`${styles.button} button--secondary button--transparent`}
             disabled={team.length <= visibleTeam.length || error.length !== 0}
             onClick={() => {
               setShowAllTeam(prevState => !prevState);

@@ -1,9 +1,9 @@
-import { CSSProperties, useMemo } from 'react';
+import { CSSProperties } from 'react';
 import { News } from '../../types/News';
 import styles from './NewsCard.module.scss';
 import { getNormalized } from '../../utils/getNormalized';
-import { Link } from 'react-router-dom';
 import { ReadMore } from '../Buttons/ReadMore';
+import { Loader } from '../Loader';
 
 type Props = {
   newsData: News;
@@ -17,7 +17,16 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
 
   return (
     <article className={styles.container} style={style}>
-      <img className={styles.img} src={image} alt={title} loading="lazy" />
+      <img
+        className={styles.img}
+        src={image}
+        alt={title}
+        loading="lazy"
+        onError={e => {
+          e.currentTarget.src = require('../../imgs/default/news.png');
+          e.currentTarget.classList.add(styles.img__default);
+        }}
+      />
       <div className={styles.info}>
         <div className={styles.info__container}>
           <div className={styles.tag}>{type}</div>

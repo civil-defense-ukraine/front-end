@@ -3,4 +3,5 @@ export type TeamMember = {
   image: string;
   name: string;
   position: string;
+  description: string;
 };

@@ -14,12 +14,11 @@
   @include padding-inline;
 
   @include on-desktop {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+    @include page-grid;
 
-  & > h2 {
-    grid-column: 1 / 2;
+    & :first-child {
+      grid-column: 1 / 3;
+    }
   }
 }
 
@@ -30,18 +29,18 @@
 }
 
 .info {
-  list-style: none;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 0;
-  gap: 24px;
-  grid-column: 1/2;
+  gap: 32px;
+  grid-column: 3 / span 4;
 
-  padding-bottom: 56px;
-
-  @include on-tablet {
-    padding-bottom: 100px;
+  &__content {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    gap: 24px;
   }
 
   @include on-desktop {
@@ -61,31 +60,56 @@
   }
 }
 
-.info2 {
+.icons {
+  padding-top: 16px;
+  & > p {
+    padding-bottom: 32px;
+  }
+}
+
+.bankDetails {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 46px;
+  gap: 32px;
+  grid-column: 7 / -1;
+
+  @include on-tablet {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @include on-desktop {
+    max-height: 185px;
+  }
 }
 
-.icons {
+.block {
+  width: 340px;
+  box-sizing: border-box;
   display: flex;
-  gap: 38px;
-  padding-top: 16px;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 0 24px 24px;
+  border: 1px solid $white-bg;
+  border-radius: 24px;
 }
 
-.mobilePay {
-  display: flex;
-  gap: 38px;
-  align-items: center;
+.icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 
-  &__icon {
+  &__mobilePay {
     width: 164px;
     height: 61px;
     background-image: url(../../imgs/icons/mobile-pay.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+  }
+
+  &__danskeBank {
+    width: 186px;
+    height: 28px;
+    background-image: url(../../imgs/icons/danske-bank.png);
+    flex-shrink: 0;
   }
 }
 
@@ -97,4 +121,16 @@
 
 .copyright {
   grid-column: 1 / -1;
+}
+
+.button {
+  height: 48px;
+  color: $white;
+
+  @include on-tablet {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    background: $blue;
+  }
 }

@@ -1,4 +1,10 @@
+@import '../../styles/styles.scss';
+
 .icons {
   display: flex;
   gap: 24px;
+}
+
+.blue {
+  background-color: $blue;
 }

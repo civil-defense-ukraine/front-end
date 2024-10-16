@@ -34,6 +34,11 @@
     flex-basis: 501px;
     height: 501px;
   }
+
+  &__default {
+    object-fit: contain;
+    object-position: center;
+  }
 }
 
 .info {

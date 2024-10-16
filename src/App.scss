@@ -9,6 +9,10 @@ h3 {
   padding: 0;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .page {
   font-family: 'Figtree', sans-serif;
   font-style: normal;
@@ -17,6 +21,8 @@ h3 {
   line-height: 1.5rem;
   color: $black;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+
   // min-height: 170vh;
 
   // display: grid;

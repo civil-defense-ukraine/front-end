@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { News } from '../types/News';
-import { news } from '../services/news';
+import { news } from '../services/public/news';
 import { sortNewsByDate } from '../utils/getSortedNews';
 import { getNormalized } from '../utils/getNormalized';
 

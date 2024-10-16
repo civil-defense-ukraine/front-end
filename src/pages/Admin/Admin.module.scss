@@ -3,8 +3,7 @@
 .container {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: repeat(366px, 1fr);
-  min-height: 100vh;
+  grid-template-columns: 366px 1fr;
 }
 
 .sidebar {

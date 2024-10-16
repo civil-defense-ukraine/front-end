@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TeamMember } from '../types/TeamMember';
-import { team } from '../services/team';
+import { team } from '../services/public/team';
 
 type InitialState = {
   loading: boolean;

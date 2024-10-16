@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'http://localhost:8088/api/admin';
 
 export async function request<T>(
   path: string,
@@ -16,14 +16,14 @@ export async function request<T>(
 
   return fetch(`${BASE_URL}/${path}`, options).then(response => {
     if (!response.ok) {
-      throw new Error('Something went wrong!');
+      throw new Error(response.statusText);
     }
 
     return response.json();
   });
 }
 
-export const client = {
+export const adminClient = {
   get<T>(url: string) {
     return request<T>(url);
   },

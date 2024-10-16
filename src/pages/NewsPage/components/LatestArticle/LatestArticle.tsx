@@ -12,7 +12,16 @@ export const LatestArticle: React.FC<Props> = ({ newsData }) => {
 
   return (
     <article className={styles.container}>
-      <img className={styles.img} src={image} alt={title} loading="lazy" />
+      <img
+        onError={e => {
+          e.currentTarget.src = require('../../../../imgs/default/news.png');
+          e.currentTarget.classList.add(styles.img__default);
+        }}
+        className={styles.img}
+        src={image}
+        alt={title}
+        loading="lazy"
+      />
       <div className={styles.info}>
         <div className={styles.tag}>{type}</div>
         <div className={`${styles.header}`}>

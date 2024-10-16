@@ -26,7 +26,7 @@ export const Header = () => {
 
         <HashLink
           to="/#donate"
-          className={`${styles.header__button} button--yellow`}
+          className={`${styles.header__button} button--yellow button--secondary`}
         >
           <p>HELP US</p>
         </HashLink>

@@ -1,0 +1,50 @@
+@import '../../../styles/styles.scss';
+
+.container {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  overflow: hidden;
+  background-color: $white;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  transition: all 1.5s;
+  padding: 24px;
+
+  &__show {
+    z-index: 1;
+    opacity: 1;
+    width: 659px;
+    transition: all 1.5s;
+  }
+}
+
+.form {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.backButton {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 100px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  &__icon {
+    background-color: $black;
+    height: 14px;
+    width: 6px;
+    transform: rotate(180deg);
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
