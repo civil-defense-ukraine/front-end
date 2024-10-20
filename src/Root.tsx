@@ -17,6 +17,8 @@ import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './pages/ErrorBoundary/ErrorBoundary';
 import { ErrorPage } from './pages/ErrorPage';
 import { MenuProvider } from './context/MenuContext';
+import { Donate } from './components/Donate';
+import { DonatePage } from './pages/DonatePage';
 
 export const Root = () => {
   return (
@@ -36,6 +38,7 @@ export const Root = () => {
                   <Route index element={<NewsPage />} />
                   <Route path=":newsId" element={<NewsArticle />} />
                 </Route>
+                <Route path="donate" element={<DonatePage />} />
                 <Route path="*" element={<ErrorPage />} />
 
                 {/* <Route path="admin" element={<RequireAuth />}>
@@ -46,8 +49,6 @@ export const Root = () => {
                 <Route path="login" element={<LoginPage />} />
               </Route>
               <Route path="admin" element={<Admin />} />
-
-
             </Routes>
           </Suspense>
         </Router>

@@ -2,15 +2,13 @@
 
 .container {
   padding-top: 80px;
-  padding-bottom: 75px;
+  @include gap-btw-blocks;
 
   @include on-tablet {
     padding-top: 88px;
-    padding-bottom: 133px;
   }
   @include on-desktop {
     padding-top: 132px;
-    padding-bottom: 144px;
   }
 }
 
@@ -21,20 +19,38 @@
   @include padding-inline;
   @include gap-btw-blocks;
 
+  @include on-tablet {
+    flex-direction: column;
+  }
+
   @include on-desktop {
     padding-inline: 162px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include on-tablet {
+      flex-direction: row;
+      align-items: center;
+
+      & > * {
+        flex-grow: 1;
+      }
+    }
   }
 }
 
 .img {
-  height: 314px;
-  width: 100%;
-  object-position: center 40%;
+  // height: 314px;
+  width: 314px;
   object-fit: contain;
   border-radius: 24px;
 
-  @include on-tablet {
-    height: 536px;
+  @include on-desktop {
+    width: 501px;
   }
 }
 
@@ -83,12 +99,13 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  align-items: center;
 
-  @include on-desktop {
-    flex-direction: row;
-    gap: 24px;
-    align-items: start;
-  }
+  // @include on-desktop {
+  //   flex-direction: row;
+  //   gap: 24px;
+  //   align-items: start;
+  // }
 }
 
 .share {
@@ -117,5 +134,20 @@
     border: none;
     border-radius: 16px;
     cursor: pointer;
+
+    &::after {
+      left: 155px;
+      top: -20px;
+      background-color: rgba($color: $white, $alpha: 0.8);
+      opacity: 0.3;
+    }
+
+    &:hover {
+      &::after {
+        color: $black;
+        left: 165px;
+        top: -30px;
+      }
+    }
   }
 }

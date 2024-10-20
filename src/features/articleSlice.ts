@@ -28,8 +28,8 @@ export const articleSlice = createSlice({
     });
     builder.addCase(
       loadArticle.fulfilled,
-      (state, action: PayloadAction<News>) => {
-        state.article = action.payload;
+      (state, action: PayloadAction<News[]>) => {
+        state.article = action.payload[0];
         state.loading = false;
       },
     );
@@ -42,7 +42,7 @@ export const articleSlice = createSlice({
 });
 
 export const loadArticle = createAsyncThunk(
-  'fetch/news',
+  'fetch/article',
   async (id: string) => {
     return news.getArticle(id);
   },

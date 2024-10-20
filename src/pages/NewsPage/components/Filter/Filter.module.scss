@@ -1,0 +1,133 @@
+@import '../../../../styles/styles.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: $text-color;
+  font-weight: 500;
+  font-size: 20px;
+  width: 100%;
+
+  @include on-tablet {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  & > * {
+    @include on-tablet {
+      width: 337px;
+    }
+  }
+}
+.category {
+  align-self: stretch;
+  position: relative;
+  height: 46px;
+}
+
+.sort {
+  align-self: stretch;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 43px;
+  &__item {
+    position: relative;
+    width: 270px;
+    height: 46px;
+
+    @include on-tablet {
+      width: 250px;
+    }
+
+    & > div {
+      top: 0;
+      left: 0;
+      max-height: 90px;
+    }
+  }
+}
+
+.filterContainer {
+  --itemCount: 1;
+  position: absolute;
+  height: 46px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 16px;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+
+  transition: height 500ms;
+  background-color: #fff;
+  box-shadow: 0px 1px 2px 0px #0000004d;
+  box-shadow: 0px 1px 3px 1px #00000026;
+
+  &__open {
+    height: calc(var(--itemCount) * 46px);
+    z-index: 2;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 500ms;
+
+  &__text {
+    color: $blue;
+  }
+}
+
+.filterItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+}
+.filterItem {
+  position: relative;
+  display: inline;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    background-color: $blue;
+    transform: scale(0);
+    transition: all 500ms;
+    bottom: -5px;
+    left: 0;
+  }
+
+  &:hover {
+    color: $blue;
+  }
+
+  &:hover::after {
+    transform: scale(1);
+    transform-origin: left;
+  }
+}
+
+.icon {
+  transform: rotate(90deg);
+  background: $black;
+  height: 11px;
+  width: 6px;
+
+  &__open {
+    transform: rotate(270deg);
+    background: $blue;
+  }
+}

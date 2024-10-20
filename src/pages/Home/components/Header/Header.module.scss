@@ -29,6 +29,7 @@
 
     @include on-desktop {
       background-image: url('../../../../imgs/header-bg-desktop.png');
+      background-position: center;
       padding-bottom: 70px;
     }
 

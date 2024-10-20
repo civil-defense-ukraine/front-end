@@ -17,6 +17,10 @@ export const checkFormField = (formField: FormFields): FormFields => {
     error.email = 'Invalid email format.';
   }
 
+  if (formField.message.length < 5) {
+    error.message = 'Message should contain at least 5 characters';
+  }
+
   for (const field in formField) {
     if (formField[field as keyof FormFields].length === 0) {
       error[field as keyof FormFields] = 'This field is required.';

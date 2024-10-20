@@ -10,8 +10,11 @@ export const ErrorPage = () => {
         <p className={styles.text}>
           Sorry, but the page you looking for could not be found.
         </p>
-        <Link to="/" className={`${styles.button} button--secondary button--yellow`}>
-        HOME
+        <Link
+          to="/"
+          className={`${styles.button} button--secondary button--yellow`}
+        >
+          HOME
         </Link>
       </div>
     </section>

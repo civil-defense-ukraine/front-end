@@ -1,8 +1,12 @@
+import { Link, useLocation } from 'react-router-dom';
+import { bankDetails, mobilePay } from '../../constants/bankDetails';
 import { Logo } from '../Logo';
 import { SocialMedia } from '../SocialMedia';
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
+  const { pathname } = useLocation();
+
   return (
     <footer className={`${styles.container} footer`}>
       <Logo classname={'logo logo--big'} />
@@ -61,22 +65,26 @@ export const Footer = () => {
         </div>
       </div>
 
-      <button
-        className={`button--secondary button--transparent ${styles.button}`}
-      >
-        <p>DONATE</p>
-        <div className="icon icon--support icon--medium"></div>
-      </button>
+      {!pathname.includes('donate') && (
+        <Link
+          to={'/donate'}
+          className={`button--secondary button--transparent ${styles.button}`}
+        >
+          <p>DONATE</p>
+          <div className="icon icon--support icon--medium"></div>
+        </Link>
+      )}
 
       <div className={styles.bankDetails}>
         <div className={styles.block}>
           <div className={`${styles.icon} ${styles.icon__mobilePay}`}></div>
-          <p>51718616</p>
+          <p>{mobilePay}</p>
         </div>
         <div className={styles.block}>
           <div className={`${styles.icon} ${styles.icon__danskeBank}`}></div>
           <p>
-            Reg. 5493 <br /> IBAN: DK5054930001652225 <br /> SWIFT: NYKBDKKK
+            Reg. {bankDetails['Registration number']}
+            <br /> IBAN: {bankDetails.IBAN} <br /> SWIFT: {bankDetails.SWIFT}
           </p>
         </div>
       </div>

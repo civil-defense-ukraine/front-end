@@ -6,6 +6,6 @@ export const news = {
     return publicClient.get<News[]>('news');
   },
   async getArticle(id: string) {
-    return publicClient.get<News>(`news/${id}`);
+    return publicClient.get<News[]>(`news/search?title=${id}`);
   },
 };

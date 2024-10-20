@@ -31,7 +31,7 @@ export const LatestNews = () => {
       )}
       {error && (
         <div className={styles.center}>
-          <Error errorText={error} />
+          <Error />
         </div>
       )}
       {!loading && !error && (
@@ -70,7 +70,7 @@ export const LatestNews = () => {
           </button>
 
           <Link
-            to={'news'}
+            to={'/news'}
             className={`${styles.mainButton}  button--secondary button--transparent`}
           >
             <p className="text--button">SEE ALL</p>

@@ -13,10 +13,9 @@ export const NewsCatalog: React.FC<Props> = ({ news }) => {
   const [searchParams] = useSearchParams();
   const visibleNews = useMemo(() => {
     const page = searchParams.get('page');
-    console.log('works');
 
     return getVisibleNews({ news: news.slice(1), page });
-  }, [searchParams.get('page')]);
+  }, [searchParams.get('page'), news]);
 
   console.log(visibleNews);
 

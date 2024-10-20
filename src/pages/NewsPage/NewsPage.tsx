@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import styles from './NewsPage.module.scss';
 import { useMemo, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
@@ -8,34 +8,48 @@ import { Pagination } from '../../components/Pagination';
 import { Loader } from '../../components/Loader';
 import { Error } from '../../components/Error';
 import { getFilteredNews } from '../../utils/getFilteredNews';
+import { Filter } from './components/Filter/Filter';
+import { LoadingPage } from '../LoadingPage/LoadingPage';
 
 const NewsPage = () => {
   const { pathname } = useLocation();
-  const [category, setCategory] = useState('');
+  const [searchParams] = useSearchParams();
   const { news, loading, error } = useAppSelector(state => state.news);
 
   const displayedNews = useMemo(() => {
-    if (pathname.slice(1) === 'reports') {
-      return getFilteredNews(news, 'reports');
-    }
+    const category = searchParams.get('category') || 'all';
+    const sortBy = searchParams.get('sortBy') || 'newest';
+    const latestArticleId = news[0] ? news[0].id : 0;
 
-    return getFilteredNews(news, category);
-  }, [pathname, news, category]);
+    if (pathname.slice(1) === 'reports') {
+      return getFilteredNews({news, category:'reports', sortBy, latestArticleId});
+    } else {
+      return getFilteredNews({news, category, sortBy, latestArticleId});
+    }
+  }, [pathname, news, searchParams]);
+  console.log(displayedNews);
 
   const numberOfPages = useMemo(() => Math.ceil(news.length / 10), [news]);
 
+  if (loading) {
+    return <LoadingPage />;
+  }
+
+  if (!loading && error) {
+    return <Error />;
+  }
+
   return (
     <section className={styles.container}>
-      <h2 className={`${styles.heading} heading--h3`}>Latest Article</h2>
-      {displayedNews[0] && <LatestArticle newsData={displayedNews[0]} />}
-      {loading && <Loader />}
-      {!loading && error && <Error />}
-      {!loading && !error && (
+      {news[0] && (
         <>
-          <NewsCatalog news={displayedNews} />
-          {numberOfPages >= 2 && <Pagination numberOfPages={numberOfPages} />}
+          <h2 className={`${styles.heading} heading--h3`}>Latest Article</h2>
+          <LatestArticle newsData={news[0]} />
         </>
       )}
+      {pathname === '/news' && <Filter />}
+      <NewsCatalog news={displayedNews} />
+      {numberOfPages >= 2 && <Pagination numberOfPages={numberOfPages} />}
     </section>
   );
 };

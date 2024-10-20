@@ -1,23 +1,44 @@
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import styles from './Main.module.scss';
 import { loadNews } from '../../../features/newsSlice';
 import { getNormalized } from '../../../utils/getNormalized';
 import { AdminContext } from '../../../context/AdminContext';
 import classNames from 'classnames';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { ItemsCatalog } from './components/ItemsCatalog';
+import { getFilteredNews } from '../../../utils/getFilteredNews';
+// const newsCategories = ['Reports', 'News', 'Events', 'All'];
 
 export const Main = () => {
   const columns = ['Title', 'Date', 'Image', 'Text'];
   const dispatch = useAppDispatch();
   const { news } = useAppSelector(state => state.news);
-  const { selectedItem, setSelectedItem, setDisplayForm } =
-    useContext(AdminContext);
+  const { setSelectedItem, setDisplayForm } = useContext(AdminContext);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     dispatch(loadNews());
+    setSelectedItem(null);
+    // setServiceFunctions({
+    //   post: () => {},
+    //   delete:() => {},
+    //   update: () => {},
+    // })
   }, []);
 
-  console.log("We're excited to let you know ...".length);
+  const getDisplayedNews = useCallback(() => {
+    const query = searchParams.get('query') || '';
+    const category = searchParams.get('type') || 'all';
+
+    return getFilteredNews({ news, category, query });
+  }, [news, searchParams]);
+  
+  // const getDisplayedTeam = useCallback(() => {
+  //   const query = searchParams.get('query') || '';
+
+  //   return getFilteredNews({ news, category, query });
+  // }, [news, searchParams]);
 
   return (
     <section className={styles.container}>
@@ -42,68 +63,7 @@ export const Main = () => {
           NEW ITEM
         </button>
       </div>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            {columns.map(column => (
-              <th key={column}>{column}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {news.map(newsItem => {
-            const { id, image, type, title, text, publicationDate } = newsItem;
-            const formatedDate = new Intl.DateTimeFormat(['ban', 'id']).format(
-              new Date(publicationDate),
-            );
-            return (
-              <tr
-                className={classNames(`${styles.item}`, {
-                  [styles.item__selected]:
-                    selectedItem && selectedItem.id === id,
-                })}
-                key={id}
-              >
-                <td>
-                  <p className={styles.item__title}>{title}</p>
-                </td>
-                <td>
-                  <p className={styles.item__date}>{formatedDate}</p>
-                </td>
-                <td>
-                  <div
-                    className={styles.item__img}
-                    style={{ backgroundImage: `url(${image})` }}
-                  ></div>
-                </td>
-                <td>
-                  <p className={styles.item__text}>
-                    {getNormalized.slicedText(text, 35)}
-                  </p>
-                </td>
-                <td>
-                  <div
-                    className={styles.button}
-                    onClick={() => {
-                      setSelectedItem(newsItem);
-                      setDisplayForm(true);
-                    }}
-                  >
-                    <div className="icon icon--edit icon--small"></div>{' '}
-                    <p>Edit</p>
-                  </div>
-                </td>
-                <td>
-                  <div className={styles.button}>
-                    <div className="icon icon--delete icon--small"></div>{' '}
-                    <p>Delete</p>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <ItemsCatalog columns={columns} items={getDisplayedNews()} />
     </section>
   );
 };

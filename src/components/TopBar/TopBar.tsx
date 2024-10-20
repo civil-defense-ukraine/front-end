@@ -4,7 +4,7 @@ import styles from './TopBar.module.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Logo } from '../Logo';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { MenuContext } from '../../context/MenuContext';
 import { useWidth } from '../../hooks/useWidth';
 
@@ -13,12 +13,8 @@ const getLinkClass = ({ isActive }: { isActive: boolean }) =>
     'link--active': isActive,
   });
 
-export const TopBar = () => {
+export const TopBar = React.memo(() => {
   const { showMenu, setShowMenu } = useContext(MenuContext);
-  const { pathname, state } = useLocation();
-
-  console.log(state, pathname);
-
   const width = useWidth();
   const getBarClass = (order: number) =>
     classNames(`${styles.bar} ${styles[`bar__${order}`]}`, {
@@ -92,4 +88,4 @@ export const TopBar = () => {
       )}
     </div>
   );
-};
+});

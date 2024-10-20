@@ -9,7 +9,6 @@ export const getVisibleNews = ({ news, itemsPerPage = 10, page }: Props) => {
   const pageNumber = page ? +page : 1;
   const startIndex = (pageNumber - 1) * itemsPerPage;
   const endIndex = (pageNumber - 1) * itemsPerPage + itemsPerPage;
-  console.log(startIndex, endIndex);
 
   return news.slice(startIndex, endIndex);
 };

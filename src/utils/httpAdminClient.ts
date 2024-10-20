@@ -30,7 +30,10 @@ export const adminClient = {
   delete<T>(url: string) {
     return request<T>(url, 'DELETE');
   },
-  post<T>(url: string, data: T) {
+  post<T>(url: string, data: Omit<T, 'id'>) {
     return request<T>(url, 'POST', data);
+  },
+  update<T>(url: string, data: T) {
+    return request<T>(url, 'PUT', data);
   },
 };
