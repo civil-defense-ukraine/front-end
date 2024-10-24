@@ -5,6 +5,7 @@ import { SocialMedia } from '../../../../components/SocialMedia';
 
 export const Header = () => {
   const { isVisible, container } = useElementOnScreen();
+
   return (
     <header>
       <section className={styles.header__main}>
@@ -28,7 +29,7 @@ export const Header = () => {
           to="/#donate"
           className={`${styles.header__button} button--yellow button--secondary`}
         >
-          <p>HELP US</p>
+          <p>DONATE</p>
         </HashLink>
       </section>
     </header>

@@ -1,7 +1,7 @@
 import { News } from '../../types/News';
 import { publicClient } from '../../utils/httpPublicClient';
 
-export const news = {
+export const publicNews = {
   async get() {
     return publicClient.get<News[]>('news');
   },

@@ -21,5 +21,7 @@
 }
 
 .button {
-  align-self: center;
+  @include on-tablet {
+    align-self: center;
+  }
 }

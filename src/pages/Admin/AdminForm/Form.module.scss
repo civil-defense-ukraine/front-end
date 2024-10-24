@@ -9,14 +9,16 @@
   z-index: -1;
   right: 0;
   top: 0;
-  transition: all 1.5s;
+  transition: all 500ms;
   padding: 24px;
+  height: 80vh;
 
   &__show {
     z-index: 1;
     opacity: 1;
     width: 659px;
-    transition: all 1.5s;
+    transition: all 500ms;
+    height: auto;
   }
 }
 
@@ -24,6 +26,43 @@
   width: 100%;
 
   box-sizing: border-box;
+}
+
+.types {
+  display: flex;
+  gap: 10px;
+  max-width: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.type {
+  cursor: pointer;
+  display: inline-block;
+  color: $blue;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  padding-inline: 16px;
+  border: 1px solid $blue;
+  border-radius: 24px;
+  position: relative;
+  margin: 20%;
+  transition: all 500ms;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &__selected {
+    background: $blue;
+    color: $white;
+  }
+}
+
+.label {
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .backButton {
@@ -48,3 +87,5 @@
   justify-content: center;
   gap: 20px;
 }
+
+

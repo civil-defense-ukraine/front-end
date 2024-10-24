@@ -1,0 +1,74 @@
+@import '../../../styles/styles.scss';
+
+td {
+  padding: 16px 8px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.item {
+  color: $grey--secondary;
+  font-size: 16px;
+  border-bottom: 1px solid $grey;
+
+  &__selected {
+    transition: all 500ms;
+    background-color: $grey;
+    color: black;
+  }
+
+  &__title {
+    max-width: 130px;
+    box-sizing: border-box;
+  }
+
+  &__type {
+    display: inline-block;
+    color: $blue;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    padding-inline: 16px;
+    border: 1px solid $blue;
+    border-radius: 24px;
+    position: relative;
+    margin: 20%;
+  }
+
+  &__date {
+    text-align: center;
+  }
+
+  &__img {
+    width: 90px;
+    height: 42px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    margin-inline: 20%;
+  }
+
+  &__text {
+    min-width: 150px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  &__button {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    background-color: $white-bg;
+    padding: 13px 16px;
+    border-radius: 8px;
+  }
+}
+
+.button {
+  max-width: 90px;
+  box-sizing: border-box;
+}

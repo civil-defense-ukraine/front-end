@@ -38,5 +38,5 @@ export const getFilteredNews = ({
 };
 
 // export const getFilteredNewsWithQuerty = (news: News[], query: string) => {
-//   return  
+//   return
 // };

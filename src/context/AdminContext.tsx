@@ -1,39 +1,53 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import {
   createContext,
   Dispatch,
   SetStateAction,
+  useLayoutEffect,
   useMemo,
   useState,
 } from 'react';
 import { News } from '../types/News';
 import { TeamMember } from '../types/TeamMember';
+import { adminNews } from '../services/admin/adminNews';
+import { publicNews } from '../services/public/publicNews';
+import { useLocation } from 'react-router-dom';
+import { team } from '../services/public/team';
 type ServiceFunctions = {
-  post: () => void;
-  delete: () => void;
-  update: () => void;
+  post: (data: FormData, token: string) => Promise<any>;
+  delete: (id: string, token: string) => Promise<any>;
+  update: (id: number, data: FormData, token: string) => Promise<any>;
+};
+type Category = null | 'news' | 'team' | 'donate';
+type Items = {
+  news: News[];
+  team: TeamMember[];
 };
 
 type InitContext = {
-  displayForm: boolean;
-  setDisplayForm: Dispatch<SetStateAction<boolean>>;
-  selectedItem: null | News | TeamMember;
-  setSelectedItem: Dispatch<SetStateAction<null | News | TeamMember>>;
+  items: Items;
+  setItems: Dispatch<SetStateAction<Items>>;
   serviceFunctions: ServiceFunctions;
   setServiceFunctions: Dispatch<SetStateAction<ServiceFunctions>>;
+  category: Category;
+  setCategory: Dispatch<SetStateAction<Category>>;
 };
 
 const initContext = {
-  displayForm: false,
-  setDisplayForm: () => {},
-  selectedItem: null,
-  setSelectedItem: () => {},
+  items: {
+    news: [],
+    team: [],
+  },
+  setItems: () => {},
   serviceFunctions: {
-    post: () => {},
-    delete: () => {},
-    update: () => {},
+    post: () => Promise.resolve(),
+    delete: () => Promise.resolve(),
+    update: () => Promise.resolve(),
   },
   setServiceFunctions: () => {},
+  category: null,
+  setCategory: () => {},
 };
 
 export const AdminContext = createContext<InitContext>(initContext);
@@ -43,31 +57,33 @@ type Props = {
 };
 
 export const AdminProvider: React.FC<Props> = ({ children }) => {
-  const [displayForm, setDisplayForm] = useState(false);
-  const [serviceFunctions, setServiceFunctions] = useState<ServiceFunctions>({
-    post: () => {},
-    delete: () => {},
-    update: () => {},
+  const [items, setItems] = useState<Items>({
+    news: [],
+    team: [],
   });
-  const [selectedItem, setSelectedItem] = useState<null | News | TeamMember>(
-    null,
-  );
+  const [category, setCategory] = useState<Category>(null);
+  const [serviceFunctions, setServiceFunctions] = useState<ServiceFunctions>({
+    post: () => Promise.resolve(),
+    delete: () => Promise.resolve(),
+    update: () => Promise.resolve(),
+  });
+
   const initState: InitContext = useMemo(() => {
     return {
-      displayForm,
-      setDisplayForm,
-      selectedItem,
-      setSelectedItem,
+      items,
+      setItems,
       serviceFunctions,
       setServiceFunctions,
+      category,
+      setCategory,
     };
   }, [
-    displayForm,
-    setDisplayForm,
-    selectedItem,
-    setSelectedItem,
+    items,
+    setItems,
     serviceFunctions,
     setServiceFunctions,
+    category,
+    setCategory,
   ]);
 
   return (

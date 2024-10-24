@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './Inputs.module.scss';
+import { FormContext } from '../../../../../context/FormContext';
+import classNames from 'classnames';
 type Props = {
-  updateInput: (fieldName: string, newValue: File | null | string) => void;
+  updateInput: (newValue: File | null | string) => void;
 };
+
+async function linkToFile(url: string, fileName: string) {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  const file = new File([blob], fileName, { type: blob.type });
+
+  return file;
+}
 
 export const ImageInput: React.FC<Props> = ({ updateInput }) => {
   const [showImg, setShowImg] = useState(false);
+
+  const { selectedItem } = useContext(FormContext);
 
   const setImagePreview = (img: File | null) => {
     if (img) {
@@ -23,32 +35,53 @@ export const ImageInput: React.FC<Props> = ({ updateInput }) => {
     setShowImg(false);
   };
 
+  useEffect(() => {
+    if (!selectedItem || ('image' in selectedItem && !selectedItem.image)) {
+      return;
+    }
+
+    const imageUrl = selectedItem.image;
+    const fileName =
+      'link' in selectedItem
+        ? selectedItem.link
+        : 'name' in selectedItem
+          ? selectedItem.name
+          : 'imageName';
+
+    linkToFile(imageUrl, fileName)
+      .then(file => {
+        setShowImg(true);
+        updateInput(file);
+        setImagePreview(file);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [selectedItem]);
+
   return (
     <label htmlFor="image" className={styles.label}>
       Image
       <br />
       <div
         className={`${showImg ? styles.imageInput__active : styles.imageInput}`}
-        style={{
-          height: !showImg ? '1px' : '60px',
-          width: !showImg ? '1px' : '60px',
-        }}
       >
-        <img src="#" alt="Preview Uploaded Image" id="file-preview" />
+        <img
+          src="#"
+          className={`${showImg ? styles.imageInput__img__active : styles.imageInput__img}`}
+          alt="Preview Uploaded Image"
+          id="file-preview"
+        />
         <div
           onClick={e => {
             console.log(e.target);
             setImagePreview(null);
-            updateInput('image', null);
-            updateInput('imageTitle', '');
+            updateInput(null);
           }}
         >
-          {' '}
           <div
             className={`icon icon--small icon--close  ${styles.label__image__close}`}
-          >
-            {' '}
-          </div>
+          ></div>
         </div>
       </div>
       {!showImg && (
@@ -65,10 +98,8 @@ export const ImageInput: React.FC<Props> = ({ updateInput }) => {
             onChange={e => {
               if (e.target.files && e.target.files?.length >= 1) {
                 const img = e.target.files[0];
-                const title = e.target.files[0].name;
                 setImagePreview(img);
-                updateInput('image', img);
-                updateInput('imageTitle', title);
+                updateInput(img);
               }
             }}
             id="image"

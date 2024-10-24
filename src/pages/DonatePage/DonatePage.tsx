@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Donate } from '../../components/Donate';
 import { bankDetails } from '../../constants/bankDetails';
 import styles from './DonatePage.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const DonatePage = () => {
   const [coppiedText, setCoppiedText] = useState('');
@@ -10,6 +10,14 @@ export const DonatePage = () => {
     navigator.clipboard.writeText(value);
     setCoppiedText(value);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <section className={styles.container}>

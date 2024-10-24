@@ -1,14 +1,25 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthContext';
+import { Navigate, useLocation } from 'react-router-dom';
+import { AuthProvider } from '../../../context/AuthContext';
+import { useSessionStorage } from '../../../hooks/useSessionStorage';
+import { FormProvider } from '../../../context/FormContext';
+import { AdminProvider } from '../../../context/AdminContext';
+import Admin from '../Admin';
 
 export const RequireAuth = () => {
-  const { authorized } = useContext(AuthContext);
+  const [authorized] = useSessionStorage('authorized', false);
   const { pathname } = useLocation();
 
   if (!authorized) {
     return <Navigate to="/login" replace state={{ pathname }} />;
   }
 
-  return <Outlet />;
+  return (
+    <AuthProvider>
+      <FormProvider>
+        <AdminProvider>
+          <Admin />
+        </AdminProvider>
+      </FormProvider>
+    </AuthProvider>
+  );
 };

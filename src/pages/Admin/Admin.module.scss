@@ -3,7 +3,8 @@
 .container {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 366px 1fr;
+  grid-template-columns: 250px 1fr;
+  min-width: 1240px;
 }
 
 .sidebar {
@@ -12,4 +13,6 @@
   padding-block: 56px;
   padding-inline: 48px;
   grid-column: 1/2;
+  min-height: 100vh;
+  box-sizing: border-box;
 }

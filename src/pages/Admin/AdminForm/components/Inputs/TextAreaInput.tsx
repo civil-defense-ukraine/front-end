@@ -1,37 +1,37 @@
 import classNames from 'classnames';
+
 import styles from './Inputs.module.scss';
 
 type Props = {
-  fieldTitle: string;
   fieldValue: string;
   placeHolder: string;
   fieldError: string;
-  updateInput: (fieldName: string, newValue: string) => void;
+  updateInput: (newValue: string) => void;
+  basicHeight?: boolean;
 };
 
-export const TextInput: React.FC<Props> = ({
-  fieldTitle,
+export const TextAreaInput: React.FC<Props> = ({
   fieldValue,
   fieldError,
   placeHolder,
   updateInput,
+  basicHeight = false,
 }) => {
   return (
-    <label htmlFor={fieldTitle} className={styles.label}>
-      {fieldTitle}
+    <label htmlFor="messageText" className={styles.label}>
+      Text
       <br />
-      <input
-        className={classNames(`formField`, {
+      <textarea
+        className={classNames(`form__textArea formField`, {
           formField__notValid: fieldError,
+          form__textArea__small: basicHeight,
         })}
+        placeholder={placeHolder}
         value={fieldValue}
         onChange={e => {
-          updateInput('title', e.target.value);
+          updateInput(e.target.value);
         }}
-        id={fieldTitle}
-        type="text"
-        placeholder={placeHolder}
-      />
+      ></textarea>
       {fieldError && <p className="formField__notValid--text">{fieldError}</p>}
     </label>
   );

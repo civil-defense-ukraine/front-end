@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { News } from '../types/News';
-import { news } from '../services/public/news';
+import { publicNews } from '../services/public/publicNews';
 import { sortNewsByDate } from '../utils/getSortedNews';
 import { getNormalized } from '../utils/getNormalized';
 
@@ -23,6 +23,18 @@ export const newsSlice = createSlice({
     setNews: (state, action: PayloadAction<News[]>) => {
       state.news = action.payload;
     },
+    addNewsArticle: (state, action: PayloadAction<News>) => {
+      state.news.push(action.payload);
+    },
+    removeNewsArticle: (state, action: PayloadAction<number>) => {
+      state.news = state.news.filter(item => item.id !== action.payload);
+    },
+    updateNewsArticle: (state, action: PayloadAction<News>) => {
+      state.news = [
+        ...state.news.filter(item => item.id !== action.payload.id),
+        action.payload,
+      ];
+    },
   },
   extraReducers(builder) {
     builder.addCase(loadNews.pending, state => {
@@ -36,12 +48,10 @@ export const newsSlice = createSlice({
         } else {
           const sortedNews = action.payload.sort(sortNewsByDate);
 
-          state.news = [...sortedNews, ...sortedNews, ...sortedNews].map(
-            (news, id) => {
-              const link = getNormalized.link(news.title);
-              return { ...news, id, link };
-            },
-          );
+          state.news = sortedNews.map((news) => {
+            const link = getNormalized.link(news.title);
+            return { ...news, link };
+          });
           state.loading = false;
         }
       },
@@ -55,5 +65,5 @@ export const newsSlice = createSlice({
 });
 
 export const loadNews = createAsyncThunk('fetch/news', async () => {
-  return news.get();
+  return publicNews.get();
 });

@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { requestToAuth } from '../utils/httpAuthClient';
+import { useSessionStorage } from '../hooks/useSessionStorage';
 
-export const AuthContext = React.createContext({
+type InitContext = {
+  authorized: boolean;
+  login: (username: string, password: string) => Promise<any>;
+  token: string;
+};
+
+export const AuthContext = React.createContext<InitContext>({
   authorized: false,
   login: (username: string, password: string) => Promise.resolve(),
+  token: '',
 });
 
 type Props = {
@@ -10,21 +19,19 @@ type Props = {
 };
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useSessionStorage('authorized', false);
+  const [token, setToken] = useSessionStorage('token', '');
+  const login = useCallback(async (email: string, password: string) => {
+    const response = await requestToAuth({ email, password });
 
-  async function login(username: string, password: string) {
-    const correctLogin = 'login';
-    const correctPass = 'q123456';
-
-    if (username !== correctLogin && password !== correctPass) {
-      throw new Error('Wrong password!');
-    }
+    setToken(response.token);
 
     setAuthorized(true);
-  }
-  return (
-    <AuthContext.Provider value={{ authorized, login }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  }, []);
+
+  const value = useMemo(() => {
+    return { authorized, login, token };
+  }, [authorized, token]);
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

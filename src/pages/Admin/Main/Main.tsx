@@ -1,44 +1,48 @@
-import { useCallback, useContext, useEffect, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { debounce } from 'lodash';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import styles from './Main.module.scss';
+import { FormContext } from '../../../context/FormContext';
+import { useAppDispatch } from '../../../app/hooks';
 import { loadNews } from '../../../features/newsSlice';
-import { getNormalized } from '../../../utils/getNormalized';
-import { AdminContext } from '../../../context/AdminContext';
-import classNames from 'classnames';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { ItemsCatalog } from './components/ItemsCatalog';
-import { getFilteredNews } from '../../../utils/getFilteredNews';
-// const newsCategories = ['Reports', 'News', 'Events', 'All'];
+import { loadTeam } from '../../../features/teamSlice';
 
 export const Main = () => {
-  const columns = ['Title', 'Date', 'Image', 'Text'];
+  const { setDisplayForm, setSelectedItem } = useContext(FormContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
   const dispatch = useAppDispatch();
-  const { news } = useAppSelector(state => state.news);
-  const { setSelectedItem, setDisplayForm } = useContext(AdminContext);
-  const [searchParams] = useSearchParams();
-
   useEffect(() => {
     dispatch(loadNews());
-    setSelectedItem(null);
-    // setServiceFunctions({
-    //   post: () => {},
-    //   delete:() => {},
-    //   update: () => {},
-    // })
+    dispatch(loadTeam());
   }, []);
 
-  const getDisplayedNews = useCallback(() => {
-    const query = searchParams.get('query') || '';
-    const category = searchParams.get('type') || 'all';
+  const { pathname } = useLocation();
+  console.log(pathname);
 
-    return getFilteredNews({ news, category, query });
-  }, [news, searchParams]);
-  
-  // const getDisplayedTeam = useCallback(() => {
-  //   const query = searchParams.get('query') || '';
+  const setApplyQuery = (newQuery: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    const normalizedQuery = newQuery.toString();
+    if (normalizedQuery.length === 0) {
+      newSearchParams.delete('query');
+    } else {
+      newSearchParams.set('query', normalizedQuery);
+    }
 
-  //   return getFilteredNews({ news, category, query });
-  // }, [news, searchParams]);
+    setSearchParams(newSearchParams.toString());
+  };
+
+  const applyQuery = useCallback(debounce(setApplyQuery, 1000), []);
+  const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    applyQuery(e.target.value);
+  };
 
   return (
     <section className={styles.container}>
@@ -53,17 +57,23 @@ export const Main = () => {
             name=""
             id=""
             placeholder="Search..."
+            value={query}
+            onChange={handleQueryChange}
           />
         </label>
 
         <button
           className={`${styles.searchButton} button--yellow button--secondary`}
-          onClick={() => setDisplayForm(true)}
+          onClick={() => {
+            setDisplayForm(true);
+            setSelectedItem(null);
+            
+          }}
         >
           NEW ITEM
         </button>
       </div>
-      <ItemsCatalog columns={columns} items={getDisplayedNews()} />
+      <Outlet />
     </section>
   );
 };

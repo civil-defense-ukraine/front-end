@@ -29,23 +29,27 @@
   visibility: hidden;
   height: 1px;
 
-  & > img {
-    height: 1px;
-  }
-
   & > div {
     display: none;
   }
+
+  &__img {
+    height: 1px;
+
+    &__active {
+      display: block;
+      height: 80px;
+      max-width: 80px;
+      object-fit: contain;
+    }
+  }
+
   &__active {
     position: relative;
     visibility: initial;
     margin-block: 8px;
     height: 60px;
-
-    & > img {
-      height: 60px;
-    }
-
+    width: 80px;
     & > div {
       display: flex;
       position: absolute;
@@ -55,8 +59,8 @@
       background-color: $white;
       border-radius: 50%;
       cursor: pointer;
-      top: -9px;
-      right: -9px;
+      top: -6%;
+      right: 2%;
       z-index: 2;
       box-shadow: 0px 1px 2px 0px #0000004d;
       box-shadow: 0px 1px 3px 1px #00000026;

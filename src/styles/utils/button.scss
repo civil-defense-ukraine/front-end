@@ -25,7 +25,7 @@
     border-radius: 24px;
     background-color: $yellow;
     color: $black;
-    transition: all 2s;
+    transition: all 500s;
     cursor: pointer;
 
     &:hover {
@@ -55,7 +55,7 @@
     @include on-tablet {
       width: 204px;
     }
-    transition: all 2s;
+    transition: all 500ms;
 
     &:hover {
       background-color: $yellow--dark;

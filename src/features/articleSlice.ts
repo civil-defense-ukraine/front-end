@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { News } from '../types/News';
-import { news } from '../services/public/news';
+import { publicNews } from '../services/public/publicNews';
 
 type InitialState = {
   loading: boolean;
@@ -44,6 +44,6 @@ export const articleSlice = createSlice({
 export const loadArticle = createAsyncThunk(
   'fetch/article',
   async (id: string) => {
-    return news.getArticle(id);
+    return publicNews.getArticle(id);
   },
 );

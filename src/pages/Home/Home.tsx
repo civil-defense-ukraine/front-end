@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-import { useAppSelector } from '../../app/hooks';
 import { Form } from '../../components/Form';
 import { LatestNews } from '../../components/LatestNews';
 import { AboutUs } from './components/AboutUs';
@@ -12,7 +10,7 @@ export const Home = () => {
   return (
     <>
       <Header />
-      <AboutUs />
+      <AboutUs  />
       <Achievements />
       <ActiveDonation />
       <LatestNews />

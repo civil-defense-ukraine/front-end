@@ -1,6 +1,6 @@
 import { useLocation, useSearchParams } from 'react-router-dom';
 import styles from './NewsPage.module.scss';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { NewsCatalog } from './components/NewsCatalog';
 import { LatestArticle } from './components/LatestArticle';
@@ -16,18 +16,30 @@ const NewsPage = () => {
   const [searchParams] = useSearchParams();
   const { news, loading, error } = useAppSelector(state => state.news);
 
+  const latestArticle = useMemo(() => {
+    if (pathname.includes('reports')) {
+      return getFilteredNews({ news, category: 'reports' })[0];
+    } else {
+      return news[0];
+    }
+  }, [news, pathname]);
+
   const displayedNews = useMemo(() => {
     const category = searchParams.get('category') || 'all';
     const sortBy = searchParams.get('sortBy') || 'newest';
-    const latestArticleId = news[0] ? news[0].id : 0;
+    const latestArticleId = latestArticle ? latestArticle.id : 0;
 
     if (pathname.slice(1) === 'reports') {
-      return getFilteredNews({news, category:'reports', sortBy, latestArticleId});
+      return getFilteredNews({
+        news,
+        category: 'reports',
+        sortBy,
+        latestArticleId,
+      });
     } else {
-      return getFilteredNews({news, category, sortBy, latestArticleId});
+      return getFilteredNews({ news, category, sortBy, latestArticleId });
     }
   }, [pathname, news, searchParams]);
-  console.log(displayedNews);
 
   const numberOfPages = useMemo(() => Math.ceil(news.length / 10), [news]);
 
@@ -41,10 +53,10 @@ const NewsPage = () => {
 
   return (
     <section className={styles.container}>
-      {news[0] && (
+      {latestArticle && (
         <>
           <h2 className={`${styles.heading} heading--h3`}>Latest Article</h2>
-          <LatestArticle newsData={news[0]} />
+          <LatestArticle newsData={latestArticle} />
         </>
       )}
       {pathname === '/news' && <Filter />}

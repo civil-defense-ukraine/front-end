@@ -1,34 +1,37 @@
 import classNames from 'classnames';
-
 import styles from './Inputs.module.scss';
 
 type Props = {
+  fieldTitle: string;
   fieldValue: string;
   placeHolder: string;
   fieldError: string;
-  updateInput: (fieldName: string, newValue: string) => void;
+  updateInput: (newValue: string) => void;
 };
 
-export const TextAreaInput: React.FC<Props> = ({
+export const TextInput: React.FC<Props> = ({
+  fieldTitle,
   fieldValue,
   fieldError,
   placeHolder,
   updateInput,
 }) => {
   return (
-    <label htmlFor="messageText" className={styles.label}>
-      Text
+    <label htmlFor={fieldTitle} className={styles.label}>
+      {fieldTitle}
       <br />
-      <textarea
-        className={classNames(`form__textArea formField`, {
+      <input
+        className={classNames(`formField`, {
           formField__notValid: fieldError,
         })}
-        placeholder={placeHolder}
         value={fieldValue}
         onChange={e => {
-          updateInput('text', e.target.value);
+          updateInput(e.target.value);
         }}
-      ></textarea>
+        id={fieldTitle}
+        type="text"
+        placeholder={placeHolder}
+      />
       {fieldError && <p className="formField__notValid--text">{fieldError}</p>}
     </label>
   );

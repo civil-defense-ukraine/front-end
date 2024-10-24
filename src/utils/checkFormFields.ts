@@ -4,7 +4,9 @@ type FormFields = {
   message: string;
 };
 
-export const checkFormField = (formField: FormFields): FormFields => {
+export const checkFormField = (
+  formField: FormFields | any,
+): FormFields | any => {
   const { email } = formField;
   const error: FormFields = {
     email: '',

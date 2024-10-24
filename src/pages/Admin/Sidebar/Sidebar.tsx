@@ -29,8 +29,12 @@ export const Sidebar = () => {
               {pageText.map((text, index) => {
                 const link = text.toLowerCase().replaceAll(' ', '-');
                 return (
-                  <NavLink to={link} className={getLinkClass}>
-                    <p key={index}>{text}</p>
+                  <NavLink
+                    to={link}
+                    className={getLinkClass}
+                    key={pageText[index]}
+                  >
+                    <p>{text}</p>
                   </NavLink>
                 );
               })}

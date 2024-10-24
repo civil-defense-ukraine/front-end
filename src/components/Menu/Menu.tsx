@@ -1,9 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
 import styles from './Menu.module.scss';
 import classNames from 'classnames';
-import { HashLink } from 'react-router-hash-link';
 import { SocialMedia } from '../SocialMedia';
 import { useContext, useEffect } from 'react';
 import { useWidth } from '../../hooks/useWidth';

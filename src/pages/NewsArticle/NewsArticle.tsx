@@ -61,7 +61,7 @@ const NewsArticle = () => {
         <div className={styles.article__container}>
           <img className={styles.img} src={image} alt={title} loading="lazy" />
           <div className={styles.info}>
-            <p className={styles.mainText}>{text}</p>
+            <p className={styles.mainText}>{text.split('<br/>').map((textEl) => <>{textEl} <br/></>)}</p>
             <div className={styles.share}>
               Share
               <button

@@ -12,7 +12,6 @@
   }
 
   &__button {
-    // border: none;
     border-radius: 24px;
     align-self: center;
     margin-top: 16px;
@@ -41,6 +40,10 @@
     font-family: 'Figtree', sans-serif;
     font-size: 14px;
     line-height: 21px;
+
+    &__small {
+      height: 112px;
+    }
   }
 }
 

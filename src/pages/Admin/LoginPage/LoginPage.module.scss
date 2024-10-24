@@ -4,3 +4,45 @@
   flex-direction: column;
   align-items: center;
 }
+
+.password {
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    cursor: pointer;
+
+    &::after {
+      content: 'Show password.';
+      position: absolute;
+      top: -5px;
+      left: -60px;
+      padding: 5px;
+      text-align: center;
+      width: 100px;
+      background-color: rgba(108, 122, 137, 0.5);
+      border-radius: 12px;
+      transform: scale(0);
+      transition:
+        transform 500ms,
+        top 500ms,
+        left 500ms;
+    }
+
+    &:hover {
+      &::after {
+        transform: scale(1) translate(0);
+        top: 15px;
+        left: 0;
+      }
+    }
+
+    &__active {
+      &::after {
+        content: 'Hide password';
+      }
+    }
+  }
+}

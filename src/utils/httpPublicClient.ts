@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8088/api/public';
+const BASE_URL = 'https://cdu-backend-5gvnird6ya-lz.a.run.app/api/public';
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export async function request<T>(
@@ -17,8 +17,6 @@ export async function request<T>(
   console.log(`${BASE_URL}/${path}`, options);
 
   return fetch(`${BASE_URL}/${path}`, options).then(response => {
-    console.log(response);
-
     if (!response.ok) {
       throw new Error(response.statusText);
     }

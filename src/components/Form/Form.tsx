@@ -5,22 +5,15 @@ import { checkFormField } from '../../utils/checkFormFields';
 import { form } from '../../services/public/form';
 import { FormFields } from '../../types/FormFields';
 import { Loader } from '../Loader';
-import { error } from 'console';
 
 export const Form = () => {
-  // const [field, setField] = useState<FormFields>({
-  //   email: '',
-  //   subject: '',
-  //   isVolunteer: false,
-  //   message: '',
-  // });
   const [field, setField] = useState<FormFields>({
-    email: 'test@gmail.com',
-    subject: 'test',
+    email: '',
+    subject: '',
     isVolunteer: false,
-    message: 'test1',
+    message: '',
   });
-
+  
   const [errors, setErrors] = useState({
     email: '',
     subject: '',
@@ -49,6 +42,7 @@ export const Form = () => {
 
     setErrors(checkFormField(normalizedField));
     if (errors.email || errors.message || errors.subject) {
+      setLoading(false);
       return;
     }
 

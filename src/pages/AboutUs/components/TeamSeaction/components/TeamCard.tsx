@@ -13,13 +13,12 @@ export const TeamCard: React.FC<Props> = ({ person }) => {
   return (
     <article className={styles.article} key={id}>
       <img
-        className={classNames(styles.article__img, {
-          [styles.article__img__default]: true,
-        })}
+        className={classNames(styles.article__img)}
         loading="lazy"
         src={image}
         onError={e => {
           e.currentTarget.src = require('../../../../../imgs/default/person.png');
+          e.currentTarget.classList.add(styles.article__img__default);
         }}
         alt={name}
       />

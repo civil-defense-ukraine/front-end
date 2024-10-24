@@ -22,22 +22,9 @@ h3 {
   color: $black;
   scroll-behavior: smooth;
   overflow-x: hidden;
-
-  // min-height: 170vh;
-
-  // display: grid;
-  // grid-template-areas:
-  // 'header'
-  // 'main'
-  // 'footer';
 }
 
-.header {
-  grid-area: header;
-  justify-self: stretch;
-}
 
-.footer {
-  grid-area: footer;
-  justify-self: stretch;
+.scroll {
+  overflow:auto;
 }

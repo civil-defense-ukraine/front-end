@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const LatestArticle: React.FC<Props> = ({ newsData }) => {
-  const { id, image, type, title, publicationDate, text } = newsData;
+  const { image, type, title, publicationDate, text } = newsData;
   const date = new Date(publicationDate);
 
   return (
@@ -30,7 +30,7 @@ export const LatestArticle: React.FC<Props> = ({ newsData }) => {
           </h3>
           <p className={styles.date}> {getNormalized.date(date)} </p>
         </div>
-        <p className={styles.mainText}>{text}</p>
+        <p className={styles.mainText}>{text.split('<br/>').map((textEl) => <>{textEl} <br/></>)}</p>
       </div>
     </article>
   );

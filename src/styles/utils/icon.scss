@@ -5,7 +5,7 @@
   mask-size: contain;
   background-position: center;
   mask-position: center;
-  transition: all 1s;
+  transition: all 500ms;
 
   &--little {
     height: 10px;
@@ -103,6 +103,13 @@
 
   &--copy {
     background-image: url('../../imgs/icons/copy.svg');
+  }
+
+  &--helmet {
+    background-image: url('../../imgs/icons/helmet.svg');
+  }
+  &--requests {
+    background-image: url('../../imgs/icons/requests.png');
   }
 }
 
