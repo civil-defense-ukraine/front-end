@@ -7,11 +7,18 @@
     margin-bottom: 8px;
   }
 
-  &__text {
+  &__links {
     padding-left: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
 .logo {
   margin-bottom: 56px;
+}
+
+.link {
+  display: inline-block;
 }

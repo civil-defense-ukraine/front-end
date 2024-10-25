@@ -22,9 +22,9 @@ h3 {
   color: $black;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  min-width: 320px;
 }
 
-
 .scroll {
-  overflow:auto;
+  overflow: auto;
 }

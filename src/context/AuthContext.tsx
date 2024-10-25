@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useMemo, useState } from 'react';
 import { requestToAuth } from '../utils/httpAuthClient';
 import { useSessionStorage } from '../hooks/useSessionStorage';

@@ -1,15 +1,15 @@
-import { useSearchParams } from "react-router-dom";
-import { useAppSelector } from "../../../app/hooks";
-import { useMemo } from "react";
-import { AdminCatalog } from "../AdminCatalog/AdminCatalog";
-import { AdminTeamCard } from "./AdminTeamCard";
-import { TeamForm } from "../AdminForm/TeamForm";
+import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../../../app/hooks';
+import { useMemo } from 'react';
+import { AdminCatalog } from '../AdminCatalog/AdminCatalog';
+import { AdminTeamCard } from './AdminTeamCard';
+import { TeamForm } from '../AdminForm/TeamForm';
 const TeamColumns = ['Name', 'Image', 'Role', 'Text'];
 
 const AdminTeam = () => {
   const { team } = useAppSelector(state => state.team);
   console.log(team);
-  
+
   const [searchParams] = useSearchParams();
   const numberOfPages = useMemo(() => {
     return Math.ceil(team.length / 15);
@@ -27,7 +27,7 @@ const AdminTeam = () => {
           <AdminTeamCard item={item} key={item.id} />
         ))}
       </AdminCatalog>
-      <TeamForm/>
+      <TeamForm />
     </>
   );
 };

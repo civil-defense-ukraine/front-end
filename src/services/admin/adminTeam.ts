@@ -1,4 +1,3 @@
-
 import { TeamMember } from '../../types/TeamMember';
 import { adminClient } from '../../utils/httpAdminClient';
 

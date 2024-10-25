@@ -16,7 +16,6 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
   const { token } = useContext(AuthContext);
   const { id, image, name, position, description } = item;
 
-
   const handleDelete = (id: number) => {
     adminTeam.delete(id.toString(), token);
   };
@@ -34,12 +33,8 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
           style={{ backgroundImage: `url(${image})` }}
         ></div>
       </td>
-      <td className={styles.item__text}>
-        {position}
-      </td>
-      <td className={styles.item__text}>
-        {description}
-      </td>
+      <td className={styles.item__role}>{position}</td>
+      <td className={styles.item__text}>{description}</td>
       <td className={styles.button}>
         <div
           className={styles.item__button}

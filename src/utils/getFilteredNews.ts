@@ -1,5 +1,7 @@
+import { normalize } from 'path';
 import { News } from '../types/News';
 import { sortNewsByDate } from './getSortedNews';
+import { getNormalized } from './getNormalized';
 type Props = {
   news: News[];
   category: string;
@@ -11,10 +13,11 @@ type Props = {
 export const getFilteredNews = ({
   news,
   category,
-  sortBy,
-  latestArticleId,
+  query = '',
+  sortBy = '',
+  latestArticleId = 0,
 }: Props) => {
-  const filtered = news
+  let filteredNews = news
     .filter(article => {
       const normalizedType = article.type.toLowerCase();
 
@@ -33,10 +36,17 @@ export const getFilteredNews = ({
       }
     })
     .sort(sortNewsByDate);
+  
+  if (query) {
+    filteredNews = filteredNews.filter((newsArticle) => {
+      const normalizedQuery = query.toLowerCase();
+      const normalizedTitle = newsArticle.title.toLowerCase();
+      const normalizedText = newsArticle.text.toLowerCase();
+      const normaliedDate = getNormalized.dateForAdmin(new Date(newsArticle.publicationDate));
+      
+      return normalizedTitle.includes(normalizedQuery) || normalizedText.includes(normalizedQuery) || normaliedDate.includes(normalizedQuery);
+    })
+    }
 
-  return sortBy === 'latest' ? filtered.reverse() : filtered;
+  return sortBy === 'latest' ? filteredNews.reverse() : filteredNews;
 };
-
-// export const getFilteredNewsWithQuerty = (news: News[], query: string) => {
-//   return
-// };

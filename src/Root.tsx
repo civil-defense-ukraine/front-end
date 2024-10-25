@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { lazy, Suspense } from 'react';
 
-
 import { App } from './App';
 import { Home } from './pages/Home';
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage'));
@@ -13,7 +12,6 @@ import { NewsContainer } from './pages/NewsContainer';
 import { LoadingPage } from './pages/LoadingPage/LoadingPage';
 const LoginPage = lazy(() => import('./pages/Admin/LoginPage/LoginPage'));
 import { RequireAuth } from './pages/Admin/RequireAuth/RequireAuth';
-
 
 import { AuthProvider } from './context/AuthContext';
 import { MenuProvider } from './context/MenuContext';
@@ -57,7 +55,7 @@ export const Root = () => {
                 />
               </Route>
               <Route path="admin" element={<RequireAuth />}>
-                <Route path="news" element={<AdminNews />} />
+                <Route index element={<AdminNews />} />
                 <Route path="team" element={<AdminTeam />} />
                 <Route path="donate" element={<AdminDonation />} />
               </Route>

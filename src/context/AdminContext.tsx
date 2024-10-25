@@ -4,16 +4,12 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
-  useLayoutEffect,
   useMemo,
   useState,
 } from 'react';
 import { News } from '../types/News';
 import { TeamMember } from '../types/TeamMember';
-import { adminNews } from '../services/admin/adminNews';
-import { publicNews } from '../services/public/publicNews';
-import { useLocation } from 'react-router-dom';
-import { team } from '../services/public/team';
+
 type ServiceFunctions = {
   post: (data: FormData, token: string) => Promise<any>;
   delete: (id: string, token: string) => Promise<any>;

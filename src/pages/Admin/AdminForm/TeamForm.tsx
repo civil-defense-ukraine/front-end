@@ -20,14 +20,22 @@ type initialFormState = {
 
 export const TeamForm = () => {
   const { displayForm, setDisplayForm, selectedItem } = useContext(FormContext);
-  const [errors, setErrors] = useState({ title: '', position: '', description: '' });
+  const [errors, setErrors] = useState({
+    title: '',
+    position: '',
+    description: '',
+  });
 
   const defaultValue = useMemo(() => {
     return {
       name: selectedItem && 'name' in selectedItem ? selectedItem.name : '',
       image: null,
-      description: selectedItem && 'description' in selectedItem ? selectedItem.description : '',
-      position: selectedItem && 'position' in selectedItem ? selectedItem.position : '',
+      description:
+        selectedItem && 'description' in selectedItem
+          ? selectedItem.description
+          : '',
+      position:
+        selectedItem && 'position' in selectedItem ? selectedItem.position : '',
     } as initialFormState;
   }, [selectedItem]);
 
@@ -35,7 +43,7 @@ export const TeamForm = () => {
   const updateInput = (fieldTitle: string) => {
     return (newValue: string | File | null) => {
       setFormField(prevValue => ({ ...prevValue, [fieldTitle]: newValue }));
-    }
+    };
   };
 
   useEffect(() => {
@@ -43,7 +51,6 @@ export const TeamForm = () => {
   }, [selectedItem]);
 
   const [token] = useSessionStorage('token', '');
-
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,7 +71,6 @@ export const TeamForm = () => {
       formData.append('image', formField.image);
     }
 
-
     if (selectedItem) {
       adminTeam
         .update(selectedItem.id, formData, token)
@@ -79,7 +85,7 @@ export const TeamForm = () => {
         .then(response => console.log(response))
         .catch(err => console.error(err));
     }
-  }
+  };
 
   function clearForm() {
     setFormField({
@@ -118,7 +124,10 @@ export const TeamForm = () => {
           placeHolder="Please enter full name"
           updateInput={updateInput('name')}
         />
-        <ImageInput updateInput={updateInput('image')} />
+        <ImageInput
+          defaultImage={formField.image}
+          updateInput={updateInput('image')}
+        />
         <TextInput
           fieldTitle="Role"
           fieldValue={formField.position}

@@ -6,21 +6,32 @@ import { loadNews } from '../../../features/newsSlice';
 import { NewsForm } from '../AdminForm';
 import { useSearchParams } from 'react-router-dom';
 import { getVisibleNews } from '../../../utils/getVisibleNews';
+import { getFilteredNews } from '../../../utils/getFilteredNews';
 const newsColumns = ['Title', 'Type', 'Date', 'Image', 'Text'];
 
 const AdminNews = () => {
   const { news } = useAppSelector(state => state.news);
   const [searchParams] = useSearchParams();
-  const numberOfPages = useMemo(() => {
-    return Math.ceil(news.length / 15);
-  }, [news]);
+
+  const displayedNews = useMemo(() => {
+    const category = searchParams.get('type') || '';
+    const query = searchParams.get('query') || '';
+    return getFilteredNews({ news, category, query })
+  }, [searchParams, news]);
+
+
+
   const visibleNews = useMemo(() => {
     const page = searchParams.get('page');
 
-    return getVisibleNews({ news: news, page });
-  }, [searchParams, news]);
 
-  console.log(news);
+    return getVisibleNews({ news: displayedNews, page });
+  }, [searchParams, displayedNews]);
+
+  const numberOfPages = useMemo(() => {
+    return Math.ceil( displayedNews .length / 15);
+  }, [ displayedNews]);
+
 
   return (
     <>

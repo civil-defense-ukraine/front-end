@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import styles from './TopBar.module.scss';
 import classNames from 'classnames';

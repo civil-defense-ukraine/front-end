@@ -6,7 +6,9 @@ export const getNormalized = {
 
     const updatedString = text.slice(0, maxLengthOfText);
     const indexOfLastSpace = updatedString.lastIndexOf(' ');
-    const isLastElSymbol = updatedString[indexOfLastSpace - 1].toUpperCase() === updatedString[indexOfLastSpace - 1].toLowerCase();
+    const isLastElSymbol =
+      updatedString[indexOfLastSpace - 1].toUpperCase() ===
+      updatedString[indexOfLastSpace - 1].toLowerCase();
     const lastIndex = isLastElSymbol ? indexOfLastSpace - 1 : indexOfLastSpace;
     return `${updatedString.slice(0, lastIndex)} ...`;
   },
@@ -16,7 +18,13 @@ export const getNormalized = {
   title(title: string) {
     return title
       .split(' ')
-      .map(word => word[0].toUpperCase() + word.slice(1))
+      .map(word => {
+        if (!word[0]) {
+          return '';
+        } else {
+          return word[0].toUpperCase() + word.slice(1);
+        }
+      })
       .join(' ');
   },
   date(date: Date) {
@@ -35,5 +43,5 @@ export const getNormalized = {
     const [day, month, year] = dateStr.split('/');
     const date = new Date(`${year}-${month}-${day}T08:33:51.074Z`);
     return date.toISOString();
-  }
+  },
 };

@@ -1,12 +1,8 @@
 import styles from './Admin.module.scss';
 import { Sidebar } from './Sidebar';
 import { Main } from './Main/Main';
-import { AdminContext, AdminProvider } from '../../context/AdminContext';
-import { useContext } from 'react';
-import classNames from 'classnames';
+import { AdminProvider } from '../../context/AdminContext';
 import { AuthProvider } from '../../context/AuthContext';
-import { Outlet } from 'react-router-dom';
-import { NewsForm } from './AdminForm';
 
 const Admin = () => {
   return (

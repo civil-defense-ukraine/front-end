@@ -3,9 +3,34 @@ import { bankDetails, mobilePay } from '../../constants/bankDetails';
 import { Logo } from '../Logo';
 import { SocialMedia } from '../SocialMedia';
 import styles from './Footer.module.scss';
+import { useEffect, useState } from 'react';
 
 export const Footer = () => {
   const { pathname } = useLocation();
+  const [showDonateButton, setShowDonateButton] = useState(false);
+  useEffect(() => {
+    function handleScroll() {
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      if (scrollPosition > viewportHeight) {
+        setShowDonateButton(true);
+      } else {
+        setShowDonateButton(false);
+      }
+    }
+
+    if (pathname === '/') {
+      window.addEventListener('scroll', handleScroll);
+    } else if (pathname.includes('donate')) {
+      setShowDonateButton(false);
+    } else {
+      setShowDonateButton(true);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pathname]);
 
   return (
     <footer className={`${styles.container} footer`}>
@@ -65,7 +90,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      {!pathname.includes('donate') && (
+      {showDonateButton && (
         <Link
           to={'/donate'}
           className={`button--secondary button--transparent ${styles.button}`}

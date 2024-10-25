@@ -13,7 +13,7 @@ export const Form = () => {
     isVolunteer: false,
     message: '',
   });
-  
+
   const [errors, setErrors] = useState({
     email: '',
     subject: '',

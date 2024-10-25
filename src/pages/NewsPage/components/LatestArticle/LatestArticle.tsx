@@ -30,7 +30,13 @@ export const LatestArticle: React.FC<Props> = ({ newsData }) => {
           </h3>
           <p className={styles.date}> {getNormalized.date(date)} </p>
         </div>
-        <p className={styles.mainText}>{text.split('<br/>').map((textEl) => <>{textEl} <br/></>)}</p>
+        <p className={styles.mainText}>
+          {text.split('<br/>').map(textEl => (
+            <>
+              {textEl} <br />
+            </>
+          ))}
+        </p>
       </div>
     </article>
   );

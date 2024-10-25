@@ -21,6 +21,7 @@ export const Main = () => {
   useEffect(() => {
     dispatch(loadNews());
     dispatch(loadTeam());
+    setApplyQuery('');
   }, []);
 
   const { pathname } = useLocation();
@@ -67,7 +68,6 @@ export const Main = () => {
           onClick={() => {
             setDisplayForm(true);
             setSelectedItem(null);
-            
           }}
         >
           NEW ITEM

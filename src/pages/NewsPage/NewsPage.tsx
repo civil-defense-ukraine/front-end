@@ -1,11 +1,10 @@
 import { useLocation, useSearchParams } from 'react-router-dom';
 import styles from './NewsPage.module.scss';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { NewsCatalog } from './components/NewsCatalog';
 import { LatestArticle } from './components/LatestArticle';
 import { Pagination } from '../../components/Pagination';
-import { Loader } from '../../components/Loader';
 import { Error } from '../../components/Error';
 import { getFilteredNews } from '../../utils/getFilteredNews';
 import { Filter } from './components/Filter/Filter';
@@ -41,7 +40,10 @@ const NewsPage = () => {
     }
   }, [pathname, news, searchParams]);
 
-  const numberOfPages = useMemo(() => Math.ceil(news.length / 10), [news]);
+  const numberOfPages = useMemo(
+    () => Math.ceil(displayedNews.length / 10),
+    [displayedNews],
+  );
 
   if (loading) {
     return <LoadingPage />;

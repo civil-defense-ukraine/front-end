@@ -16,29 +16,36 @@ import { getUniqueId } from '../../../utils/formUtils';
 import { NewsTypes } from '../../../types/News';
 import { adminNews } from '../../../services/admin/adminNews';
 import { Loader } from '../../../components/Loader';
+import { checkAdminFormField } from '../../../utils/checkFormFields';
 
 type initialFormState = {
   title: string;
   publicationDate: Date;
-  image: null | File;
+  image: null | File | string;
   text: string;
   type: string;
 };
 
+type ValidationErrors<T> = {
+  [K in keyof T]?: string | null;
+};
+
 export const NewsForm = () => {
   const { displayForm, setDisplayForm, selectedItem } = useContext(FormContext);
-  const { serviceFunctions, setItems, category } = useContext(AdminContext);
-  const [errors, setErrors] = useState({ title: '', text: '' });
+  const [errors, setErrors] = useState<ValidationErrors<initialFormState>>();
   const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState('');
   const dispatch = useAppDispatch();
 
   const defaultValue = useMemo(() => {
     return {
       title: selectedItem && 'title' in selectedItem ? selectedItem.title : '',
-      publicationDate: selectedItem && 'publicationDate' in selectedItem
-        ? new Date(selectedItem.publicationDate)
-        : new Date(),
-      image: null,
+      publicationDate:
+        selectedItem && 'publicationDate' in selectedItem
+          ? new Date(selectedItem.publicationDate)
+          : new Date(),
+      image:
+        selectedItem && 'image' in selectedItem ? selectedItem.image : null,
       text: selectedItem && 'title' in selectedItem ? selectedItem.text : '',
       type: selectedItem && 'type' in selectedItem ? selectedItem.type : 'news',
     };
@@ -48,7 +55,7 @@ export const NewsForm = () => {
   const updateInput = (fieldTitle: string) => {
     return (newValue: string | File | null | Date) => {
       setFormField(prevValue => ({ ...prevValue, [fieldTitle]: newValue }));
-    }
+    };
   };
 
   useEffect(() => {
@@ -61,13 +68,17 @@ export const NewsForm = () => {
     updateInput('publicationDate')(new Date(date));
   };
 
+
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    setErrors(checkAdminFormField(formField));
     const formData = new FormData();
     const restdata = {
       title: formField.title,
       text: formField.text,
-      type: formField.type.toUpperCase(),
+      type: formField.type,
       publicationDate: formField.publicationDate.toISOString(),
     };
 
@@ -75,9 +86,6 @@ export const NewsForm = () => {
       'requestDto',
       new Blob([JSON.stringify(restdata)], { type: 'application/json' }),
     );
-
-    console.log(formField.image);
-    
 
     if (formField.image) {
       formData.append('image', formField.image);
@@ -91,7 +99,7 @@ export const NewsForm = () => {
             ...formField,
             publicationDate: formField.publicationDate.toISOString(),
             image: '',
-            type: formField.type.toUpperCase() as NewsTypes,
+            type: formField.type as NewsTypes,
             id: selectedItem.id,
             link: getNormalized.link(title),
           });
@@ -101,27 +109,37 @@ export const NewsForm = () => {
         .catch(err => {
           console.error(err);
           console.log(formField);
+          setFormError('Something went wrong! Try again later!');
+        }).finally(() => {
+          setLoading(false);
         });
     } else {
-      adminNews.post(formData, token)
-        .then((response) => {
-          console.log(response);
+      console.log(formData);
 
+      adminNews
+        .post(formData, token)
+        .then(() => {
           dispatch(
             newsSlice.actions.addNewsArticle({
               ...formField,
               publicationDate: formField.publicationDate.toISOString(),
               image: '',
-              type: formField.type.toUpperCase() as NewsTypes,
+              type: formField.type as NewsTypes,
               id: getUniqueId(),
               link: getNormalized.link(title),
             }),
           );
           clearForm();
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setFormError('Something went wrong! Try again later!');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }
+  };
 
   function clearForm() {
     setFormField({
@@ -157,7 +175,7 @@ export const NewsForm = () => {
         <TextInput
           fieldTitle="Title"
           fieldValue={formField.title}
-          fieldError={errors.title}
+          fieldError={errors?.title || ''}
           placeHolder="Please enter title"
           updateInput={updateInput('title')}
         />
@@ -175,7 +193,8 @@ export const NewsForm = () => {
             return (
               <div
                 className={classNames(styles.type, {
-                  [styles.type__selected]: formField.type.toUpperCase() === type.toUpperCase(),
+                  [styles.type__selected]:
+                    formField.type.toUpperCase() === type.toUpperCase(),
                 })}
                 onClick={() => updateInput('type')(type.toUpperCase())}
               >
@@ -185,21 +204,30 @@ export const NewsForm = () => {
           })}
         </div>
 
-        <ImageInput updateInput={updateInput('image')} />
+        <ImageInput
+          defaultImage={formField.image}
+          updateInput={updateInput('image')}
+        />
         <TextAreaInput
           fieldValue={formField.text}
-          fieldError={errors.text}
+          fieldError={errors?.text || ''}
           placeHolder={'Type the text of the news article...'}
           updateInput={updateInput('text')}
         />
-
+        {formError && (
+          <p className="formField__notValid--text">{formError}</p>
+        )}
         <div className={styles.buttons}>
-          {loading ? <Loader /> : <button
-            type="submit"
-            className={`form__button button--yellow button--secondary`}
-          >
-            SAVE
-          </button>}
+          {loading ? (
+            <Loader />
+          ) : (
+            <button
+              type="submit"
+              className={`form__button button--yellow button--secondary`}
+            >
+              SAVE
+            </button>
+          )}
           <button
             className={`form__button button--transparent button--secondary`}
             onClick={() => clearForm()}

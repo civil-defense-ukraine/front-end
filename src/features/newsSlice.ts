@@ -48,7 +48,7 @@ export const newsSlice = createSlice({
         } else {
           const sortedNews = action.payload.sort(sortNewsByDate);
 
-          state.news = sortedNews.map((news) => {
+          state.news = sortedNews.map(news => {
             const link = getNormalized.link(news.title);
             return { ...news, link };
           });
