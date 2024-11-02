@@ -22,9 +22,21 @@ export const teamSlice = createSlice({
       state.team = action.payload;
     },
 
-    updateTeam(state, action: PayloadAction<Omit<TeamMember, 'id'>>) {
+    update(state, action: PayloadAction<TeamMember>) {
+      state.team = [
+        ...state.team.filter(person => person.id !== action.payload.id),
+        action.payload,
+      ];
+    },
+
+    add(state, action: PayloadAction<Omit<TeamMember, 'id'>>) {
       const id = Math.random().toFixed(14).slice(2);
       state.team.push({ ...action.payload, id: +id });
+    },
+    delete(state, action: PayloadAction<number>) {
+      state.team = state.team.filter(
+        teamMember => teamMember.id !== action.payload,
+      );
     },
   },
 
@@ -36,7 +48,9 @@ export const teamSlice = createSlice({
     builder.addCase(
       loadTeam.fulfilled,
       (state, action: PayloadAction<TeamMember[]>) => {
-        state.team = action.payload;
+        state.team = action.payload.sort((person1, person2) =>
+          person1.position.localeCompare(person2.position),
+        );
 
         if (action.payload.length === 0) {
           state.error = 'Currently no team members have been added!';

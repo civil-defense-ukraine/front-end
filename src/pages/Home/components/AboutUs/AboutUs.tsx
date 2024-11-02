@@ -1,30 +1,29 @@
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
 import styles from './AboutUs.module.scss';
 import { ReadMore } from '../../../../components/Buttons/ReadMore';
+import { useState } from 'react';
+import classNames from 'classnames';
 
 export const AboutUs = () => {
   const { isVisible, container } = useElementOnScreen();
-
-  console.log('about us', isVisible);
+  const [loaded, setIsLoaded] = useState(false);
 
   return (
     <section ref={container} className={styles.container}>
-      <picture className={`${styles.img} `}>
-        <source
-          media="(min-width: 1240px)"
-          srcSet="./imgs/about-us/about-us-desktop.png"
-        />
-        <source
-          media="(min-width: 834px)"
-          srcSet="./imgs/about-us/about-us-tablet.png"
-        />
+      <div
+        className={classNames(`${styles.img} hide--right`, {
+          skeleton: !loaded,
+          show: isVisible,
+        })}
+      >
         <img
-          loading="lazy"
-          src="./imgs/about-us/about-us.png"
+          src="./imgs/about-us/about-us1.jpg"
           alt="Civil Defense Ukraine Team"
-          className={`${styles.img} hide--left ${isVisible ? 'show' : ''}`}
+          className={`${styles.img} `}
+          onLoad={() => setIsLoaded(true)}
+          loading="lazy"
         />
-      </picture>
+      </div>
 
       <div className={`${styles.text} hide--right ${isVisible ? 'show' : ''}`}>
         <h2 className={`${styles.title} heading--h2`}>About Us</h2>

@@ -12,6 +12,6 @@ export const adminNews = {
     return adminClient.post<News>(`news`, token, data);
   },
   async update(id: number, data: FormData, token: string) {
-    return adminClient.update(`news/${id}`, token, data);
+    return adminClient.update<News>(`news/${id}`, token, data);
   },
 };

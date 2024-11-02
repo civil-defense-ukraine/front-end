@@ -1,4 +1,5 @@
-const BASE_URL = 'https://cdu-backend-5gvnird6ya-lz.a.run.app/api/public';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const BASE_URL = 'https://cdu-backend-service-latest.onrender.com/api/public';
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export async function request<T>(

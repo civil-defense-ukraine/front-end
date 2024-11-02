@@ -21,12 +21,6 @@ const initContext = {
   setDisplayForm: () => {},
   selectedItem: null,
   setSelectedItem: () => {},
-  serviceFunctions: {
-    post: () => {},
-    delete: () => {},
-    update: () => {},
-  },
-  setServiceFunctions: () => {},
 };
 
 export const FormContext = createContext<InitContext>(initContext);

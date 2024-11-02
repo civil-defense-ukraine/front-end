@@ -6,15 +6,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 32px;
+  @include gap-btw-blocks;
+  @include max-width;
 
   @include on-tablet {
     padding-inline: 69px;
-    padding-block: 56px;
   }
 
   @include on-desktop {
-    padding-inline: 162px;
-    padding-block: 100px;
+    padding-inline: 48px;
+  }
+
+  @include max-width;
+}
+
+.latestArticle {
+  @include on-tablet {
+    margin-bottom: 32px;
+  }
+
+  @include on-desktop {
+    align-self: flex-start;
   }
 }
 

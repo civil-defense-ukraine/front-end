@@ -6,16 +6,14 @@
   gap: 32px;
   align-items: center;
   padding-inline: 18px;
-  padding-bottom: 100px;
+  @include gap-btw-blocks;
 
   @include on-tablet {
     padding-inline: 70px;
-    padding-bottom: 144px;
   }
 
   @include on-desktop {
     padding-inline: 48px;
-    padding-bottom: 150px;
   }
 }
 
@@ -24,13 +22,15 @@
   row-gap: 24px;
 
   @include on-tablet {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 336px);
+
     column-gap: 24px;
     row-gap: 32px;
   }
 
   @include on-desktop {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 432px);
+    max-width: 1344px;
   }
 
   &__rest {
@@ -41,20 +41,60 @@
 }
 
 .article {
-  max-height: 454px;
+  position: relative;
+  cursor: pointer;
+  height: 363px;
+  width: 336px;
   box-sizing: border-box;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
 
   @include on-desktop {
-    max-height: 584px;
+    height: 479px;
+    width: 432px;
+  }
+
+  &:hover {
+    z-index: 3;
+
+    .article__quote {
+      height: var(--hover-height);
+      opacity: 1;
+      overflow: 'inherit';
+    }
+
+    .article__container {
+      background-color: $white;
+      border-radius: 24px;
+    }
+  }
+
+  &__name {
+    font-size: 24px;
+  }
+
+  &__container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-sizing: border-box;
   }
 
   &__img {
-    height: 311px;
-    padding-bottom: 32px;
+    height: 236px;
+    width: 100%;
+
+    display: block;
+    border-radius: 24px;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 32px;
 
     @include on-desktop {
-      height: 425px;
+      height: 336px;
+      width: 382px;
     }
 
     &__default {
@@ -63,9 +103,26 @@
     }
   }
 
+  &__quote {
+    display: flex;
+    align-items: center;
+    height: 1px;
+    opacity: 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: $grey--secondary;
+    transition: all 500ms;
+  }
+
   &__text {
     font-weight: 700;
+    font-size: 16px;
     color: $grey--text;
     padding-top: 0.8em;
   }
+}
+
+.button {
+  transform: translateY(-30px);
+  height: 60px;
 }

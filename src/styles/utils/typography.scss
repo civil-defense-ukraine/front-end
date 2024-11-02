@@ -21,9 +21,13 @@
   }
 
   &--h3 {
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.3em;
     font-weight: 600;
+
+    @include on-tablet {
+      font-size: 24px;
+    }
   }
 }
 

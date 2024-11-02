@@ -1,9 +1,7 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { AuthProvider } from '../../../context/AuthContext';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSessionStorage } from '../../../hooks/useSessionStorage';
 import { FormProvider } from '../../../context/FormContext';
-import { AdminProvider } from '../../../context/AdminContext';
-import Admin from '../Admin';
+import { AuthProvider } from '../../../context/AuthContext';
 
 export const RequireAuth = () => {
   const [authorized] = useSessionStorage('authorized', false);
@@ -14,12 +12,10 @@ export const RequireAuth = () => {
   }
 
   return (
-    <AuthProvider>
-      <FormProvider>
-        <AdminProvider>
-          <Admin />
-        </AdminProvider>
-      </FormProvider>
-    </AuthProvider>
+    <FormProvider>
+      <AuthProvider>
+        <Outlet />
+      </AuthProvider>
+    </FormProvider>
   );
 };

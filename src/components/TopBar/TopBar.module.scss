@@ -1,19 +1,25 @@
 @import '../../styles/styles.scss';
 
 .topBar {
-  height: $header-height;
-  padding-block: 34px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: $blue;
-  @include padding-inline;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 2;
 
   &__menu {
     background-color: $white;
+  }
+
+  &__content {
+    height: $header-height;
+    @include max-width;
+    padding-block: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include padding-inline;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
   }
 
   &__button {

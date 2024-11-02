@@ -3,17 +3,25 @@ import styles from './AboutUsInfo.module.scss';
 
 export const AboutUsInfo = () => {
   const { isVisible, container } = useElementOnScreen();
+
   return (
     <section ref={container} className={styles.container}>
       <article
         className={`${styles.article} hide--right ${isVisible ? 'show' : ''}`}
       >
-        <img
-          className={styles.article__img}
-          loading="lazy"
-          src="./imgs/about-us-page/founders.png"
-          alt="Civil Defence Founders"
-        />
+        <div className={`${styles.article__img} skeleton`}>
+          <img
+            className={styles.article__img}
+            onLoad={e => {
+              console.log(e.currentTarget.parentElement);
+
+              e.currentTarget.parentElement?.classList.remove('skeleton');
+            }}
+            loading="lazy"
+            src="./imgs/about-us-page/founders.png"
+            alt="Civil Defence Founders"
+          />
+        </div>
         <span>
           <h2 className={`${styles.article__header} heading--h2`}>About Us</h2>
           <p className={styles.article__text}>
@@ -32,12 +40,20 @@ export const AboutUsInfo = () => {
       <article
         className={`${styles.article} hide--left ${isVisible ? 'show' : ''}`}
       >
-        <img
-          className={styles.article__img}
-          loading="lazy"
-          src="./imgs/about-us-page/whatDoWeDo.png"
-          alt="Territorial Defense Unit"
-        />
+        <div className={`${styles.article__img} skeleton`}>
+          <img
+            className={styles.article__img}
+            onLoad={e => {
+              console.log(e.currentTarget.parentElement);
+
+              e.currentTarget.parentElement?.classList.remove('skeleton');
+            }}
+            loading="lazy"
+            src="./imgs/about-us-page/whatDoWeDo.png"
+            alt="Territorial Defense Unit"
+          />
+        </div>
+
         <span>
           <h2 className={`${styles.article__header} heading--h2`}>
             What We Do?
@@ -63,12 +79,19 @@ export const AboutUsInfo = () => {
       <article
         className={`${styles.article} hide--right ${isVisible ? 'show' : ''}`}
       >
-        <img
-          className={styles.article__img}
-          loading="lazy"
-          src="./imgs/about-us-page/mission.png"
-          alt="Stop War"
-        />
+        <div className={`${styles.article__img} skeleton`}>
+          <img
+            className={styles.article__img}
+            onLoad={e => {
+              console.log(e.currentTarget.parentElement);
+
+              e.currentTarget.parentElement?.classList.remove('skeleton');
+            }}
+            loading="lazy"
+            src="./imgs/about-us-page/mission.png"
+            alt="Stop War"
+          />
+        </div>
         <span>
           <h2 className={`${styles.article__header} heading--h2`}>
             Our Mission

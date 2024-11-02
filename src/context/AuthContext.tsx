@@ -24,12 +24,12 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [authorized, setAuthorized] = useSessionStorage('authorized', false);
   const [token, setToken] = useSessionStorage('token', '');
   const login = useCallback(async (email: string, password: string) => {
-    const response = await requestToAuth({ email, password });
-
-    setToken(response.token);
-
-    setAuthorized(true);
+    return requestToAuth({ email, password }).then(response => {
+      setToken(response.token);
+      setAuthorized(true);
+    });
   }, []);
+  console.log('works');
 
   const value = useMemo(() => {
     return { authorized, login, token };

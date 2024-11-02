@@ -23,69 +23,71 @@ export const TopBar = React.memo(() => {
 
   return (
     <div
-      className={classNames(`${styles.topBar} header`, {
+      className={classNames(`${styles.topBar}`, {
         [styles.topBar__menu]: showMenu,
       })}
     >
-      <Link to="/">
-        {!showMenu ? (
-          <Logo />
-        ) : (
-          <img
-            className="logo"
-            src={require('../../imgs/logo-blue.png')}
-            alt="CDU logo"
-          />
-        )}
-      </Link>
-      <ul className={`${styles.topBar__nav} ${styles.nav}`}>
-        <li className={styles.nav__item}>
-          <NavLink to="/" className={getLinkClass}>
-            Home
-          </NavLink>
-        </li>
-        <li className={styles.nav__item}>
-          <NavLink to="about-us" className={getLinkClass}>
-            About Us
-          </NavLink>
-        </li>
-        <li className={styles.nav__item}>
-          <NavLink to="news" className={getLinkClass}>
-            News
-          </NavLink>
-        </li>
-        <li className={styles.nav__item}>
-          <NavLink to="reports" className={getLinkClass}>
-            Reports
-          </NavLink>
-        </li>
-      </ul>
-      <HashLink
-        className={classNames(`${styles.topBar__button}`, {
-          [styles.topBar__button__menu]: showMenu,
-        })}
-        onClick={() => setShowMenu(false)}
-        to="/#contact-form"
-      >
-        CONTACT US{' '}
-      </HashLink>
-
-      {width < 834 && (
-        <div
-          className={styles.icon1}
-          onClick={() => setShowMenu(prev => !prev)}
+      <div className={styles.topBar__content}>
+        <Link to="/">
+          {!showMenu ? (
+            <Logo />
+          ) : (
+            <img
+              className="logo"
+              src={require('../../imgs/logo-blue.png')}
+              alt="CDU logo"
+            />
+          )}
+        </Link>
+        <ul className={`${styles.topBar__nav} ${styles.nav}`}>
+          <li className={styles.nav__item}>
+            <NavLink to="/" className={getLinkClass}>
+              Home
+            </NavLink>
+          </li>
+          <li className={styles.nav__item}>
+            <NavLink to="about-us" className={getLinkClass}>
+              About Us
+            </NavLink>
+          </li>
+          <li className={styles.nav__item}>
+            <NavLink to="news" className={getLinkClass}>
+              News
+            </NavLink>
+          </li>
+          <li className={styles.nav__item}>
+            <NavLink to="reports" className={getLinkClass}>
+              Reports
+            </NavLink>
+          </li>
+        </ul>
+        <HashLink
+          className={classNames(`${styles.topBar__button}`, {
+            [styles.topBar__button__menu]: showMenu,
+          })}
+          onClick={() => setShowMenu(false)}
+          to="/#contact-form"
         >
+          CONTACT US{' '}
+        </HashLink>
+
+        {width < 834 && (
           <div
-            className={classNames(`${styles.hamburger}`, {
-              [styles.hamburger__selected]: showMenu,
-            })}
+            className={styles.icon1}
+            onClick={() => setShowMenu(prev => !prev)}
           >
-            {Array.from(Array(4).keys()).map((__el, index) => (
-              <span key={index} className={getBarClass(index)}></span>
-            ))}
+            <div
+              className={classNames(`${styles.hamburger}`, {
+                [styles.hamburger__selected]: showMenu,
+              })}
+            >
+              {Array.from(Array(4).keys()).map((__el, index) => (
+                <span key={index} className={getBarClass(index)}></span>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 });

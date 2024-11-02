@@ -1,0 +1,46 @@
+@import '../../../../styles/styles.scss';
+
+.modal {
+  display: block;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(107, 104, 104, 0.447);
+  overflow: hidden;
+  display: flex;
+  font-family: 'Figtree', sans-serif;
+
+  &__container {
+    margin: auto;
+    padding: 24px;
+    width: 472px;
+    background-color: $white;
+    border-radius: 24px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    & > p {
+      color: $blue;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    & > div {
+      margin: 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+  }
+}

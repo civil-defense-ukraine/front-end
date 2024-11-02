@@ -1,11 +1,15 @@
 import classNames from 'classnames';
 import { News } from '../../../../types/News';
 import styles from '../../AdminCatalog/AdminCatalog.module.scss';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FormContext } from '../../../../context/FormContext';
 import { getNormalized } from '../../../../utils/getNormalized';
 import { adminNews } from '../../../../services/admin/adminNews';
 import { AuthContext } from '../../../../context/AuthContext';
+import { createPortal } from 'react-dom';
+import { Modal } from '../../components/Modal';
+import { useAppDispatch } from '../../../../app/hooks';
+import { newsSlice } from '../../../../features/newsSlice';
 
 type Props = {
   item: News;
@@ -15,13 +19,17 @@ export const AdminNewsCard: React.FC<Props> = ({ item }) => {
   const { selectedItem, setDisplayForm, setSelectedItem } =
     useContext(FormContext);
   const { token } = useContext(AuthContext);
+  const dispatch = useAppDispatch();
   const { id, image, type, title, text, publicationDate } = item;
   const formatedDate = new Intl.DateTimeFormat(['ban', 'id']).format(
     new Date(publicationDate),
   );
+  const [showModal, setShowModal] = useState(false);
 
   const handleDelete = (id: number) => {
-    adminNews.delete(id.toString(), token);
+    adminNews.delete(id.toString(), token).then(() => {
+      dispatch(newsSlice.actions.delete(id));
+    });
   };
   return (
     <tr
@@ -56,14 +64,22 @@ export const AdminNewsCard: React.FC<Props> = ({ item }) => {
         </div>
       </td>
       <td className={styles.button}>
-        <div
-          className={styles.item__button}
-          onClick={() => {
-            handleDelete(id);
-          }}
-        >
+        <div className={styles.item__button} onClick={() => setShowModal(true)}>
           <div className="icon icon--delete icon--small"></div> <p>Delete</p>
         </div>
+        {showModal && (
+          <>
+            {createPortal(
+              <Modal
+                onDelete={() => {
+                  handleDelete(id);
+                }}
+                onClose={() => setShowModal(false)}
+              />,
+              document.body,
+            )}
+          </>
+        )}
       </td>
     </tr>
   );

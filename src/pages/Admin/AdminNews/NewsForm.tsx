@@ -1,19 +1,15 @@
 import { FormEvent, useContext, useEffect, useMemo, useState } from 'react';
-import styles from './Form.module.scss';
+import styles from '../AdminForm/Form.module.scss';
 import { getNormalized } from '../../../utils/getNormalized';
-import { TextInput } from './components/Inputs/TextInput';
-import { DateInput } from './components/Inputs/DateInput';
-import { TextAreaInput } from './components/Inputs/TextAreaInput';
-import { ImageInput } from './components/Inputs/ImageInput';
+import { TextInput } from '../AdminForm/components/Inputs/TextInput';
+import { DateInput } from '../AdminForm/components/Inputs/DateInput';
+import { TextAreaInput } from '../AdminForm/components/Inputs/TextAreaInput';
+import { ImageInput } from '../AdminForm/components/Inputs/ImageInput';
 import classNames from 'classnames';
-import { AdminContext } from '../../../context/AdminContext';
 import { useSessionStorage } from '../../../hooks/useSessionStorage';
 import { FormContext } from '../../../context/FormContext';
 import { newsSlice } from '../../../features/newsSlice';
 import { useAppDispatch } from '../../../app/hooks';
-import { title } from 'process';
-import { getUniqueId } from '../../../utils/formUtils';
-import { NewsTypes } from '../../../types/News';
 import { adminNews } from '../../../services/admin/adminNews';
 import { Loader } from '../../../components/Loader';
 import { checkAdminFormField } from '../../../utils/checkFormFields';
@@ -68,12 +64,15 @@ export const NewsForm = () => {
     updateInput('publicationDate')(new Date(date));
   };
 
-
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setErrors(checkAdminFormField(formField));
+
+    // if (checkAdminFormField(formField)) {
+    //   return;
+    // }
+
     const formData = new FormData();
     const restdata = {
       title: formField.title,
@@ -94,15 +93,13 @@ export const NewsForm = () => {
     if (selectedItem) {
       adminNews
         .update(selectedItem.id, formData, token)
-        .then(() => {
-          newsSlice.actions.updateNewsArticle({
-            ...formField,
-            publicationDate: formField.publicationDate.toISOString(),
-            image: '',
-            type: formField.type as NewsTypes,
-            id: selectedItem.id,
-            link: getNormalized.link(title),
-          });
+        .then(newArticle => {
+          dispatch(
+            newsSlice.actions.update({
+              ...newArticle,
+              link: getNormalized.link(formField.title),
+            }),
+          );
 
           clearForm();
         })
@@ -110,7 +107,8 @@ export const NewsForm = () => {
           console.error(err);
           console.log(formField);
           setFormError('Something went wrong! Try again later!');
-        }).finally(() => {
+        })
+        .finally(() => {
           setLoading(false);
         });
     } else {
@@ -118,15 +116,11 @@ export const NewsForm = () => {
 
       adminNews
         .post(formData, token)
-        .then(() => {
+        .then(newArticle => {
           dispatch(
-            newsSlice.actions.addNewsArticle({
-              ...formField,
-              publicationDate: formField.publicationDate.toISOString(),
-              image: '',
-              type: formField.type as NewsTypes,
-              id: getUniqueId(),
-              link: getNormalized.link(title),
+            newsSlice.actions.add({
+              ...newArticle,
+              link: getNormalized.link(formField.title),
             }),
           );
           clearForm();
@@ -214,27 +208,26 @@ export const NewsForm = () => {
           placeHolder={'Type the text of the news article...'}
           updateInput={updateInput('text')}
         />
-        {formError && (
-          <p className="formField__notValid--text">{formError}</p>
-        )}
-        <div className={styles.buttons}>
-          {loading ? (
-            <Loader />
-          ) : (
+        {formError && <p className="formField__notValid--text">{formError}</p>}
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className={styles.buttons}>
             <button
               type="submit"
               className={`form__button button--yellow button--secondary`}
             >
               SAVE
             </button>
-          )}
-          <button
-            className={`form__button button--transparent button--secondary`}
-            onClick={() => clearForm()}
-          >
-            RESET
-          </button>
-        </div>
+
+            <button
+              className={`form__button button--transparent button--secondary`}
+              onClick={() => clearForm()}
+            >
+              RESET
+            </button>
+          </div>
+        )}
       </form>
     </section>
   );

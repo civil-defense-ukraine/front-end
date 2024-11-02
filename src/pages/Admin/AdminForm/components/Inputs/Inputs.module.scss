@@ -18,10 +18,24 @@
 
   &__text {
     font-weight: 400;
+    text-align: center;
+  }
+
+  &__icon {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    margin: auto;
   }
 
   &__button {
     display: none;
+  }
+
+  &__huge {
+    width: 200px;
+    height: 200px;
+    flex-direction: column;
   }
 }
 
@@ -40,7 +54,13 @@
       display: block;
       height: 80px;
       max-width: 80px;
-      object-fit: contain;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+
+    &__huge {
+      height: 350px;
+      max-width: 350px;
     }
   }
 
@@ -50,6 +70,7 @@
     margin-block: 8px;
     height: 60px;
     width: 80px;
+
     & > div {
       display: flex;
       position: absolute;
@@ -69,6 +90,22 @@
         height: 9px;
         width: 9px;
         margin: auto;
+      }
+    }
+
+    &__huge {
+      height: 350px;
+      width: 350px;
+
+      & > div {
+        height: 48px;
+        width: 48px;
+        right: 1%;
+
+        & > div {
+          height: 24px;
+          width: 24px;
+        }
       }
     }
   }

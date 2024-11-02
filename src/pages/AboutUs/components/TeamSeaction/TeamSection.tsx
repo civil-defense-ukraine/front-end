@@ -23,6 +23,7 @@ export const TeamSection = () => {
       return 2;
     }
   }, [width, team]);
+
   const visibleTeam = useMemo(() => team.slice(0, itemsPerPage), [width, team]);
   const restOfTeam = useMemo(() => team.slice(itemsPerPage), [width, team]);
   const getMaxHeight = useMemo(() => {
@@ -31,7 +32,7 @@ export const TeamSection = () => {
     }
 
     if (width >= 1240) {
-      return Math.ceil(restOfTeam.length * itemsPerPage) * (584 + 24);
+      return Math.ceil(restOfTeam.length * itemsPerPage) * (363 + 24);
     }
 
     if (width > 834) {

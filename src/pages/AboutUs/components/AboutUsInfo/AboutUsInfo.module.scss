@@ -38,10 +38,6 @@
     }
   }
 
-  &:last-child {
-    margin-bottom: 35px;
-  }
-
   &__header {
     padding-bottom: 16px;
     text-align: center;
@@ -56,15 +52,22 @@
   }
 
   &__img {
-    padding-bottom: 32px;
+    //  height: 314px;
+
+    width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
+    margin-bottom: 32px;
 
     @include on-tablet {
-      padding-bottom: 0;
-      height: 311px;
+      margin-bottom: 0;
+      height: 295px;
+      width: 311px;
     }
 
     @include on-desktop {
       height: 501px;
+      width: 526px;
     }
   }
 

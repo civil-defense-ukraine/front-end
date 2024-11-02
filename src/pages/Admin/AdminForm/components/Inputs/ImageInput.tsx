@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Inputs.module.scss';
+import classNames from 'classnames';
 
 type Props = {
   defaultImage: File | null | string;
   updateInput: (newValue: File | null | string) => void;
+  isDonationPage?: boolean;
 };
 
 async function linkToFile(url: string, fileName: string) {
@@ -15,7 +17,7 @@ async function linkToFile(url: string, fileName: string) {
 }
 
 export const ImageInput: React.FC<Props> = React.memo(
-  ({ defaultImage, updateInput }) => {
+  ({ defaultImage, updateInput, isDonationPage = false }) => {
     const [showImg, setShowImg] = useState(false);
 
     const setImagePreview = (img: File | null | string) => {
@@ -60,15 +62,30 @@ export const ImageInput: React.FC<Props> = React.memo(
     }, [defaultImage]);
 
     return (
-      <label htmlFor="image" className={styles.label}>
+      <label
+        htmlFor="image"
+        className={classNames(styles.label, {
+          [styles.label__huge]: isDonationPage,
+        })}
+      >
         Image
         <br />
         <div
-          className={`${showImg ? styles.imageInput__active : styles.imageInput}`}
+          className={classNames(
+            `${showImg ? styles.imageInput__active : styles.imageInput}`,
+            {
+              [styles.imageInput__active__huge]: showImg && isDonationPage,
+            },
+          )}
         >
           <img
             src="#"
-            className={`${showImg ? styles.imageInput__img__active : styles.imageInput__img}`}
+            className={classNames(
+              `${showImg ? styles.imageInput__img__active : styles.imageInput__img}`,
+              {
+                [styles.imageInput__img__huge]: showImg && isDonationPage,
+              },
+            )}
             alt="Preview Uploaded Image"
             id="file-preview"
           />
@@ -86,14 +103,24 @@ export const ImageInput: React.FC<Props> = React.memo(
         </div>
         {!showImg && (
           <>
-            <div className={`${styles.label__image} formField`}>
+            <div
+              className={classNames(`${styles.label__image} formField`, {
+                [styles.label__image__huge]: isDonationPage,
+              })}
+            >
               <p className={styles.label__image__text}>Upload image</p>
-              <div className="icon icon--small icon--upload"></div>
+              <div
+                className={classNames(`icon icon--small icon--upload`, {
+                  [styles.label__image__icon]: isDonationPage,
+                })}
+              ></div>
             </div>
             <input
               type="file"
               accept="image/*"
-              className={`${styles.label__image__button}`}
+              className={classNames(`${styles.label__image__button}`, {
+                [styles.label__image__huge]: isDonationPage,
+              })}
               disabled={showImg}
               onChange={e => {
                 if (e.target.files && e.target.files?.length >= 1) {

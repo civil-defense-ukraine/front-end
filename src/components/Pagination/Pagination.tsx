@@ -26,7 +26,7 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
       return getPagination.bigScreen(numberOfPages, currentPage);
     }
     return getPagination.smallScreen(numberOfPages, currentPage);
-  }, [currentPage]);
+  }, [currentPage, numberOfPages]);
 
   return (
     <div className={styles.container}>

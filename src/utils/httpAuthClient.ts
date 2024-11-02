@@ -1,4 +1,5 @@
-const BASE_URL = 'https://cdu-backend-5gvnird6ya-lz.a.run.app/api/auth/login';
+const BASE_URL =
+  'https://cdu-backend-service-latest.onrender.com/api/auth/login';
 
 export async function requestToAuth<T>(data: {
   email: string;

@@ -4,12 +4,16 @@
   &--secondary {
     font-family: 'Figtree', sans-serif;
     text-decoration: none;
+    text-align: center;
     font-weight: 500;
-    height: 60px;
+    height: 48px;
+    line-height: 48px;
     width: 100%;
-    line-height: 60px;
+    max-width: 327px;
 
     @include on-tablet {
+      height: 60px;
+      line-height: 60px;
       width: 160px;
     }
 

@@ -1,5 +1,10 @@
 @import '../../styles/styles.scss';
 
+.container {
+  width: 100%;
+  display: flex;
+}
+
 .loader {
   transform: rotateZ(45deg);
   perspective: 1000px;
@@ -7,6 +12,7 @@
   width: 48px;
   height: 48px;
   color: $blue;
+  margin-inline: auto;
 }
 .loader:before,
 .loader:after {

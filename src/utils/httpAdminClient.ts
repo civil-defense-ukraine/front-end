@@ -1,4 +1,5 @@
-const BASE_URL = 'https://cdu-backend-5gvnird6ya-lz.a.run.app/api/admin';
+//const BASE_URL = 'https://cdu-backend-5gvnird6ya-lz.a.run.app/api/admin';
+const BASE_URL = 'https://cdu-backend-service-latest.onrender.com/api/admin';
 
 export async function request<T>(
   path: string,

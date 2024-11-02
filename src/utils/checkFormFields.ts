@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type FormFields = {
   email: string;
   subject: string;
@@ -35,7 +36,9 @@ export const checkFormField = (
 type ValidationErrors<T> = {
   [K in keyof T]?: string;
 };
-export const checkAdminFormField = <T extends Record<string, any>>(formField: T): ValidationErrors<T> => {
+export const checkAdminFormField = <T extends Record<string, any>>(
+  formField: T,
+): ValidationErrors<T> => {
   const error: ValidationErrors<T> = {};
   const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

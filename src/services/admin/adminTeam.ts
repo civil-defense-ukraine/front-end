@@ -2,9 +2,6 @@ import { TeamMember } from '../../types/TeamMember';
 import { adminClient } from '../../utils/httpAdminClient';
 
 export const adminTeam = {
-  async get(token: string) {
-    return adminClient.get<TeamMember[]>('team', token);
-  },
   async delete(id: string, token: string) {
     return adminClient.delete<TeamMember>(`team/${id}`, token);
   },
@@ -12,6 +9,6 @@ export const adminTeam = {
     return adminClient.post<TeamMember>(`team`, token, data);
   },
   async update(id: number, data: FormData, token: string) {
-    return adminClient.update(`team/${id}`, token, data);
+    return adminClient.update<TeamMember>(`team/${id}`, token, data);
   },
 };

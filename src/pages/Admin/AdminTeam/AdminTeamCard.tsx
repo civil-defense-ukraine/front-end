@@ -1,10 +1,15 @@
 import classNames from 'classnames';
 import styles from '../AdminCatalog/AdminCatalog.module.scss';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FormContext } from '../../../context/FormContext';
 import { AuthContext } from '../../../context/AuthContext';
 import { TeamMember } from '../../../types/TeamMember';
 import { adminTeam } from '../../../services/admin/adminTeam';
+import { createPortal } from 'react-dom';
+import { Modal } from '../components/Modal';
+import { useAppDispatch } from '../../../app/hooks';
+import { teamSlice } from '../../../features/teamSlice';
+import { getNormalized } from '../../../utils/getNormalized';
 
 type Props = {
   item: TeamMember;
@@ -15,9 +20,12 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
     useContext(FormContext);
   const { token } = useContext(AuthContext);
   const { id, image, name, position, description } = item;
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleDelete = (id: number) => {
     adminTeam.delete(id.toString(), token);
+    dispatch(teamSlice.actions.delete(id));
   };
   return (
     <tr
@@ -34,7 +42,9 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
         ></div>
       </td>
       <td className={styles.item__role}>{position}</td>
-      <td className={styles.item__text}>{description}</td>
+      <td className={styles.item__text}>
+        {getNormalized.slicedText(description, 150)}
+      </td>
       <td className={styles.button}>
         <div
           className={styles.item__button}
@@ -50,11 +60,25 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
         <div
           className={styles.item__button}
           onClick={() => {
-            handleDelete(id);
+            setShowModal(true);
           }}
         >
           <div className="icon icon--delete icon--small"></div> <p>Delete</p>
         </div>
+        {showModal && (
+          <>
+            {createPortal(
+              <Modal
+                onDelete={() => {
+                  handleDelete(id);
+                  setShowModal(false);
+                }}
+                onClose={() => setShowModal(false)}
+              />,
+              document.body,
+            )}{' '}
+          </>
+        )}
       </td>
     </tr>
   );

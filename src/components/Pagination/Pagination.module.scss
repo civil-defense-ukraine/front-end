@@ -5,10 +5,10 @@
   flex-direction: row;
   gap: 10px;
   justify-content: space-evenly;
-  width: 100%;
 
   @include on-tablet {
     justify-content: center;
+    margin-top: 24px;
   }
 }
 

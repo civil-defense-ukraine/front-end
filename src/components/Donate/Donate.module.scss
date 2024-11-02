@@ -1,14 +1,11 @@
 @import '../../styles/styles';
 
-.container {
+.wrapper {
   background-image: url(../../imgs/donate/donate-bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  padding-block: 48px;
-  padding-inline: 42px;
-  color: $white;
-  text-align: center;
+  background-color: $black;
 
   @include on-tablet {
     padding-block: 70px;
@@ -18,18 +15,43 @@
 
   @include on-desktop {
     background-image: url(../../imgs/donate/donate-bg-desktop.png);
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-items: center;
   }
 
   @include gap-btw-blocks;
 }
 
+.container {
+  @include max-width;
+  padding-block: 48px;
+  padding-inline: 42px;
+  color: $white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include on-tablet {
+    padding-block: 70px;
+  }
+
+  @include on-desktop {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+  }
+}
+
 .img {
-  height: 500px;
+  height: 450px;
+  width: 230px;
+  flex-grow: 0;
+  flex-shrink: 0;
   padding-block: 25px;
   object-position: center;
+
+  @include on-desktop {
+    height: 546px;
+    width: 280px;
+  }
 }

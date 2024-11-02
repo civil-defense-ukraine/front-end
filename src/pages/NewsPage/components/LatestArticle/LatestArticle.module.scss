@@ -11,8 +11,9 @@
 
   @include on-tablet {
     flex-direction: row;
-    align-items: center;
   }
+
+  @include max-width;
 }
 
 .img {
@@ -20,14 +21,15 @@
   object-fit: cover;
   object-position: center;
   border-radius: 24px;
-  flex-basis: 314px;
+  width: 100%;
   max-height: 350px;
-  flex-grow: 0;
-  flex-shrink: 0;
+  align-self: center;
 
   @include on-tablet {
     flex-basis: 311px;
     height: 296px;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 
   @include on-desktop {
@@ -46,6 +48,11 @@
   flex-direction: column;
   gap: 16px;
   width: 100%;
+
+  @include on-desktop {
+    width: 510px;
+    flex-shrink: 0;
+  }
 }
 
 .tag {

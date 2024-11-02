@@ -18,9 +18,13 @@ const AboutUs = () => {
   return (
     <section>
       <div className={styles.header}>
-        <Breadcrumbs />
+        <div className={styles.max_width}>
+          <Breadcrumbs />
+        </div>
       </div>
-      <AboutUsInfo />
+      <section className={styles.max_width}>
+        <AboutUsInfo />
+      </section>
       <TeamSection />
       <Location />
       <Form />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormFields } from '../../types/FormFields';
 import { publicClient } from '../../utils/httpPublicClient';
 

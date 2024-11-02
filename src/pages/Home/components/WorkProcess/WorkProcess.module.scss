@@ -1,0 +1,157 @@
+@import '../../../../styles/styles.scss';
+
+$total-items: 4;
+
+.wrapper {
+  @include max-width;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include padding-inline;
+  @include gap-btw-blocks;
+
+  @include on-tablet {
+    margin-inline: 87px;
+    grid-auto-flow: dense;
+    row-gap: 32px;
+
+    @include page-grid;
+  }
+}
+
+.header {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+
+  &_1 {
+    grid-column: 4/ -1;
+
+    @include on-desktop {
+      grid-column: 6/ -1;
+    }
+  }
+
+  &_2 {
+    grid-column: 1 / 4;
+
+    @include on-desktop {
+      grid-column: 2/ 6;
+    }
+  }
+}
+
+.item {
+  display: flex;
+  gap: 14px;
+  padding-inline: 24px;
+  opacity: 0;
+  list-style: none;
+  position: relative;
+  align-items: center;
+
+  &_1 {
+    animation: fadeIn 0.5s linear forwards;
+  }
+
+  &_2 {
+    animation: fadeIn 0.5s linear forwards;
+  }
+
+  &__index {
+    height: 54px;
+    width: 54px;
+    line-height: 54px;
+    border-radius: 50%;
+    background-color: $yellow;
+    text-align: center;
+    flex-shrink: 0;
+
+    @include on-desktop {
+      height: 68px;
+      width: 68px;
+      line-height: 68px;
+    }
+  }
+
+  &__text {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.img {
+  height: 314px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+
+  @include on-tablet {
+    height: 352px;
+    width: 311px;
+  }
+
+  @include on-desktop {
+    height: 432px;
+    width: 526px;
+  }
+
+  &_1 {
+    grid-column: 1 / 4;
+
+    @include on-desktop {
+      grid-column: 2 / 6;
+    }
+
+    &_loaded {
+      background-image: url(../../../../imgs/process/event.jfif);
+    }
+  }
+  &_2 {
+    grid-column: 4 / -1;
+
+    @include on-desktop {
+      grid-column: 6 / -2;
+    }
+
+    &_loaded {
+      background-image: url(../../../../imgs/process/report.jfif);
+    }
+  }
+}
+
+@for $i from 1 through $total-items {
+  .item_1:nth-child(#{$i}) {
+    animation-delay: 0.25s * $i;
+  }
+}
+
+@for $i from 1 through $total-items {
+  .item_2:nth-child(#{$i}) {
+    animation-delay: 0.25s * $i;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    top: 100px;
+  }
+  75% {
+    opacity: 0.5;
+    top: 0px;
+  }
+  100% {
+    opacity: 1;
+  }
+}

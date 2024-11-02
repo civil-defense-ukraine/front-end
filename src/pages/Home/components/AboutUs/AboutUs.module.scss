@@ -4,6 +4,7 @@
   padding-inline: 34px;
 
   @include gap-btw-blocks;
+  @include max-width;
 
   @include on-tablet {
     @include page-grid;
@@ -24,10 +25,13 @@
 }
 
 .img {
+  position: relative;
+  display: block;
   height: 100%;
   width: 100%;
   grid-column: 1 / 4;
   margin-bottom: 32px;
+  border-radius: 24px;
 
   @include on-tablet {
     margin-bottom: 0;
@@ -35,5 +39,7 @@
 
   @include on-desktop {
     grid-column: 2 / span 5;
+    max-height: 501px;
+    width: auto;
   }
 }

@@ -1,15 +1,18 @@
 import { FormEvent, useContext, useEffect, useMemo, useState } from 'react';
-import styles from './Form.module.scss';
-import { getNormalized } from '../../../utils/getNormalized';
-import { TextInput } from './components/Inputs/TextInput';
-import { DateInput } from './components/Inputs/DateInput';
-import { TextAreaInput } from './components/Inputs/TextAreaInput';
-import { ImageInput } from './components/Inputs/ImageInput';
+import { TextInput } from '../AdminForm/components/Inputs/TextInput';
+import { TextAreaInput } from '../AdminForm/components/Inputs/TextAreaInput';
+import { ImageInput } from '../AdminForm/components/Inputs/ImageInput';
 import classNames from 'classnames';
-import { AdminContext } from '../../../context/AdminContext';
 import { useSessionStorage } from '../../../hooks/useSessionStorage';
 import { FormContext } from '../../../context/FormContext';
 import { adminTeam } from '../../../services/admin/adminTeam';
+import { checkAdminFormField } from '../../../utils/checkFormFields';
+import { teamSlice } from '../../../features/teamSlice';
+import { useAppDispatch } from '../../../app/hooks';
+import { TeamMember } from '../../../types/TeamMember';
+import { Loader } from '../../../components/Loader';
+import { getNormalized } from '../../../utils/getNormalized';
+import styles from '../AdminForm/Form.module.scss';
 
 type initialFormState = {
   name: string;
@@ -18,18 +21,21 @@ type initialFormState = {
   description: string;
 };
 
+type ValidationErrors<T> = {
+  [K in keyof T]?: string | null;
+};
+
 export const TeamForm = () => {
   const { displayForm, setDisplayForm, selectedItem } = useContext(FormContext);
-  const [errors, setErrors] = useState({
-    title: '',
-    position: '',
-    description: '',
-  });
+  const [errors, setErrors] = useState<ValidationErrors<initialFormState>>();
+  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState('');
 
   const defaultValue = useMemo(() => {
     return {
       name: selectedItem && 'name' in selectedItem ? selectedItem.name : '',
-      image: null,
+      image:
+        selectedItem && 'image' in selectedItem ? selectedItem.image : null,
       description:
         selectedItem && 'description' in selectedItem
           ? selectedItem.description
@@ -51,9 +57,17 @@ export const TeamForm = () => {
   }, [selectedItem]);
 
   const [token] = useSessionStorage('token', '');
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    setErrors(checkAdminFormField(formField));
+
+    // if (checkAdminFormField(formField)) {
+    //   return;
+    // }
+
     const formData = new FormData();
 
     const restdata = {
@@ -67,23 +81,28 @@ export const TeamForm = () => {
       new Blob([JSON.stringify(restdata)], { type: 'application/json' }),
     );
 
-    if (formField.image) {
+    if (formField.image && typeof formField.image !== 'string') {
       formData.append('image', formField.image);
     }
 
     if (selectedItem) {
       adminTeam
         .update(selectedItem.id, formData, token)
-        .then(() => {
+        .then((updatedTeamMember: TeamMember) => {
+          dispatch(teamSlice.actions.update(updatedTeamMember));
           clearForm();
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+        .finally(() => setLoading(false));
     } else {
       adminTeam
         .post(formData, token)
-        // .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+        .then((newTeamMember: TeamMember) => {
+          dispatch(teamSlice.actions.add(newTeamMember));
+          clearForm();
+        })
+        .catch(err => console.error(err))
+        .finally(() => setLoading(false));
     }
   };
 
@@ -120,7 +139,7 @@ export const TeamForm = () => {
         <TextInput
           fieldTitle="Name"
           fieldValue={formField.name}
-          fieldError={errors.title}
+          fieldError={errors?.name || ''}
           placeHolder="Please enter full name"
           updateInput={updateInput('name')}
         />
@@ -131,31 +150,39 @@ export const TeamForm = () => {
         <TextInput
           fieldTitle="Role"
           fieldValue={formField.position}
-          fieldError={errors.position}
+          fieldError={errors?.position || ''}
           placeHolder="Please enter role"
           updateInput={updateInput('position')}
         />
         <TextAreaInput
           fieldValue={formField.description}
-          fieldError={errors.description}
+          fieldError={errors?.description || ''}
           placeHolder={'Type the favourite quote...'}
           updateInput={updateInput('description')}
           basicHeight={true}
         />
 
+        {formError && <p className="formField__notValid--text">{formError}</p>}
+
         <div className={styles.buttons}>
-          <button
-            type="submit"
-            className={`form__button button--yellow button--secondary`}
-          >
-            SAVE
-          </button>
-          <button
-            className={`form__button button--transparent button--secondary`}
-            onClick={() => clearForm()}
-          >
-            RESET
-          </button>
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <button
+                type="submit"
+                className={`form__button button--yellow button--secondary`}
+              >
+                SAVE
+              </button>
+              <button
+                className={`form__button button--transparent button--secondary`}
+                onClick={() => clearForm()}
+              >
+                RESET
+              </button>
+            </>
+          )}
         </div>
       </form>
     </section>

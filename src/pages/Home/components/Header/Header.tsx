@@ -2,12 +2,23 @@ import { HashLink } from 'react-router-hash-link';
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
 import styles from './Header.module.scss';
 import { SocialMedia } from '../../../../components/SocialMedia';
+import { useEffect, useState } from 'react';
 
 export const Header = () => {
   const { isVisible, container } = useElementOnScreen();
 
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = require('../../../../imgs/header-bg-tablet.png');
+    img.onload = () => setBgImageLoaded(true);
+  }, []);
+
   return (
-    <header>
+    <header
+      className={`${styles.header} ${styles.backgroundContainer} ${bgImageLoaded ? styles.loaded : ''}`}
+    >
       <section className={styles.header__main}>
         <SocialMedia />
         <h2

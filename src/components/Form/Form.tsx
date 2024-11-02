@@ -46,10 +46,6 @@ export const Form = () => {
       return;
     }
 
-    console.log(
-      Object.entries({ ...normalizedField, isVolunteer: field.isVolunteer }),
-    );
-
     form
       .post({ ...normalizedField, isVolunteer: field.isVolunteer })
       .then(() => {
@@ -154,22 +150,26 @@ export const Form = () => {
             staff will respond as soon as possible.
           </p>
         </label>
-        <div className={styles.button}>
-          {loading && <Loader />}
-          {!loading && formError && (
+        {loading && (
+          <div className={styles.button}>
+            <Loader />
+          </div>
+        )}
+        {!loading && formError && (
+          <div className={styles.button}>
             <p className="formField__notValid--text">
               Something went wrong! Try again later!
             </p>
-          )}
-          {!loading && !formError && (
-            <button
-              type="submit"
-              className={`form__button button--yellow button--secondary`}
-            >
-              SUBMIT
-            </button>
-          )}
-        </div>
+          </div>
+        )}
+        {!loading && !formError && (
+          <button
+            type="submit"
+            className={` form__button button--yellow button--secondary`}
+          >
+            SUBMIT
+          </button>
+        )}
       </form>
     </section>
   );

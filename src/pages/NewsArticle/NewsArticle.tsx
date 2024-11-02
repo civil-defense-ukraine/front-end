@@ -1,20 +1,19 @@
-import { Navigate, useLocation, useParams } from 'react-router-dom';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { useParams } from 'react-router-dom';
 import styles from './NewsArticle.module.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { LatestNews } from '../../components/LatestNews';
 import { getNormalized } from '../../utils/getNormalized';
 import { SocialMedia } from '../../components/SocialMedia';
 import { News } from '../../types/News';
-import { useEffect, useMemo, useRef } from 'react';
-import { loadNews } from '../../features/newsSlice';
+import { useEffect, useRef, useState } from 'react';
 import { loadArticle } from '../../features/articleSlice';
 import { Error } from '../../components/Error';
-import classNames from 'classnames';
 import { LoadingPage } from '../LoadingPage/LoadingPage';
+import classNames from 'classnames';
 
 const NewsArticle = () => {
   const { newsId } = useParams();
+  const [loaded, setLoaded] = useState(false);
   if (!newsId) {
     return <p>No such article</p>;
   }
@@ -24,6 +23,11 @@ const NewsArticle = () => {
 
   useEffect(() => {
     dispatch(loadArticle(newsId.split('-').join('%20')));
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }, [newsId]);
 
   const { article, loading, error } = useAppSelector(state => state.article);
@@ -59,7 +63,19 @@ const NewsArticle = () => {
           <p className={styles.date}> {getNormalized.date(date)} </p>
         </div>
         <div className={styles.article__container}>
-          <img className={styles.img} src={image} alt={title} loading="lazy" />
+          <div
+            className={classNames(styles.img, {
+              skeleton: !loaded,
+            })}
+          >
+            <img
+              className={styles.img}
+              onLoad={() => setLoaded(true)}
+              src={image}
+              alt={title}
+              loading="lazy"
+            />
+          </div>
           <div className={styles.info}>
             <p className={styles.mainText}>
               {text.split('<br/>').map(textEl => (

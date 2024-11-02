@@ -19,6 +19,8 @@
     font-size: 15px;
     font-family: 'Figtree', sans-serif;
     cursor: pointer;
+    flex-shrink: 0;
+    margin-inline: auto;
   }
 
   &__checkbox {

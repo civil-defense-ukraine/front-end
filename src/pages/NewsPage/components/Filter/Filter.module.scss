@@ -10,9 +10,14 @@
   font-size: 20px;
   width: 100%;
 
+  @include max-width;
+
   @include on-tablet {
     flex-direction: row;
-    justify-content: space-between;
+  }
+
+  @include on-desktop {
+    justify-content: end;
   }
 
   & > * {
@@ -34,6 +39,11 @@
   justify-content: space-between;
   align-items: center;
   padding-left: 43px;
+
+  @include on-tablet {
+    padding-left: 0;
+  }
+
   &__item {
     position: relative;
     width: 270px;

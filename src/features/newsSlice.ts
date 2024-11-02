@@ -23,13 +23,13 @@ export const newsSlice = createSlice({
     setNews: (state, action: PayloadAction<News[]>) => {
       state.news = action.payload;
     },
-    addNewsArticle: (state, action: PayloadAction<News>) => {
+    add: (state, action: PayloadAction<News>) => {
       state.news.push(action.payload);
     },
-    removeNewsArticle: (state, action: PayloadAction<number>) => {
+    delete: (state, action: PayloadAction<number>) => {
       state.news = state.news.filter(item => item.id !== action.payload);
     },
-    updateNewsArticle: (state, action: PayloadAction<News>) => {
+    update: (state, action: PayloadAction<News>) => {
       state.news = [
         ...state.news.filter(item => item.id !== action.payload.id),
         action.payload,

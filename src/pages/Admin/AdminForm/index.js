@@ -1,1 +1,1 @@
-export * from './NewsForm';
+export * from '../AdminNews/NewsForm';

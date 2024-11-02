@@ -1,19 +1,20 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useElementOnScreen } from '../../hooks/useElementOnScreen';
+
+
 import styles from './LatestNews.module.scss';
-import { NewsCard } from '../NewsCard';
 import { useAppSelector } from '../../app/hooks';
-import { Loader } from '../Loader';
-import { Error } from '../Error';
 import { useWidth } from '../../hooks/useWidth';
+import { useElementOnScreen } from '../../hooks/useElementOnScreen';
+
+import { NewsCard } from '../NewsCard';
+import { Error } from '../Error';
+import { SkeletonNewsCard } from '../NewsCard/SkeletonNewsCard';
 
 export const LatestNews = () => {
   const [displayIndex, setDisplayIndex] = useState(0);
   const { isVisible, container } = useElementOnScreen();
   const { news, loading, error } = useAppSelector(state => state.news);
-
-  console.log(news);
 
   const width = useWidth();
   const currentNews = useMemo(() => {
@@ -24,9 +25,15 @@ export const LatestNews = () => {
   return (
     <section ref={container} className={styles.container}>
       <h2 className={`${styles.header} heading--h2`}>Latest News</h2>
+
       {loading && (
         <div className={styles.center}>
-          <Loader />
+          <div
+            className={`${styles.articles} hide--bottom ${isVisible ? 'show' : ''}`}
+          >
+            <SkeletonNewsCard />
+            <SkeletonNewsCard />
+          </div>
         </div>
       )}
       {error && (

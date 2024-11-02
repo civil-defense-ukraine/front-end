@@ -7,7 +7,7 @@
   justify-content: center;
   gap: 50px;
 
-  & :last-child {
-    transform: scale(2) rotate(-45deg);
+  & > div {
+    transform: scale(2);
   }
 }

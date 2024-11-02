@@ -11,9 +11,11 @@
   transition: all 500ms;
   padding: 24px;
   height: 80vh;
+  display: none;
 
   &__show {
     z-index: 1;
+    display: block;
     opacity: 1;
     width: 659px;
     transition: all 500ms;
@@ -61,6 +63,13 @@
 .label {
   font-weight: 700;
   font-size: 16px;
+
+  &__image {
+    &__huge {
+      height: 500px;
+      width: 500px;
+    }
+  }
 }
 
 .backButton {

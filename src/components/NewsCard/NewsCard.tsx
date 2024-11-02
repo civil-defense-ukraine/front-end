@@ -1,9 +1,10 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { News } from '../../types/News';
 import styles from './NewsCard.module.scss';
 import { getNormalized } from '../../utils/getNormalized';
 import { ReadMore } from '../Buttons/ReadMore';
 import { useWidth } from '../../hooks/useWidth';
+import classNames from 'classnames';
 
 type Props = {
   newsData: News;
@@ -13,21 +14,29 @@ type Props = {
 export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
   const { image, type, title, link, publicationDate, text } = newsData;
   const width = useWidth();
+  const [loaded, setIsLoaded] = useState(false);
   const date = new Date(publicationDate);
   const normalizedText = getNormalized.slicedText(text);
 
   return (
     <article className={styles.container} style={style}>
-      <img
-        className={styles.img}
-        src={image}
-        alt={title}
-        loading="lazy"
-        onError={e => {
-          e.currentTarget.src = require('../../imgs/default/news.png');
-          e.currentTarget.classList.add(styles.img__default);
-        }}
-      />
+      <div
+        className={classNames(`${styles.img}`, {
+          skeleton: !loaded,
+        })}
+      >
+        <img
+          className={styles.img}
+          src={image}
+          alt={title}
+          onLoad={() => setIsLoaded(true)}
+          loading="lazy"
+          onError={e => {
+            e.currentTarget.src = require('../../imgs/default/news.png');
+            e.currentTarget.classList.add(styles.img__default);
+          }}
+        />
+      </div>
       <div className={styles.info}>
         <div className={styles.info__container}>
           <div className={styles.tag}>{type}</div>
@@ -35,7 +44,7 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
             <h3 className={`${styles.heading} heading--h3`}>
               {getNormalized.slicedText(
                 getNormalized.title(title),
-                width < 1240 ? 30 : 60,
+                width < 1240 ? 30 : 68,
               )}
             </h3>
             <p className={styles.date}> {getNormalized.date(date)} </p>

@@ -1,14 +1,27 @@
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
 import { CounterUpPage } from './CounterUpPage';
 import styles from './Achievements.module.scss';
+import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 export const Achievements = () => {
   const { isVisible, container } = useElementOnScreen();
 
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = require('../../../../imgs/achievements-bg.jpg');
+    img.onload = () => setBgImageLoaded(true);
+  }, []);
+
   return (
     <section
       ref={container}
-      className={`${styles.container} hide--bottom ${isVisible && 'show'}`}
+      className={classNames(`${styles.container} hide--bottom`, {
+        show: isVisible,
+        [styles.container__bgImg]: bgImageLoaded,
+      })}
     >
       <div className={styles.container__bg}>
         <h2 className="heading--h2"> Our Achievements</h2>

@@ -5,7 +5,7 @@ type Props = {
   page?: string | null;
 };
 
-export const getVisibleNews = ({ news, itemsPerPage = 10, page }: Props) => {
+export const getVisibleNews = ({ news, itemsPerPage = 12, page }: Props) => {
   const pageNumber = page ? +page : 1;
   const startIndex = (pageNumber - 1) * itemsPerPage;
   const endIndex = (pageNumber - 1) * itemsPerPage + itemsPerPage;

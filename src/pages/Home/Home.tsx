@@ -5,6 +5,7 @@ import { Achievements } from './components/Achievements';
 import { ActiveDonation } from './components/ActiveDonation';
 import { Donate } from '../../components/Donate';
 import { Header } from './components/Header';
+import { WorkProcess } from './components/WorkProcess/WorkProcess';
 
 export const Home = () => {
   return (
@@ -13,6 +14,7 @@ export const Home = () => {
       <AboutUs />
       <Achievements />
       <ActiveDonation />
+      <WorkProcess />
       <LatestNews />
       <Donate />
       <Form />

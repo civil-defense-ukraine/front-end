@@ -1,10 +1,15 @@
 export const path = {
   getNormalizedName(path: string) {
-    return path
-      .replaceAll('-', ' ')
-      .split(' ')
+    const normalized = path
+      .split('-')
+      .filter(word => word.length > 0)
       .map(word => word[0].toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(' ')
+      .replaceAll('-', ' ');
+
+    console.log(path, normalized);
+
+    return normalized;
   },
 
   getCurrent(fullPathName: string, currentIndex: number) {

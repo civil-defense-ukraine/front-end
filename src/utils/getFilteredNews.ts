@@ -1,4 +1,3 @@
-import { normalize } from 'path';
 import { News } from '../types/News';
 import { sortNewsByDate } from './getSortedNews';
 import { getNormalized } from './getNormalized';
@@ -36,17 +35,23 @@ export const getFilteredNews = ({
       }
     })
     .sort(sortNewsByDate);
-  
+
   if (query) {
-    filteredNews = filteredNews.filter((newsArticle) => {
+    filteredNews = filteredNews.filter(newsArticle => {
       const normalizedQuery = query.toLowerCase();
       const normalizedTitle = newsArticle.title.toLowerCase();
       const normalizedText = newsArticle.text.toLowerCase();
-      const normaliedDate = getNormalized.dateForAdmin(new Date(newsArticle.publicationDate));
-      
-      return normalizedTitle.includes(normalizedQuery) || normalizedText.includes(normalizedQuery) || normaliedDate.includes(normalizedQuery);
-    })
-    }
+      const normaliedDate = getNormalized.dateForAdmin(
+        new Date(newsArticle.publicationDate),
+      );
+
+      return (
+        normalizedTitle.includes(normalizedQuery) ||
+        normalizedText.includes(normalizedQuery) ||
+        normaliedDate.includes(normalizedQuery)
+      );
+    });
+  }
 
   return sortBy === 'latest' ? filteredNews.reverse() : filteredNews;
 };

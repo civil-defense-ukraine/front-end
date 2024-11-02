@@ -1,7 +1,11 @@
 @import '../../styles/styles.scss';
 
-.container {
+.footer {
   background-color: $blue;
+}
+
+.container {
+  @include max-width;
   padding-block: 32px;
   color: $white;
   font-size: 20px;
@@ -84,14 +88,19 @@
 }
 
 .block {
-  width: 340px;
+  min-width: 280px;
+  max-width: 340px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 24px 0 24px 24px;
+  padding: 24px;
   border: 1px solid $white-bg;
   border-radius: 24px;
+
+  @include on-tablet {
+    width: 340px;
+  }
 }
 
 .icon {

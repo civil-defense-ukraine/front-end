@@ -1,16 +1,28 @@
 @import '../../../../styles/styles.scss';
 
+.backgroundContainer.loaded {
+  background-image: url('../../../../imgs/header-bg-tablet.png');
+
+  @include on-desktop {
+    background-image: url('../../../../imgs/header-bg-desktop.png');
+    padding-bottom: 70px;
+  }
+}
+
 .header {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: black;
+  transition: background-image 0.5s ease-in-out;
+
+  @include gap-btw-blocks;
+
   &__main {
-    background-image: url('../../../../imgs/header-bg-tablet.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: black;
     width: 100%;
     padding-block: 56px;
 
-    @include gap-btw-blocks;
+    @include max-width;
 
     display: flex;
     flex-direction: column;
@@ -26,12 +38,6 @@
       padding-top: 40px;
       padding-bottom: 82x;
       padding-inline: 85px;
-    }
-
-    @include on-desktop {
-      background-image: url('../../../../imgs/header-bg-desktop.png');
-      background-position: center;
-      padding-bottom: 70px;
     }
 
     & > p {
@@ -56,11 +62,11 @@
   &__button {
     height: 48px;
     line-height: 48px;
-    width: 90%;
+    width: 100%;
+    max-width: 340px;
     color: $black;
     font-size: 15px;
     font-weight: 700;
-    animation: wigle 4s ease-in-out 2s infinite;
 
     margin-top: 16px;
     text-decoration: none;
@@ -76,33 +82,5 @@
     @include on-desktop {
       font-size: 16px;
     }
-  }
-}
-
-@keyframes wigle {
-  5%,
-  50% {
-    transform: scale(1);
-  }
-  10% {
-    transform: scale(0.9);
-  }
-  15% {
-    transform: scale(1.15);
-  }
-  20% {
-    transform: scale(1.15) rotate(-5deg);
-  }
-  25% {
-    transform: scale(1.15) rotate(5deg);
-  }
-  30% {
-    transform: scale(1.15) rotate(-3deg);
-  }
-  35% {
-    transform: scale(1.15) rotate(2deg);
-  }
-  40% {
-    transform: scale(1.15) rotate(0);
   }
 }

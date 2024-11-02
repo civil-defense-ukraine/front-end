@@ -1,3 +1,4 @@
+
 export const getNormalized = {
   slicedText(text: string, maxLengthOfText = 270) {
     if (text.length <= maxLengthOfText) {
@@ -13,13 +14,14 @@ export const getNormalized = {
     return `${updatedString.slice(0, lastIndex)} ...`;
   },
   link(title: string) {
-    return title.toLowerCase().split(' ').join('-');
+    const modifiedTitle = title.trim().toLowerCase();
+    return modifiedTitle.split(' ').join('-');
   },
   title(title: string) {
     return title
       .split(' ')
       .map(word => {
-        if (!word[0]) {
+        if (word.length === 0) {
           return '';
         } else {
           return word[0].toUpperCase() + word.slice(1);

@@ -1,16 +1,15 @@
 @import '../../styles/styles.scss';
 
 .container {
-  padding-inline: 18px;
-
   display: grid;
-  justify-items: center;
-  align-items: center;
   grid-template-areas:
     'header header'
     'main main'
     'button1 button2'
     'buttonMain buttonMain';
+  max-width: 1440px;
+  margin-inline: auto;
+  justify-items: center;
 
   @include on-tablet {
     grid-template-areas:
@@ -20,11 +19,13 @@
   }
 
   @include gap-btw-blocks;
+  align-items: center;
 }
 
 .header {
   padding-bottom: 24px;
   grid-area: header;
+  text-align: center;
 
   @include on-tablet {
     padding-bottom: 32px;
@@ -40,20 +41,17 @@
   display: flex;
   overflow: hidden;
   gap: 16px;
-  width: $news-card-width;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: $news-card-width;
   padding-bottom: 24px;
 
   @include on-tablet {
-    width: calc($news-card-width * 2);
+    max-width: calc($news-card-width * 2 + 16px);
   }
 
   @include on-desktop {
-    width: calc($news-card-width-desktop * 2);
-  }
-
-  & > * {
-    flex-shrink: 0;
-    flex-grow: 1;
+    max-width: calc($news-card-width-desktop * 2 + 16px);
   }
 }
 
@@ -111,6 +109,8 @@
   text-decoration: none;
   color: $black;
   margin-top: 24px;
+  justify-self: center;
+  @include padding-inline;
 
   @include on-tablet {
     margin-top: 32px;

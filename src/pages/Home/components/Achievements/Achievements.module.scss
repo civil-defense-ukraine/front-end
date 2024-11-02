@@ -1,12 +1,16 @@
 @import '../../../../styles/styles.scss';
 
 .container {
-  background-image: url('../../../../imgs/achievements-bg.jpg');
   background-size: cover;
   background-position: center;
   color: $white;
   position: relative;
   z-index: -1;
+  background-color: $black;
+
+  &__bgImg {
+    background-image: url('../../../../imgs/achievements-bg.jpg');
+  }
 
   &__bg {
     background-color: rgba(7, 17, 28, 0.7);
@@ -33,6 +37,7 @@
   align-items: center;
   justify-content: center;
   justify-items: center;
+  @include max-width;
 
   @include on-tablet {
     display: grid;
