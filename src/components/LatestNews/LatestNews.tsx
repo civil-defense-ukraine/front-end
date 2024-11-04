@@ -10,6 +10,7 @@ import { useElementOnScreen } from '../../hooks/useElementOnScreen';
 import { NewsCard } from '../NewsCard';
 import { Error } from '../Error';
 import { SkeletonNewsCard } from '../NewsCard/SkeletonNewsCard';
+import { MobileSwiper } from '../MobileSwiper';
 
 export const LatestNews = () => {
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -21,6 +22,32 @@ export const LatestNews = () => {
     return news.slice(0, 10);
   }, [news]);
   const itemsPerPage = useMemo(() => (width >= 834 ? 2 : 1), [width]);
+
+
+  const handleIncrease = (step = 1) => {
+    const maxIndex = currentNews.length - 1;
+    setDisplayIndex(prevIndex =>
+      prevIndex + step >= maxIndex ? maxIndex : prevIndex + step,
+    );
+  };
+
+  const handleDecrease = (step = 1) => {
+    setDisplayIndex(prevIndex =>
+      prevIndex - step < 0 ? 0 : prevIndex - step,
+    );
+  };
+
+  const onSwipe = (diff: number) => {
+    if (diff > 50) {
+      handleDecrease(itemsPerPage);
+    }
+
+    if (diff < -50) {
+      handleIncrease(itemsPerPage);
+    }
+  }
+
+
 
   return (
     <section ref={container} className={styles.container}>
@@ -42,7 +69,9 @@ export const LatestNews = () => {
         </div>
       )}
       {!loading && !error && (
-        <>
+
+
+        <><MobileSwiper onSwipe={onSwipe}>
           <div
             className={`${styles.articles} hide--bottom ${isVisible ? 'show' : ''}`}
           >
@@ -56,22 +85,20 @@ export const LatestNews = () => {
               />
             ))}
           </div>
+        </MobileSwiper>
+
 
           <button
             className={`${styles.button} ${styles.button__left}`}
             disabled={displayIndex <= 0}
-            onClick={() => {
-              setDisplayIndex(prev => prev - 1);
-            }}
+            onClick={() => handleDecrease}
           >
             <div className="icon icon--arrow"></div>
           </button>
           <button
             className={styles.button}
             disabled={displayIndex >= currentNews.length - itemsPerPage}
-            onClick={() => {
-              setDisplayIndex(prev => prev + 1);
-            }}
+            onClick={() => handleIncrease}
           >
             <div className="icon icon--arrow"></div>
           </button>

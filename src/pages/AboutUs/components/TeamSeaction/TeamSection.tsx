@@ -61,7 +61,9 @@ export const TeamSection = () => {
             ))}
           </div>
           <div
-            className={classNames(`${styles.team__rest} ${styles.team}`)}
+            className={classNames(`${styles.team__rest} ${styles.team}`, {
+              [styles.team__rest__open]: showAllTeam
+            })}
             style={{
               maxHeight: `${getMaxHeight}px`,
             }}

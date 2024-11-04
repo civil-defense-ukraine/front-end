@@ -14,7 +14,7 @@ export const TeamCard: React.FC<Props> = ({ person }) => {
 
   return (
     <article className={styles.article} key={id}>
-      <div className={styles.article__container}>
+      <div className={`${styles.article__container} ${styles.article}`}>
         <div
           className={classNames(styles.article__img, {
             skeleton: !loaded,

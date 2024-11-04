@@ -97,7 +97,7 @@ export const Footer = () => {
             className={`button--secondary button--transparent ${styles.button}`}
           >
             <p>DONATE</p>
-            <div className="icon icon--support icon--medium"></div>
+            <div className="icon icon--support--black icon--medium"></div>
           </Link>
         )}
 
