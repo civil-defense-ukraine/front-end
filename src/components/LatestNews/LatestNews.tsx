@@ -73,7 +73,7 @@ export const LatestNews = () => {
                 newsData={article}
                 key={article.id}
                 style={{
-                  minWidth: width >= 1250 ? '536px' : '',
+                  width: width >= 1250 ? '536px' : '340px',
                   transform: `translateX(calc(-100% * ${displayIndex} - 16px * ${displayIndex}))`,
                 }}
               />

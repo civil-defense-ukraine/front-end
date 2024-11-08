@@ -20,7 +20,7 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
   const date = new Date(publicationDate);
   const normalizedText = getNormalized.slicedText(
     text,
-    width < 1240 ? 180 : 300,
+    180,
   );
 
   return (
@@ -46,12 +46,14 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
         <div className={styles.tag}>{type}</div>
 
         <div className={styles.info__container}>
-          <h3 className={`${styles.heading} heading--h3`}>
+          <div className={styles.heading}> 
+          <h3 className={`heading--h3`}>
             {getNormalized.slicedText(
               getNormalized.title(title),
               width < 1240 ? 48 : 68,
             )}
           </h3>
+          </div>
           <p className={styles.mainText}>
             {normalizedText.split('<br/>').map(textEl => (
               <React.Fragment key={textEl.slice(5)}>
