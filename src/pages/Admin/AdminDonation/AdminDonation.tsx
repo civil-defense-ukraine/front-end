@@ -47,8 +47,6 @@ export const AdminDonation = () => {
       setAuthorized(false);
       navigate('/login');
     }
-
-    console.log(err);
     setFormError('Something went wrong! Try again later!');
   };
 
@@ -67,9 +65,6 @@ export const AdminDonation = () => {
 
     adminActiveDonation
       .post(formData, token)
-      .then(response => {
-        console.log(response);
-      })
       .catch(handleFormError)
       .finally(() => setLoading(false));
   };

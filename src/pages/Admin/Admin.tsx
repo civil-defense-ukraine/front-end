@@ -13,13 +13,10 @@ import { Sidebar } from './components/Sidebar';
 const Admin = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
-  const { news } = useAppSelector(state => state.news);
   useEffect(() => {
     dispatch(loadNews());
     dispatch(loadTeam());
   }, []);
-
-  console.log(news);
 
   return (
     <ErrorBoundary fallback={<Error />}>

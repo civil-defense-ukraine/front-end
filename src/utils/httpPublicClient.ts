@@ -15,7 +15,6 @@ export async function request<T>(
       'Content-Type': 'application/json; charset=utf-8',
     };
   }
-  console.log(`${BASE_URL}/${path}`, options);
 
   return fetch(`${BASE_URL}/${path}`, options).then(response => {
     if (!response.ok) {

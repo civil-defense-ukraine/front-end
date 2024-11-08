@@ -75,6 +75,7 @@
 .bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .date {
@@ -82,10 +83,15 @@
   color: $text-color;
   text-align: right;
   text-wrap: nowrap;
-  width: 95px;
   display: flex;
   align-items: center;
   gap: 8px;
+  display: flex;
+
+  & > p {
+    display: block;
+  }
+
 
   &__icon {
     padding: 10px;

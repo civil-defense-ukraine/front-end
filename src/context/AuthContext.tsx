@@ -32,7 +32,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       setAuthorized(true);
     });
   }, []);
-  console.log('works');
 
   const value = useMemo(() => {
     return { authorized, login, token, setAuthorized };

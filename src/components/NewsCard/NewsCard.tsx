@@ -14,7 +14,6 @@ type Props = {
 export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
   const { image, type, title, link, publicationDate, text } = newsData;
   const width = useWidth();
-  console.log(getNormalized.link(title));
 
   const [loaded, setIsLoaded] = useState(false);
   const date = new Date(publicationDate);

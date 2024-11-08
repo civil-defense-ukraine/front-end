@@ -17,8 +17,6 @@ export const NewsCatalog: React.FC<Props> = ({ news }) => {
     return getVisibleItems({ items: news, page });
   }, [searchParams, news]);
 
-  console.log(visibleNews);
-
   return (
     <article className={styles.container}>
       {visibleNews.map(singleNews => (

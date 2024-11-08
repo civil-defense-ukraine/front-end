@@ -13,8 +13,6 @@ export const AboutUsInfo = () => {
           <img
             className={styles.article__img}
             onLoad={e => {
-              console.log(e.currentTarget.parentElement);
-
               e.currentTarget.parentElement?.classList.remove('skeleton');
             }}
             loading="lazy"
@@ -44,8 +42,6 @@ export const AboutUsInfo = () => {
           <img
             className={styles.article__img}
             onLoad={e => {
-              console.log(e.currentTarget.parentElement);
-
               e.currentTarget.parentElement?.classList.remove('skeleton');
             }}
             loading="lazy"
@@ -83,8 +79,6 @@ export const AboutUsInfo = () => {
           <img
             className={styles.article__img}
             onLoad={e => {
-              console.log(e.currentTarget.parentElement);
-
               e.currentTarget.parentElement?.classList.remove('skeleton');
             }}
             loading="lazy"

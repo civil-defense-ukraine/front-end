@@ -13,11 +13,8 @@ export async function requestToAuth(data: {
       'Content-Type': 'application/json; charset=utf-8',
     };
   }
-  console.log(`${BASE_URL}`, options);
 
   return fetch(`${BASE_URL}`, options).then(response => {
-    console.log(response);
-
     if (!response.ok) {
       throw new Error(response.statusText);
     }

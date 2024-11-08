@@ -92,7 +92,6 @@ export const ImageInput: React.FC<Props> = React.memo(
           />
           <div
             onClick={e => {
-              console.log(e.target);
               setImagePreview(null);
               updateInput(null);
             }}

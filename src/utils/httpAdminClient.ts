@@ -19,8 +19,6 @@ export async function request<T>(
   }
 
   return fetch(`${BASE_URL}/${path}`, options).then(async response => {
-    console.log(response);
-
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(errorText || response.statusText);
