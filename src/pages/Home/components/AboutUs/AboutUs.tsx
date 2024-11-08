@@ -1,8 +1,9 @@
-import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
-import styles from './AboutUs.module.scss';
-import { ReadMore } from '../../../../components/Buttons/ReadMore';
 import { useState } from 'react';
 import classNames from 'classnames';
+
+import styles from './AboutUs.module.scss';
+import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
+import { ReadMore } from '../../../../components/Buttons/ReadMore';
 
 export const AboutUs = () => {
   const { isVisible, container } = useElementOnScreen();

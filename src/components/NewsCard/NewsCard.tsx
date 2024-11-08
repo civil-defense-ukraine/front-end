@@ -14,9 +14,14 @@ type Props = {
 export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
   const { image, type, title, link, publicationDate, text } = newsData;
   const width = useWidth();
+  console.log(getNormalized.link(title));
+
   const [loaded, setIsLoaded] = useState(false);
   const date = new Date(publicationDate);
-  const normalizedText = getNormalized.slicedText(text);
+  const normalizedText = getNormalized.slicedText(
+    text,
+    width < 1240 ? 180 : 300,
+  );
 
   return (
     <article className={styles.container} style={style}>
@@ -38,17 +43,15 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
         />
       </div>
       <div className={styles.info}>
+        <div className={styles.tag}>{type}</div>
+
         <div className={styles.info__container}>
-          <div className={styles.tag}>{type}</div>
-          <div className={`${styles.header}`}>
-            <h3 className={`${styles.heading} heading--h3`}>
-              {getNormalized.slicedText(
-                getNormalized.title(title),
-                width < 1240 ? 30 : 68,
-              )}
-            </h3>
-            <p className={styles.date}> {getNormalized.date(date)} </p>
-          </div>
+          <h3 className={`${styles.heading} heading--h3`}>
+            {getNormalized.slicedText(
+              getNormalized.title(title),
+              width < 1240 ? 48 : 68,
+            )}
+          </h3>
           <p className={styles.mainText}>
             {normalizedText.split('<br/>').map(textEl => (
               <React.Fragment key={textEl.slice(5)}>
@@ -56,8 +59,16 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
               </React.Fragment>
             ))}
           </p>
+          <div className={styles.bottom}>
+            <div className={styles.date}>
+              <div className={styles.date__icon}>
+                <div className={`icon icon--small icon--calendar`}></div>
+              </div>
+              <p> {getNormalized.date(date)} </p>
+            </div>
+            <ReadMore pathname={`/news/${link}`} />
+          </div>
         </div>
-        <ReadMore pathname={`/news/${link}`} />
       </div>
     </article>
   );

@@ -33,29 +33,25 @@ export const checkFormField = (
   return error;
 };
 
-type ValidationErrors<T> = {
-  [K in keyof T]?: string;
-};
 export const checkAdminFormField = <T extends Record<string, any>>(
   formField: T,
-): ValidationErrors<T> => {
-  const error: ValidationErrors<T> = {};
-  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+) => {
+  const error: { [key: string]: string } = {};
+
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   for (const field in formField) {
-    const value = formField[field];
+    const value = formField[field] || '';
 
     if (!value) {
       error[field] = 'This field is required.';
       continue;
     }
 
-    if (field === 'email' && !pattern.test(value)) {
+    if (field === 'email' && !emailPattern.test(value)) {
       error[field] = 'Invalid email format.';
     } else if (field === 'message' && value.length < 5) {
-      error[field] = 'Message should contain at least 5 characters';
-    } else if (value.length === 0) {
-      error[field] = 'This field is required.';
+      error[field] = 'Message should contain at least 5 characters.';
     }
   }
 

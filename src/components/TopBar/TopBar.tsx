@@ -7,6 +7,7 @@ import { Logo } from '../Logo';
 import React, { useContext } from 'react';
 import { MenuContext } from '../../context/MenuContext';
 import { useWidth } from '../../hooks/useWidth';
+import { screenWidth } from '../../constants/screenWidth';
 
 const getLinkClass = ({ isActive }: { isActive: boolean }) =>
   classNames(`${styles.nav__link}  link`, {
@@ -62,16 +63,20 @@ export const TopBar = React.memo(() => {
           </li>
         </ul>
         <HashLink
-          className={classNames(`${styles.topBar__button}`, {
-            [styles.topBar__button__menu]: showMenu,
-          })}
+          className={classNames(
+            `button button--transparent ${styles.topBar__button}`,
+            {
+              [styles.topBar__button__menu]: showMenu,
+            },
+          )}
           onClick={() => setShowMenu(false)}
           to="/#contact-form"
         >
-          CONTACT US{' '}
+          <p>CONTACT US</p>
+          <div className="icon icon--button icon--send icon--send--yellow"></div>
         </HashLink>
 
-        {width < 834 && (
+        {width < screenWidth.tablet && (
           <div
             className={styles.icon1}
             onClick={() => setShowMenu(prev => !prev)}

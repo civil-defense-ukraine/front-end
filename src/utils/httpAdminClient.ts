@@ -18,11 +18,12 @@ export async function request<T>(
     options.body = data;
   }
 
-  return fetch(`${BASE_URL}/${path}`, options).then(response => {
+  return fetch(`${BASE_URL}/${path}`, options).then(async response => {
     console.log(response);
 
     if (!response.ok) {
-      throw new Error(response.statusText);
+      const errorText = await response.text();
+      throw new Error(errorText || response.statusText);
     }
 
     const contentType = response.headers.get('content-type');

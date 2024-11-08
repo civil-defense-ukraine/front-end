@@ -22,7 +22,7 @@ const NewsArticle = () => {
   const copyButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    dispatch(loadArticle(newsId.split('-').join('%20')));
+    dispatch(loadArticle(newsId));
     window.scrollTo({
       top: 0,
       left: 0,
@@ -57,52 +57,53 @@ const NewsArticle = () => {
         <div className={styles.tag}>{type}</div>
 
         <div className={`${styles.header}`}>
-          <h3 className={`${styles.heading} heading--h3`}>
+          <h3 className={`${styles.heading} heading--h2`}>
             {`${getNormalized.title(title)}`}
           </h3>
-          <p className={styles.date}> {getNormalized.date(date)} </p>
-        </div>
-        <div className={styles.article__container}>
-          <div
-            className={classNames(styles.img, {
-              skeleton: !loaded,
-            })}
-          >
-            <img
-              className={styles.img}
-              onLoad={() => setLoaded(true)}
-              src={image}
-              alt={title}
-              loading="lazy"
-            />
-          </div>
-          <div className={styles.info}>
-            <p className={styles.mainText}>
-              {text.split('<br/>').map(textEl => (
-                <>
-                  {textEl} <br />
-                </>
-              ))}
-            </p>
-            <div className={styles.share}>
-              Share
-              <button
-                ref={copyButton}
-                onClick={() => {
-                  copyLink();
-                }}
-                onTransitionEnd={() => {
-                  if (copyButton.current) {
-                    copyButton.current.classList.remove('copyLink--coppied');
-                  }
-                }}
-                className={`${styles.share__button} copyLink`}
-              >
-                COPY LINK
-              </button>
-              <SocialMedia />
+          <div className={styles.date}>
+            <div className={styles.date__icon}>
+              <div className={`icon icon--small icon--calendar`}></div>
             </div>
+            <p> {getNormalized.date(date)} </p>
           </div>
+        </div>
+        <div
+          className={classNames(styles.img, {
+            skeleton: !loaded,
+          })}
+        >
+          <img
+            className={styles.img}
+            onLoad={() => setLoaded(true)}
+            src={image}
+            alt={title}
+            loading="lazy"
+          />
+        </div>
+        <p className={styles.mainText}>
+          {text.split('<br/>').map(textEl => (
+            <>
+              {textEl} <br />
+            </>
+          ))}
+        </p>
+        <div className={`heading--h3 ${styles.share}`}>
+          Share
+          <button
+            ref={copyButton}
+            onClick={() => {
+              copyLink();
+            }}
+            onTransitionEnd={() => {
+              if (copyButton.current) {
+                copyButton.current.classList.remove('copyLink--coppied');
+              }
+            }}
+            className={`${styles.share__button} copyLink`}
+          >
+            COPY LINK
+          </button>
+          <SocialMedia />
         </div>
       </article>
 

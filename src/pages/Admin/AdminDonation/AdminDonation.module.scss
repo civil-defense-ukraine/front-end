@@ -1,19 +1,11 @@
-.container {
-  display: flex;
-  min-height: 80vh;
-  padding-top: 20vh;
-}
-
 .form {
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-}
-.info {
   display: flex;
   flex-direction: column;
-  gap: 45px;
+  justify-content: center;
+  gap: 48px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
 }
 
 .buttons {

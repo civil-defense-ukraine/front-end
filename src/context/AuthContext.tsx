@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useMemo, useState } from 'react';
@@ -8,12 +9,14 @@ type InitContext = {
   authorized: boolean;
   login: (username: string, password: string) => Promise<any>;
   token: string;
+  setAuthorized: (v: boolean) => void;
 };
 
 export const AuthContext = React.createContext<InitContext>({
   authorized: false,
-  login: (username: string, password: string) => Promise.resolve(),
+  login: () => Promise.resolve(),
   token: '',
+  setAuthorized: () => {},
 });
 
 type Props = {
@@ -32,7 +35,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   console.log('works');
 
   const value = useMemo(() => {
-    return { authorized, login, token };
+    return { authorized, login, token, setAuthorized };
   }, [authorized, token]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

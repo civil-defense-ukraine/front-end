@@ -9,8 +9,6 @@
   padding-left: 18px;
   background-color: $blue;
 
-  @include gap-btw-blocks;
-
   @include on-tablet {
     background-image: url('../../imgs/about-us/bg-tablet.png');
     background-position: center;
@@ -23,7 +21,6 @@
     height: 348px;
     padding-top: 32px;
     padding-left: 48px;
-    margin-bottom: 100px;
   }
 }
 

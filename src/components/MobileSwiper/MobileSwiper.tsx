@@ -3,9 +3,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 type Props = {
   children: React.ReactNode;
   onSwipe: (diff: number) => void;
+  className: string;
 };
 
-export const MobileSwiper: React.FC<Props> = ({ children, onSwipe }) => {
+export const MobileSwiper: React.FC<Props> = ({
+  children,
+  onSwipe,
+  className,
+}) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [startX, setStartX] = useState(0);
 
@@ -45,5 +50,9 @@ export const MobileSwiper: React.FC<Props> = ({ children, onSwipe }) => {
     };
   }, [handleTouchStart, handleTouchEnd]);
 
-  return <div ref={wrapperRef}>{children}</div>;
+  return (
+    <section ref={wrapperRef} className={className}>
+      {children}
+    </section>
+  );
 };

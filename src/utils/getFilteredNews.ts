@@ -6,7 +6,7 @@ type Props = {
   category: string;
   query?: string;
   sortBy?: string;
-  latestArticleId?: number;
+  latestArticleId?: number | null;
 };
 
 export const getFilteredNews = ({
@@ -14,7 +14,7 @@ export const getFilteredNews = ({
   category,
   query = '',
   sortBy = '',
-  latestArticleId = 0,
+  latestArticleId = null,
 }: Props) => {
   let filteredNews = news
     .filter(article => {
@@ -53,5 +53,5 @@ export const getFilteredNews = ({
     });
   }
 
-  return sortBy === 'latest' ? filteredNews.reverse() : filteredNews;
+  return sortBy === 'oldest' ? filteredNews.reverse() : filteredNews;
 };

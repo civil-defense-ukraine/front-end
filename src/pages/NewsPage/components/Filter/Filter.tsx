@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 export const Filter = () => {
   const [selectedDropdown, setSelectedDropdown] = useState('');
   const categories = ['All categories', 'News', 'Events', 'Reports'];
-  const sortBy = ['Newest', 'Latest'];
+  const sortBy = ['Recent', 'Oldest'];
 
   return (
     <div className={styles.container}>
@@ -45,11 +45,14 @@ export const FilterItem: React.FC<Props> = ({
   selectedDropdown,
   setSelectedDropdown,
 }) => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedOption, setSelectedOption] = useState(() => {
+    return searchParams.get(name) || options[0];
+  });
+
   const restOptions = useMemo(() => {
     return options.filter(item => item !== selectedOption);
   }, [selectedOption]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const onSelect = (newSelectedOption: string) => {
     const updatedSearchParams = new URLSearchParams(searchParams);

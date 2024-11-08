@@ -118,20 +118,22 @@ const LoginPage = () => {
           )}
         </label>
 
-        {loading && (
+        {loading ? (
           <div className="form__button">
             <Loader />
           </div>
+        ) : (
+          <button
+            type="submit"
+            className={`form__button button button--yellow button--secondary`}
+          >
+            SUBMIT
+            <div className="icon icon--button icon--send icon--send--black"></div>
+          </button>
         )}
         {formError && (
           <p className="form__button formField__notValid--text">{formError}</p>
         )}
-        <button
-          type="submit"
-          className={`form__button button--yellow button--secondary`}
-        >
-          SUBMIT
-        </button>
       </form>
     </section>
   );

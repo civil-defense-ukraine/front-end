@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
+
 import styles from './WorkProcess.module.scss';
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
-import classNames from 'classnames';
 
 const process = [
   'Receive a request',

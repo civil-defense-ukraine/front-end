@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { News } from '../types/News';
 import { publicNews } from '../services/public/publicNews';
 import { sortNewsByDate } from '../utils/getSortedNews';
-import { getNormalized } from '../utils/getNormalized';
 
 type InitialState = {
   loading: boolean;
@@ -48,10 +47,7 @@ export const newsSlice = createSlice({
         } else {
           const sortedNews = action.payload.sort(sortNewsByDate);
 
-          state.news = sortedNews.map(news => {
-            const link = getNormalized.link(news.title);
-            return { ...news, link };
-          });
+          state.news = sortedNews;
           state.loading = false;
         }
       },

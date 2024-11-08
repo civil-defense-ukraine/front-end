@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useSessionStorage } from '../../../hooks/useSessionStorage';
-import { FormProvider } from '../../../context/FormContext';
-import { AuthProvider } from '../../../context/AuthContext';
+import { FormProvider } from '../../../../context/FormContext';
+import { AuthProvider } from '../../../../context/AuthContext';
+import { useSessionStorage } from '../../../../hooks/useSessionStorage';
 
 export const RequireAuth = () => {
   const [authorized] = useSessionStorage('authorized', false);

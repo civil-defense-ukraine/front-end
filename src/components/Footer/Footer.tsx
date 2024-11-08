@@ -1,9 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { bankDetails, mobilePay } from '../../constants/bankDetails';
 import { Logo } from '../Logo';
 import { SocialMedia } from '../SocialMedia';
 import styles from './Footer.module.scss';
 import { useEffect, useState } from 'react';
+import { DonateButton } from '../Buttons/ReadMore/DonateButton';
 
 export const Footer = () => {
   const { pathname } = useLocation();
@@ -84,22 +85,24 @@ export const Footer = () => {
               </a>
             </li>
           </ul>
-
-          <div className={styles.icons}>
-            <p className="heading--h3">Follow Us</p>
-            <SocialMedia />
-          </div>
+        </div>
+        <div className={styles.socialMedia}>
+          <p className="heading--h3">Follow Us</p>
+          <SocialMedia />
         </div>
 
-        {showDonateButton && (
-          <Link
-            to={'/donate'}
-            className={`button--secondary button--transparent ${styles.button}`}
+        <div className={styles.registration}>
+          <div className={`icon icon--small icon--hover icon--globe`}></div>
+          <a
+            target="_blank"
+            href="https://www.civilstyrelsen.dk/sagsomraader/indsamlingsnaevnet/godkendte-indsamlinger/2022/komite-ukraine-hjaelp-04827?fbclid=IwY2xjawGV8VRleHRuA2FlbQIxMAABHThFQDXLzMrr7osQ-eMbTLEMqbRNr9zduyTXbymAh83tqii8CzDaaaGbxg_aem_RFZB_sLDOm8NZyM2JRDajQ"
+            className={`${styles.info__text} link heading--h3`}
           >
-            <p>DONATE</p>
-            <div className="icon icon--support--black icon--medium"></div>
-          </Link>
-        )}
+            Registration Info
+          </a>
+        </div>
+
+        {showDonateButton && <DonateButton classname={styles.fixedButton} />}
 
         <div className={styles.bankDetails}>
           <div className={styles.block}>

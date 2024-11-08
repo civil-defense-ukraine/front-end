@@ -1,9 +1,9 @@
 import styles from './Sidebar.module.scss';
-import { Logo } from '../../../components/Logo';
 import classNames from 'classnames';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { Logo } from '../../../../components/Logo';
 
 const sidebarItems = {
   Home: ['Active Donation'],

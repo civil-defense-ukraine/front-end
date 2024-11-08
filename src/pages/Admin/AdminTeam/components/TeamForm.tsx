@@ -1,18 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, useContext, useEffect, useMemo, useState } from 'react';
-import { TextInput } from '../AdminForm/components/Inputs/TextInput';
-import { TextAreaInput } from '../AdminForm/components/Inputs/TextAreaInput';
-import { ImageInput } from '../AdminForm/components/Inputs/ImageInput';
+
+import styles from '../../components/FormComponents/Form.module.scss';
+import { FormContext } from '../../../../context/FormContext';
+import { useSessionStorage } from '../../../../hooks/useSessionStorage';
+import { useAppDispatch } from '../../../../app/hooks';
+import { checkAdminFormField } from '../../../../utils/checkFormFields';
+import { adminTeam } from '../../../../services/admin/adminTeam';
+import { TeamMember } from '../../../../types/TeamMember';
+import { teamSlice } from '../../../../features/teamSlice';
 import classNames from 'classnames';
-import { useSessionStorage } from '../../../hooks/useSessionStorage';
-import { FormContext } from '../../../context/FormContext';
-import { adminTeam } from '../../../services/admin/adminTeam';
-import { checkAdminFormField } from '../../../utils/checkFormFields';
-import { teamSlice } from '../../../features/teamSlice';
-import { useAppDispatch } from '../../../app/hooks';
-import { TeamMember } from '../../../types/TeamMember';
-import { Loader } from '../../../components/Loader';
-import { getNormalized } from '../../../utils/getNormalized';
-import styles from '../AdminForm/Form.module.scss';
+import { TextInput } from '../../components/FormComponents/components/TextInput';
+import { ImageInput } from '../../components/FormComponents/components/ImageInput';
+import { TextAreaInput } from '../../components/FormComponents/components/TextAreaInput';
+import { Loader } from '../../../../components/Loader';
+import { AuthContext } from '../../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 type initialFormState = {
   name: string;
@@ -21,15 +24,30 @@ type initialFormState = {
   description: string;
 };
 
-type ValidationErrors<T> = {
-  [K in keyof T]?: string | null;
+const defaultErrors = {
+  name: '',
+  image: '',
+  position: '',
+  description: '',
 };
 
 export const TeamForm = () => {
   const { displayForm, setDisplayForm, selectedItem } = useContext(FormContext);
-  const [errors, setErrors] = useState<ValidationErrors<initialFormState>>();
+  const [errors, setErrors] = useState<{ [key: string]: string }>(
+    defaultErrors,
+  );
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState('');
+  const { setAuthorized } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleFormError = (err: any) => {
+    if (err.message && err.message.includes('401')) {
+      setAuthorized(false);
+      navigate('/login');
+    }
+    setFormError('Something went wrong! Try again later!');
+  };
 
   const defaultValue = useMemo(() => {
     return {
@@ -49,6 +67,8 @@ export const TeamForm = () => {
   const updateInput = (fieldTitle: string) => {
     return (newValue: string | File | null) => {
       setFormField(prevValue => ({ ...prevValue, [fieldTitle]: newValue }));
+      setErrors(defaultErrors);
+      setFormError('');
     };
   };
 
@@ -64,9 +84,13 @@ export const TeamForm = () => {
     setLoading(true);
     setErrors(checkAdminFormField(formField));
 
-    // if (checkAdminFormField(formField)) {
-    //   return;
-    // }
+    const hasErrors = Object.values(checkAdminFormField(formField)).filter(
+      error => error.length > 0,
+    );
+    if (hasErrors.length > 0) {
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData();
 
@@ -92,7 +116,7 @@ export const TeamForm = () => {
           dispatch(teamSlice.actions.update(updatedTeamMember));
           clearForm();
         })
-        .catch(err => console.error(err))
+        .catch(handleFormError)
         .finally(() => setLoading(false));
     } else {
       adminTeam
@@ -101,7 +125,7 @@ export const TeamForm = () => {
           dispatch(teamSlice.actions.add(newTeamMember));
           clearForm();
         })
-        .catch(err => console.error(err))
+        .catch(handleFormError)
         .finally(() => setLoading(false));
     }
   };
@@ -113,6 +137,9 @@ export const TeamForm = () => {
       description: '',
       position: '',
     });
+
+    setErrors(defaultErrors);
+    setFormError('');
   }
 
   return (
@@ -146,6 +173,7 @@ export const TeamForm = () => {
         <ImageInput
           defaultImage={formField.image}
           updateInput={updateInput('image')}
+          fieldError={errors?.image || ''}
         />
         <TextInput
           fieldTitle="Role"
@@ -171,13 +199,16 @@ export const TeamForm = () => {
             <>
               <button
                 type="submit"
-                className={`form__button button--yellow button--secondary`}
+                className={`form__button button button--yellow button--secondary`}
               >
                 SAVE
               </button>
               <button
-                className={`form__button button--transparent button--secondary`}
-                onClick={() => clearForm()}
+                className={`form__button button  button--transparent button--secondary`}
+                onClick={e => {
+                  e.preventDefault();
+                  clearForm();
+                }}
               >
                 RESET
               </button>

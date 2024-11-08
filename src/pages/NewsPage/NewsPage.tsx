@@ -26,8 +26,8 @@ const NewsPage = () => {
 
   const displayedNews = useMemo(() => {
     const category = searchParams.get('category') || 'all';
-    const sortBy = searchParams.get('sortBy') || 'newest';
-    const latestArticleId = latestArticle ? latestArticle.id : 0;
+    const sortBy = searchParams.get('sortBy') || 'recent';
+    const latestArticleId = latestArticle ? latestArticle.id : null;
 
     if (pathname.slice(1) === 'reports') {
       return getFilteredNews({
@@ -46,15 +46,13 @@ const NewsPage = () => {
     [displayedNews],
   );
 
-  console.log(displayedNews.length, numberOfPages);
-
   if (!loading && error) {
     return <Error />;
   }
 
   return (
     <section className={styles.container}>
-      <h2 className={`${styles.heading} heading--h3`}>Latest Article</h2>
+      <h2 className={`${styles.heading} heading--h3`}>Recent Article</h2>
       <section className={styles.latestArticle}>
         {loading ? (
           <SkeletonNewsCard showInRow={true} />

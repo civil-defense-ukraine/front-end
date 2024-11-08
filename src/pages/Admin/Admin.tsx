@@ -1,5 +1,4 @@
 import styles from './Admin.module.scss';
-import { Sidebar } from './Sidebar';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AdminSearch } from './components/AdminSearch';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -9,6 +8,7 @@ import { loadTeam } from '../../features/teamSlice';
 import { Error } from '../../components/Error';
 import { LoadingPage } from '../LoadingPage/LoadingPage';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { Sidebar } from './components/Sidebar';
 
 const Admin = () => {
   const dispatch = useAppDispatch();

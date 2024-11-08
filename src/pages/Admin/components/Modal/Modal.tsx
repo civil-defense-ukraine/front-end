@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './Modal.module.scss';
 type Props = {
   onDelete: () => void;
@@ -6,7 +5,6 @@ type Props = {
 };
 
 export const Modal: React.FC<Props> = ({ onDelete, onClose }) => {
-  
   return (
     <div className={styles.modal}>
       <div className={styles.modal__container}>
@@ -20,13 +18,18 @@ export const Modal: React.FC<Props> = ({ onDelete, onClose }) => {
         </p>
         <div className={styles.modal__buttons}>
           <div
-            className="button--secondary button--transparent"
+            className=" button button--secondary button--transparent"
             onClick={onClose}
           >
-            Cancel
+            <p>Cancel</p>
+            <div className="icon icon--medium icon--goBack"></div>
           </div>
-          <div className="button--secondary button--yellow" onClick={onDelete}>
-            Delete
+          <div
+            className=" button button--secondary button--yellow"
+            onClick={onDelete}
+          >
+            <p>Delete</p>
+            <div className="icon icon--medium icon--bin"></div>
           </div>
         </div>
       </div>

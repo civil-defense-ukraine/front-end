@@ -1,5 +1,5 @@
+import { Pagination } from '../../../../components/Pagination';
 import styles from './AdminCatalog.module.scss';
-import { Pagination } from '../../../components/Pagination';
 
 type Props = {
   columns: string[];

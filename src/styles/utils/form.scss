@@ -12,14 +12,8 @@
   }
 
   &__button {
-    border-radius: 24px;
-    align-self: center;
     margin-top: 16px;
-    font-weight: 600;
-    font-size: 15px;
-    font-family: 'Figtree', sans-serif;
     cursor: pointer;
-    flex-shrink: 0;
     margin-inline: auto;
   }
 
@@ -67,6 +61,7 @@
 
     &--text {
       color: red;
+      font-weight: 500;
     }
   }
 }

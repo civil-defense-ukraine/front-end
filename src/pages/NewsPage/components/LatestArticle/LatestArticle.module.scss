@@ -1,19 +1,21 @@
 @import '../../../../styles/styles.scss';
 
 .container {
-  padding: 16px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   transition: transform 500ms;
-  width: 100%;
 
   @include on-tablet {
     flex-direction: row;
+    gap: 24px;
   }
 
-  @include max-width;
+  @include on-desktop {
+    max-width: 1116px;
+    gap: 32px;
+  }
 }
 
 .img {
@@ -43,56 +45,68 @@
   }
 }
 
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+}
+
 .info {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
   width: 100%;
-
-  @include on-desktop {
-    width: 510px;
-    flex-shrink: 0;
-  }
 }
 
 .tag {
+  align-self: start;
+  display: inline-block;
   color: $blue;
   text-transform: uppercase;
   font-weight: 700;
   height: 37px;
   line-height: 37px;
-  width: 77px;
   text-align: center;
-
+  padding-inline: 16px;
   border: 1px solid $blue;
   border-radius: 24px;
 }
 
-.header {
+.bottom {
   display: flex;
   justify-content: space-between;
-  align-items: end;
-}
-
-.heading {
-  max-width: 200px;
-  flex-shrink: 1;
-
-  @include on-tablet {
-    max-width: 100%;
-    font-size: 32px;
-  }
 }
 
 .date {
   font-size: 14px;
-  color: $grey;
-  flex-shrink: 0;
+  color: $text-color;
+  text-align: right;
+  text-wrap: nowrap;
+  width: 95px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &__icon {
+    padding: 10px;
+    height: 44px;
+    width: 44px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: $white-bg;
+  }
 }
 
 .mainText {
   font-size: 14px;
   line-height: 1.5em;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  height: calc(1.5em * 4);
 
   @include on-tablet {
     font-size: 16px;

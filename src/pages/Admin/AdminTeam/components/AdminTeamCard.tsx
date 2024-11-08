@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import styles from '../AdminCatalog/AdminCatalog.module.scss';
+import styles from '../../components/AdminCatalog/AdminCatalog.module.scss';
 import { useContext, useState } from 'react';
-import { FormContext } from '../../../context/FormContext';
-import { AuthContext } from '../../../context/AuthContext';
-import { TeamMember } from '../../../types/TeamMember';
-import { adminTeam } from '../../../services/admin/adminTeam';
+import { TeamMember } from '../../../../types/TeamMember';
+import { FormContext } from '../../../../context/FormContext';
+import { AuthContext } from '../../../../context/AuthContext';
+import { useAppDispatch } from '../../../../app/hooks';
+import { adminTeam } from '../../../../services/admin/adminTeam';
+import { teamSlice } from '../../../../features/teamSlice';
+import { getNormalized } from '../../../../utils/getNormalized';
 import { createPortal } from 'react-dom';
-import { Modal } from '../components/Modal';
-import { useAppDispatch } from '../../../app/hooks';
-import { teamSlice } from '../../../features/teamSlice';
-import { getNormalized } from '../../../utils/getNormalized';
+import { Modal } from '../../components/Modal';
 
 type Props = {
   item: TeamMember;
@@ -43,9 +43,9 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
       </td>
       <td className={styles.item__role}>{position}</td>
       <td className={styles.item__text}>
-        {getNormalized.slicedText(description, 150)}
+        {getNormalized.slicedText(description, 35)}
       </td>
-      <td className={styles.button}>
+      <td className={styles.button1}>
         <div
           className={styles.item__button}
           onClick={() => {
@@ -56,7 +56,7 @@ export const AdminTeamCard: React.FC<Props> = ({ item }) => {
           <div className="icon icon--edit icon--small"></div> <p>Edit</p>
         </div>
       </td>
-      <td className={styles.button}>
+      <td className={styles.button1}>
         <div
           className={styles.item__button}
           onClick={() => {

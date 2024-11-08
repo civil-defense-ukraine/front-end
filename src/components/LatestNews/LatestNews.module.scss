@@ -7,15 +7,21 @@
     'main main'
     'button1 button2'
     'buttonMain buttonMain';
-  max-width: 1440px;
+
   margin-inline: auto;
   justify-items: center;
+  grid-auto-flow: dense;
+  width: 100%;
 
   @include on-tablet {
     grid-template-areas:
       'header header header'
       'button1 main button2'
       'buttonMain buttonMain buttonMain';
+  }
+
+  @include on-desktop {
+    max-width: 1440px;
   }
 
   @include gap-btw-blocks;
@@ -44,14 +50,15 @@
   width: 100%;
   box-sizing: border-box;
   max-width: $news-card-width;
-  padding-bottom: 24px;
+  margin-bottom: 24px;
 
   @include on-tablet {
     max-width: calc($news-card-width * 2 + 16px);
+    margin-bottom: 32px;
   }
 
   @include on-desktop {
-    max-width: calc($news-card-width-desktop * 2 + 16px);
+    max-width: calc(536px * 2 + 16px);
   }
 }
 
@@ -86,8 +93,8 @@
   }
 
   & > div {
-    height: 20px;
-    width: 10px;
+    height: 25px;
+    width: 15px;
   }
 
   &__left {
@@ -101,18 +108,12 @@
 }
 
 .mainButton {
-  height: 48px;
-  line-height: 48px;
-  border: 1px solid $yellow;
-  border-radius: 24px;
   grid-area: buttonMain;
-  text-decoration: none;
-  color: $black;
-  margin-top: 24px;
   justify-self: center;
-  @include padding-inline;
+  max-width: calc(320px - 18px * 2);
+  margin-top: 24px;
 
-  @include on-tablet {
-    margin-top: 32px;
+  @media (min-width: 375px) {
+    max-width: 327px;
   }
 }

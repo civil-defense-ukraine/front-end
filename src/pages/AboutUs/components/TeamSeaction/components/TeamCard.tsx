@@ -52,7 +52,7 @@ export const TeamCard: React.FC<Props> = ({ person }) => {
             className={styles.article__quote}
             style={
               {
-                '--hover-height': `${description.length * 0.8}px`,
+                '--hover-height': `${description.length * 0.5}px`,
               } as React.CSSProperties
             }
           >

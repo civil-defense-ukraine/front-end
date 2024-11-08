@@ -22,6 +22,16 @@
     width: 32px;
   }
 
+  &--button {
+    height: 24px;
+    width: 24px;
+
+    @include on-tablet {
+      height: 32px;
+      width: 32px;
+    }
+  }
+
   &--hover {
     background-color: $white;
 
@@ -56,6 +66,12 @@
   &--arrow {
     -webkit-mask-image: url('../../imgs/icons/arrow.svg');
     mask-image: url('../../imgs/icons/arrow.svg');
+
+    &--left {
+      -webkit-mask-image: url('../../imgs/icons/arrow--left.svg');
+      mask-image: url('../../imgs/icons/arrow--left.svg');
+      background-color: $black;
+    }
   }
 
   &--location {
@@ -114,6 +130,32 @@
   }
   &--requests {
     background-image: url('../../imgs/icons/requests.png');
+  }
+
+  &--send {
+    -webkit-mask-image: url('../../imgs/icons/send.svg');
+    mask-image: url('../../imgs/icons/send.svg');
+    &--yellow {
+      background-color: $yellow;
+    }
+    &--black {
+      background-color: $black;
+    }
+  }
+
+  &--calendar {
+    background-image: url('../../imgs/icons/calendar.svg');
+  }
+
+  &--plus {
+    background-image: url('../../imgs/icons/plus.svg');
+  }
+
+  &--goBack {
+    background-image: url('../../imgs/icons/goBack.svg');
+  }
+  &--bin {
+    background-image: url('../../imgs/icons/bin.svg');
   }
 }
 

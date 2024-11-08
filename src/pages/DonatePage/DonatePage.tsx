@@ -3,7 +3,6 @@ import { Donate } from '../../components/Donate';
 import { bankDetails } from '../../constants/bankDetails';
 import styles from './DonatePage.module.scss';
 import { useEffect, useState } from 'react';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
 
 export const DonatePage = () => {
   const [coppiedText, setCoppiedText] = useState('');
@@ -22,9 +21,6 @@ export const DonatePage = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.breadcrumbs}>
-        <Breadcrumbs />
-      </div>
       <Donate />
 
       <h2 className={`${styles.header} heading--h1`}>

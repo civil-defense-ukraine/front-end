@@ -15,10 +15,12 @@ h2 {
   padding: 0;
   gap: 24px;
   margin-bottom: 46px;
+  font-size: 20px;
 
   @include on-tablet {
     padding-bottom: 0;
     align-items: flex-start;
+    margin-bottom: 77px;
   }
 
   &__text {

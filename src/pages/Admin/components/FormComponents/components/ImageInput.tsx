@@ -5,6 +5,7 @@ import classNames from 'classnames';
 type Props = {
   defaultImage: File | null | string;
   updateInput: (newValue: File | null | string) => void;
+  fieldError: string;
   isDonationPage?: boolean;
 };
 
@@ -17,7 +18,7 @@ async function linkToFile(url: string, fileName: string) {
 }
 
 export const ImageInput: React.FC<Props> = React.memo(
-  ({ defaultImage, updateInput, isDonationPage = false }) => {
+  ({ defaultImage, updateInput, fieldError, isDonationPage = false }) => {
     const [showImg, setShowImg] = useState(false);
 
     const setImagePreview = (img: File | null | string) => {
@@ -106,6 +107,7 @@ export const ImageInput: React.FC<Props> = React.memo(
             <div
               className={classNames(`${styles.label__image} formField`, {
                 [styles.label__image__huge]: isDonationPage,
+                formField__notValid: fieldError,
               })}
             >
               <p className={styles.label__image__text}>Upload image</p>
@@ -133,6 +135,9 @@ export const ImageInput: React.FC<Props> = React.memo(
               placeholder="Upload image"
             />
           </>
+        )}
+        {fieldError && (
+          <p className="formField__notValid--text">{fieldError}</p>
         )}
       </label>
     );

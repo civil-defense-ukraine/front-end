@@ -165,9 +165,10 @@ export const Form = () => {
         {!loading && !formError && (
           <button
             type="submit"
-            className={` form__button button--yellow button--secondary`}
+            className={`button button--yellow form__button button--secondary`}
           >
-            SUBMIT
+            <p>SUBMIT</p>
+            <div className="icon icon--button icon--send icon--send--black"></div>
           </button>
         )}
       </form>

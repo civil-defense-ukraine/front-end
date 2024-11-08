@@ -1,8 +1,9 @@
-import { HashLink } from 'react-router-hash-link';
-import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
-import styles from './Header.module.scss';
-import { SocialMedia } from '../../../../components/SocialMedia';
 import { useEffect, useState } from 'react';
+
+import styles from './Header.module.scss';
+import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
+import { SocialMedia } from '../../../../components/SocialMedia';
+import { DonateButton } from '../../../../components/Buttons/ReadMore/DonateButton';
 
 export const Header = () => {
   const { isVisible, container } = useElementOnScreen();
@@ -23,7 +24,7 @@ export const Header = () => {
         <SocialMedia />
         <h2
           ref={container}
-          className={`${styles.header__title} heading--h2 hide--left ${!isVisible ? '' : 'show'}`}
+          className={`${styles.header__title} heading--h1 hide--left ${!isVisible ? '' : 'show'}`}
         >
           We are a charitable organization that raises funds for the people of
           Ukraine who are defending our country.
@@ -36,12 +37,7 @@ export const Header = () => {
           modern civilized world.
         </p>
 
-        <HashLink
-          to="/#donate"
-          className={`${styles.header__button} button--yellow button--secondary`}
-        >
-          <p>DONATE</p>
-        </HashLink>
+        <DonateButton />
       </section>
     </header>
   );

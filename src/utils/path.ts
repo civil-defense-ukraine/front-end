@@ -6,9 +6,6 @@ export const path = {
       .map(word => word[0].toUpperCase() + word.slice(1))
       .join(' ')
       .replaceAll('-', ' ');
-
-    console.log(path, normalized);
-
     return normalized;
   },
 

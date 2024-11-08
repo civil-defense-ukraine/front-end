@@ -1,18 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormEvent, useContext, useEffect, useMemo, useState } from 'react';
-import styles from '../AdminForm/Form.module.scss';
-import { getNormalized } from '../../../utils/getNormalized';
-import { TextInput } from '../AdminForm/components/Inputs/TextInput';
-import { DateInput } from '../AdminForm/components/Inputs/DateInput';
-import { TextAreaInput } from '../AdminForm/components/Inputs/TextAreaInput';
-import { ImageInput } from '../AdminForm/components/Inputs/ImageInput';
+import styles from '../../components/FormComponents/Form.module.scss';
+import { getNormalized } from '../../../../utils/getNormalized';
 import classNames from 'classnames';
-import { useSessionStorage } from '../../../hooks/useSessionStorage';
-import { FormContext } from '../../../context/FormContext';
-import { newsSlice } from '../../../features/newsSlice';
-import { useAppDispatch } from '../../../app/hooks';
-import { adminNews } from '../../../services/admin/adminNews';
-import { Loader } from '../../../components/Loader';
-import { checkAdminFormField } from '../../../utils/checkFormFields';
+import { useSessionStorage } from '../../../../hooks/useSessionStorage';
+import { FormContext } from '../../../../context/FormContext';
+import { newsSlice } from '../../../../features/newsSlice';
+import { useAppDispatch } from '../../../../app/hooks';
+import { adminNews } from '../../../../services/admin/adminNews';
+import { Loader } from '../../../../components/Loader';
+import { checkAdminFormField } from '../../../../utils/checkFormFields';
+import { TextInput } from '../../components/FormComponents/components/TextInput';
+import { DateInput } from '../../components/FormComponents/components/DateInput';
+import { ImageInput } from '../../components/FormComponents/components/ImageInput';
+import { TextAreaInput } from '../../components/FormComponents/components/TextAreaInput';
+import { AuthContext } from '../../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { News } from '../../../../types/News';
 
 type initialFormState = {
   title: string;
@@ -22,16 +26,30 @@ type initialFormState = {
   type: string;
 };
 
-type ValidationErrors<T> = {
-  [K in keyof T]?: string | null;
+const defaultErrors = {
+  title: '',
+  image: '',
+  text: '',
+};
+
+const defaultNews = {
+  title: '',
+  publicationDate: new Date(),
+  image: null,
+  text: '',
+  type: 'news',
 };
 
 export const NewsForm = () => {
   const { displayForm, setDisplayForm, selectedItem } = useContext(FormContext);
-  const [errors, setErrors] = useState<ValidationErrors<initialFormState>>();
+  const [errors, setErrors] = useState<{ [key: string]: string }>(
+    defaultErrors,
+  );
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState('');
+  const { setAuthorized } = useContext(AuthContext);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const defaultValue = useMemo(() => {
     return {
@@ -48,9 +66,12 @@ export const NewsForm = () => {
   }, [selectedItem]);
 
   const [formField, setFormField] = useState<initialFormState>(defaultValue);
+
   const updateInput = (fieldTitle: string) => {
     return (newValue: string | File | null | Date) => {
       setFormField(prevValue => ({ ...prevValue, [fieldTitle]: newValue }));
+      setErrors(defaultErrors);
+      setFormError('');
     };
   };
 
@@ -64,14 +85,36 @@ export const NewsForm = () => {
     updateInput('publicationDate')(new Date(date));
   };
 
+  const handleFormError = (err: any) => {
+    if (err.message && err.message.includes('401')) {
+      setAuthorized(false);
+      navigate('/login');
+    }
+    setFormError('Something went wrong! Try again later!');
+  };
+
+  const updateData = (updatedArticle: News) => {
+    dispatch(newsSlice.actions.update(updatedArticle));
+    clearForm();
+  };
+
+  const addData = (newArticle: News) => {
+    dispatch(newsSlice.actions.add(newArticle));
+    clearForm();
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setErrors(checkAdminFormField(formField));
 
-    // if (checkAdminFormField(formField)) {
-    //   return;
-    // }
+    const hasErrors = Object.values(checkAdminFormField(formField)).filter(
+      error => error.length > 0,
+    );
+    if (hasErrors.length > 0) {
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData();
     const restdata = {
@@ -79,6 +122,7 @@ export const NewsForm = () => {
       text: formField.text,
       type: formField.type,
       publicationDate: formField.publicationDate.toISOString(),
+      link: getNormalized.link(formField.title),
     };
 
     formData.append(
@@ -93,42 +137,16 @@ export const NewsForm = () => {
     if (selectedItem) {
       adminNews
         .update(selectedItem.id, formData, token)
-        .then(newArticle => {
-          dispatch(
-            newsSlice.actions.update({
-              ...newArticle,
-              link: getNormalized.link(formField.title),
-            }),
-          );
-
-          clearForm();
-        })
-        .catch(err => {
-          console.error(err);
-          console.log(formField);
-          setFormError('Something went wrong! Try again later!');
-        })
+        .then(updateData)
+        .catch(handleFormError)
         .finally(() => {
           setLoading(false);
         });
     } else {
-      console.log(formData);
-
       adminNews
         .post(formData, token)
-        .then(newArticle => {
-          dispatch(
-            newsSlice.actions.add({
-              ...newArticle,
-              link: getNormalized.link(formField.title),
-            }),
-          );
-          clearForm();
-        })
-        .catch(err => {
-          console.log(err);
-          setFormError('Something went wrong! Try again later!');
-        })
+        .then(addData)
+        .catch(handleFormError)
         .finally(() => {
           setLoading(false);
         });
@@ -136,13 +154,9 @@ export const NewsForm = () => {
   };
 
   function clearForm() {
-    setFormField({
-      title: '',
-      publicationDate: new Date(),
-      image: null,
-      text: '',
-      type: 'news',
-    });
+    setFormField(defaultNews);
+    setErrors(defaultErrors);
+    setFormError('');
   }
 
   return (
@@ -169,7 +183,7 @@ export const NewsForm = () => {
         <TextInput
           fieldTitle="Title"
           fieldValue={formField.title}
-          fieldError={errors?.title || ''}
+          fieldError={errors.title}
           placeHolder="Please enter title"
           updateInput={updateInput('title')}
         />
@@ -201,10 +215,11 @@ export const NewsForm = () => {
         <ImageInput
           defaultImage={formField.image}
           updateInput={updateInput('image')}
+          fieldError={errors.image}
         />
         <TextAreaInput
           fieldValue={formField.text}
-          fieldError={errors?.text || ''}
+          fieldError={errors.text}
           placeHolder={'Type the text of the news article...'}
           updateInput={updateInput('text')}
         />
@@ -215,14 +230,17 @@ export const NewsForm = () => {
           <div className={styles.buttons}>
             <button
               type="submit"
-              className={`form__button button--yellow button--secondary`}
+              className={`form__button button button--yellow button--secondary`}
             >
               SAVE
             </button>
 
             <button
-              className={`form__button button--transparent button--secondary`}
-              onClick={() => clearForm()}
+              className={`form__button button button--transparent button--secondary`}
+              onClick={e => {
+                e.preventDefault();
+                clearForm();
+              }}
             >
               RESET
             </button>

@@ -5,7 +5,6 @@
 
   @include on-desktop {
     background-image: url('../../../../imgs/header-bg-desktop.png');
-    padding-bottom: 70px;
   }
 }
 
@@ -36,8 +35,12 @@
     @include on-tablet {
       min-height: calc(100vh - $header-height);
       padding-top: 40px;
-      padding-bottom: 82x;
+      padding-bottom: 82px;
       padding-inline: 85px;
+    }
+
+    @include on-desktop {
+      padding-bottom: 70px;
     }
 
     & > p {
@@ -46,15 +49,11 @@
   }
 
   &__title {
-    font-size: 36px;
-    line-height: 1.2em;
-    font-weight: 400;
     padding-bottom: 2px;
     max-width: 305px;
+    font-weight: 500;
 
     @include on-tablet {
-      font-size: 48px;
-      font-weight: 600px;
       max-width: 885px;
     }
   }

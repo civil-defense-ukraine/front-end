@@ -1,7 +1,7 @@
 const BASE_URL =
   'https://cdu-backend-service-latest.onrender.com/api/auth/login';
 
-export async function requestToAuth<T>(data: {
+export async function requestToAuth(data: {
   email: string;
   password: string;
 }): Promise<{ token: string }> {

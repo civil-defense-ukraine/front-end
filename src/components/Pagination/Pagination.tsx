@@ -13,7 +13,7 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
   const handleClick = (value: string | number) => {
     const newSearchParams = getPagination.searchParams(value, currentPage);
     window.scrollTo({
-      top: 1200,
+      top: 0,
       left: 0,
       behavior: 'auto',
     });
@@ -53,8 +53,8 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
           return (
             <div
               key={page}
-              className={classNames(`${styles.button}`, {
-                [styles.button__selected]:
+              className={classNames(`${styles.buttonP}`, {
+                [styles.buttonP__selected]:
                   page === currentPage || (page === 1 && currentPage === 0),
               })}
               onClick={() => {

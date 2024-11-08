@@ -3,7 +3,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   align-items: center;
   padding-inline: 18px;
   @include gap-btw-blocks;
@@ -17,9 +16,16 @@
   }
 }
 
+.header {
+  @include on-tablet {
+    font-size: 40px;
+  }
+}
+
 .team {
   display: grid;
   row-gap: 24px;
+  padding-top: 32px;
 
   @include on-tablet {
     grid-template-columns: repeat(2, 336px);
@@ -68,6 +74,8 @@
       height: var(--hover-height);
       opacity: 1;
       overflow: inherit;
+      padding-top: 8px;
+      padding-bottom: 32px;
     }
 
     .article__container {
@@ -79,13 +87,14 @@
 
   &__name {
     font-size: 24px;
+    margin-top: 32px;
   }
 
   &__container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 8px;
     box-sizing: border-box;
 
     @include on-tablet {
@@ -97,20 +106,24 @@
     height: 236px;
     width: 100%;
 
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 24px;
     object-fit: cover;
     object-position: top;
-    margin-bottom: 32px;
 
     @include on-desktop {
       height: 336px;
-      width: 382px;
+      width: 416px;
     }
 
     &__default {
-      max-height: 180px;
-      max-width: 150px;
+      max-height: 160px;
+      max-width: 160px;
+      border-radius: 0;
+      object-fit: contain;
+      object-position: center;
     }
   }
 
@@ -133,7 +146,7 @@
   }
 }
 
-.button {
-  transform: translateY(-30px);
+.teamSection__button {
   height: 60px;
+  margin-top: 32px;
 }

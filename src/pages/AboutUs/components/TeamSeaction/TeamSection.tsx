@@ -7,6 +7,7 @@ import { loadTeam } from '../../../../features/teamSlice';
 import { Loader } from '../../../../components/Loader';
 import { Error } from '../../../../components/Error';
 import { TeamCard } from './components/TeamCard';
+import { screenWidth } from '../../../../constants/screenWidth';
 
 export const TeamSection = () => {
   const [showAllTeam, setShowAllTeam] = useState(false);
@@ -17,7 +18,7 @@ export const TeamSection = () => {
   const dispath = useAppDispatch();
 
   const itemsPerPage = useMemo(() => {
-    if (width >= 1240) {
+    if (width >= screenWidth.desktop) {
       return 3;
     } else {
       return 2;
@@ -31,11 +32,11 @@ export const TeamSection = () => {
       return 0;
     }
 
-    if (width >= 1240) {
+    if (width >= screenWidth.desktop) {
       return Math.ceil(restOfTeam.length * itemsPerPage) * (363 + 24);
     }
 
-    if (width > 834) {
+    if (width >= screenWidth.tablet) {
       return Math.ceil(restOfTeam.length * itemsPerPage) * (454 + 32);
     }
     return restOfTeam.length * (454 + 32);
@@ -44,8 +45,6 @@ export const TeamSection = () => {
   useEffect(() => {
     dispath(loadTeam());
   }, []);
-
-  console.log(team);
 
   return (
     <section className={styles.container}>
@@ -62,7 +61,7 @@ export const TeamSection = () => {
           </div>
           <div
             className={classNames(`${styles.team__rest} ${styles.team}`, {
-              [styles.team__rest__open]: showAllTeam
+              [styles.team__rest__open]: showAllTeam,
             })}
             style={{
               maxHeight: `${getMaxHeight}px`,
@@ -73,13 +72,16 @@ export const TeamSection = () => {
             ))}
           </div>
           <button
-            className={`${styles.button} button--secondary button--transparent`}
+            className={`${styles.teamSection__button} button button--secondary button--transparent`}
             disabled={team.length <= visibleTeam.length || error.length !== 0}
             onClick={() => {
               setShowAllTeam(prevState => !prevState);
             }}
           >
             {`${showAllTeam ? 'SEE LESS' : 'SEE ALL'} `}
+            {!showAllTeam && (
+              <div className="icon icon--button icon--arrow icon--arrow--left"></div>
+            )}
           </button>
         </>
       )}

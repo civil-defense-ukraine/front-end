@@ -1,4 +1,3 @@
-
 export const getNormalized = {
   slicedText(text: string, maxLengthOfText = 270) {
     if (text.length <= maxLengthOfText) {
@@ -14,8 +13,22 @@ export const getNormalized = {
     return `${updatedString.slice(0, lastIndex)} ...`;
   },
   link(title: string) {
-    const modifiedTitle = title.trim().toLowerCase();
-    return modifiedTitle.split(' ').join('-');
+    return title
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .map(word => {
+        return word
+          .split('')
+          .filter(ch => {
+            const isLetter = ch.toUpperCase() !== ch;
+            const isNumber = !isNaN(Number(ch));
+            return isLetter || isNumber;
+          })
+          .join('');
+      })
+      .filter(word => word.length > 0)
+      .join('-');
   },
   title(title: string) {
     return title
@@ -30,13 +43,11 @@ export const getNormalized = {
       .join(' ');
   },
   date(date: Date) {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    };
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const day = date.getDate();
+    const year = date.getFullYear();
 
-    return new Intl.DateTimeFormat('en-US', options).format(date);
+    return `${month}. ${day} ${year}`;
   },
   dateForAdmin(date: Date) {
     return new Intl.DateTimeFormat(['ban', 'id']).format(date);

@@ -2,6 +2,7 @@
 
 .topBar {
   background-color: $blue;
+  font-size: 20px;
 
   &__menu {
     background-color: $white;
@@ -23,20 +24,21 @@
   }
 
   &__button {
-    display: block;
-    height: 48px;
-    line-height: 48px;
-    text-align: center;
-    width: 160px;
-    border: 1px solid $yellow;
-    text-decoration: none;
-    border-radius: 24px;
+    flex-shrink: 0;
     color: $yellow;
-    font-weight: 700;
+    width: 160px;
+
+    @include on-tablet {
+      width: 204px;
+    }
 
     &__menu {
       color: $blue;
       border-color: $blue;
+
+      & > div {
+        background: $blue;
+      }
     }
   }
 
@@ -57,7 +59,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 42px;
+    gap: 24px;
+    padding-inline: 24px;
   }
 
   @include on-desktop {

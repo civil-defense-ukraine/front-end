@@ -1,14 +1,14 @@
-import { News } from '../types/News';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type Props = {
-  news: News[];
+  items: any[];
   itemsPerPage?: number;
   page?: string | null;
 };
 
-export const getVisibleNews = ({ news, itemsPerPage = 12, page }: Props) => {
+export const getVisibleItems = ({ items, itemsPerPage = 12, page }: Props) => {
   const pageNumber = page ? +page : 1;
   const startIndex = (pageNumber - 1) * itemsPerPage;
   const endIndex = (pageNumber - 1) * itemsPerPage + itemsPerPage;
 
-  return news.slice(startIndex, endIndex);
+  return items.slice(startIndex, endIndex);
 };

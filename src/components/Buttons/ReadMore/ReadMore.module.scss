@@ -20,13 +20,14 @@
   }
 
   &:hover {
+    border: 1px solid $blue;
+    border-color: $blue;
+    border-radius: 24px;
+    padding-inline: 10px;
     width: 127px;
   }
 
   &:active {
-    border: 1px solid $blue;
-    border-radius: 24px;
-    padding-inline: 10px;
     width: 147px;
   }
 }

@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 import styles from './LatestNews.module.scss';
 import { useAppSelector } from '../../app/hooks';
 import { useWidth } from '../../hooks/useWidth';
@@ -23,7 +22,6 @@ export const LatestNews = () => {
   }, [news]);
   const itemsPerPage = useMemo(() => (width >= 834 ? 2 : 1), [width]);
 
-
   const handleIncrease = (step = 1) => {
     const maxIndex = currentNews.length - 1;
     setDisplayIndex(prevIndex =>
@@ -32,9 +30,7 @@ export const LatestNews = () => {
   };
 
   const handleDecrease = (step = 1) => {
-    setDisplayIndex(prevIndex =>
-      prevIndex - step < 0 ? 0 : prevIndex - step,
-    );
+    setDisplayIndex(prevIndex => (prevIndex - step < 0 ? 0 : prevIndex - step));
   };
 
   const onSwipe = (diff: number) => {
@@ -45,13 +41,11 @@ export const LatestNews = () => {
     if (diff < -50) {
       handleIncrease(itemsPerPage);
     }
-  }
-
-
+  };
 
   return (
     <section ref={container} className={styles.container}>
-      <h2 className={`${styles.header} heading--h2`}>Latest News</h2>
+      <h2 className={`${styles.header} heading--h2`}>Recent News</h2>
 
       {loading && (
         <div className={styles.center}>
@@ -69,10 +63,9 @@ export const LatestNews = () => {
         </div>
       )}
       {!loading && !error && (
-
-
-        <><MobileSwiper onSwipe={onSwipe}>
-          <div
+        <>
+          <MobileSwiper
+            onSwipe={onSwipe}
             className={`${styles.articles} hide--bottom ${isVisible ? 'show' : ''}`}
           >
             {currentNews.map(article => (
@@ -80,34 +73,34 @@ export const LatestNews = () => {
                 newsData={article}
                 key={article.id}
                 style={{
+                  minWidth: width >= 1250 ? '536px' : '',
                   transform: `translateX(calc(-100% * ${displayIndex} - 16px * ${displayIndex}))`,
                 }}
               />
             ))}
-          </div>
-        </MobileSwiper>
-
+          </MobileSwiper>
 
           <button
             className={`${styles.button} ${styles.button__left}`}
             disabled={displayIndex <= 0}
-            onClick={() => handleDecrease}
+            onClick={() => handleDecrease(itemsPerPage)}
           >
             <div className="icon icon--arrow"></div>
           </button>
           <button
             className={styles.button}
             disabled={displayIndex >= currentNews.length - itemsPerPage}
-            onClick={() => handleIncrease}
+            onClick={() => handleIncrease(itemsPerPage)}
           >
             <div className="icon icon--arrow"></div>
           </button>
 
           <Link
             to={'/news'}
-            className={`${styles.mainButton}  button--secondary button--transparent`}
+            className={`${styles.mainButton} button button--secondary button--transparent`}
           >
-            <p className="text--button">SEE ALL</p>
+            <p>SEE ALL</p>
+            <div className="icon icon--button icon--arrow icon--arrow--left"></div>
           </Link>
         </>
       )}

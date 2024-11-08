@@ -44,6 +44,8 @@ export const articleSlice = createSlice({
 export const loadArticle = createAsyncThunk(
   'fetch/article',
   async (id: string) => {
+    console.log(id);
+
     return publicNews.getArticle(id);
   },
 );

@@ -45,13 +45,14 @@ export const AdminSearch = () => {
       </label>
 
       <button
-        className={`${styles.searchButton} button--yellow button--secondary`}
+        className={`${styles.searchButton} button button--yellow button--secondary`}
         onClick={() => {
           setDisplayForm(true);
           setSelectedItem(null);
         }}
       >
-        NEW ITEM
+        <p>NEW ITEM</p>
+        <div className="icon icon--plus icon--medium"></div>
       </button>
     </section>
   );

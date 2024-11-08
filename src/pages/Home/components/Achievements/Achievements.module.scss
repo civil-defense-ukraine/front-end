@@ -17,7 +17,7 @@
     width: 100%;
 
     @include padding-inline;
-    padding-block: 88px;
+    padding-block: 56px;
 
     & > h2 {
       padding-bottom: 32px;
@@ -26,6 +26,7 @@
 
     @include on-desktop {
       padding-inline: 48px;
+      padding-block: 88px;
     }
   }
 }

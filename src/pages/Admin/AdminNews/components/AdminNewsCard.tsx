@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { News } from '../../../../types/News';
-import styles from '../../AdminCatalog/AdminCatalog.module.scss';
+import styles from '../../components/AdminCatalog/AdminCatalog.module.scss';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../../../context/FormContext';
 import { getNormalized } from '../../../../utils/getNormalized';
@@ -52,7 +52,7 @@ export const AdminNewsCard: React.FC<Props> = ({ item }) => {
       <td className={styles.item__text}>
         {getNormalized.slicedText(text, 35)}
       </td>
-      <td className={styles.button}>
+      <td className={styles.button1}>
         <div
           className={styles.item__button}
           onClick={() => {
@@ -63,7 +63,7 @@ export const AdminNewsCard: React.FC<Props> = ({ item }) => {
           <div className="icon icon--edit icon--small"></div> <p>Edit</p>
         </div>
       </td>
-      <td className={styles.button}>
+      <td className={styles.button1}>
         <div className={styles.item__button} onClick={() => setShowModal(true)}>
           <div className="icon icon--delete icon--small"></div> <p>Delete</p>
         </div>

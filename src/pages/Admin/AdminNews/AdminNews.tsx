@@ -1,15 +1,17 @@
 import { useMemo } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import { AdminNewsCard } from './components/AdminNewsCard';
-import { AdminCatalog } from '../AdminCatalog/AdminCatalog';
-import { NewsForm } from '../AdminForm';
+import { AdminCatalog } from '../components/AdminCatalog/AdminCatalog';
+import { NewsForm } from './components/NewsForm';
 import { useSearchParams } from 'react-router-dom';
-import { getVisibleNews } from '../../../utils/getVisibleNews';
 import { getFilteredNews } from '../../../utils/getFilteredNews';
+import { LoadingPage } from '../../LoadingPage/LoadingPage';
+import { Error } from '../../../components/Error';
+import { getVisibleItems } from '../../../utils/getVisibleItems';
 const newsColumns = ['Title', 'Type', 'Date', 'Image', 'Text'];
 
 const AdminNews = () => {
-  const { news } = useAppSelector(state => state.news);
+  const { news, loading, error } = useAppSelector(state => state.news);
   const [searchParams] = useSearchParams();
 
   const displayedNews = useMemo(() => {
@@ -21,31 +23,20 @@ const AdminNews = () => {
   const visibleNews = useMemo(() => {
     const page = searchParams.get('page');
 
-    return getVisibleNews({ news: displayedNews, page });
+    return getVisibleItems({ items: displayedNews, page, itemsPerPage: 8 });
   }, [searchParams, displayedNews]);
 
   const numberOfPages = useMemo(() => {
-    return Math.ceil(displayedNews.length / 10);
+    return Math.ceil(displayedNews.length / 8);
   }, [displayedNews]);
 
-  // function handleSubmit(formField) {
-  //   const formData = new FormData();
-  //   const restdata = {
-  //     title: formField.title,
-  //     text: formField.text,
-  //     type: formField.type,
-  //     publicationDate: new Date(formField.publicationDate).toISOString(),
-  //   };
+  if (loading) {
+    return <LoadingPage />;
+  }
 
-  //   formData.append(
-  //     'requestDto',
-  //     new Blob([JSON.stringify(restdata)], { type: 'application/json' }),
-  //   );
-
-  //   if (formField.image) {
-  //     formData.append('image', formField.image);
-  //   }
-  // }
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <>

@@ -11,6 +11,7 @@
   @include on-tablet {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 16px;
+    row-gap: 24px;
   }
 
   @include on-desktop {

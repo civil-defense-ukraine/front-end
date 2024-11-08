@@ -1,25 +1,40 @@
 import { useAppSelector } from '../../../app/hooks';
 import { useMemo } from 'react';
-import { AdminCatalog } from '../AdminCatalog/AdminCatalog';
-import { AdminTeamCard } from './AdminTeamCard';
-import { TeamForm } from './TeamForm';
+
+import { Error } from '../../../components/Error';
+import { LoadingPage } from '../../LoadingPage/LoadingPage';
+import { AdminCatalog } from '../components/AdminCatalog/AdminCatalog';
+import { AdminTeamCard } from './components/AdminTeamCard';
+import { TeamForm } from './components/TeamForm';
+import { useSearchParams } from 'react-router-dom';
+import { getVisibleItems } from '../../../utils/getVisibleItems';
 const TeamColumns = ['Name', 'Image', 'Role', 'Text'];
 
 const AdminTeam = () => {
-  const { team } = useAppSelector(state => state.team);
+  const { team, loading, error } = useAppSelector(state => state.team);
+  const [searchParams] = useSearchParams();
   const numberOfPages = useMemo(() => {
-    return Math.ceil(team.length / 15);
+    return Math.ceil(team.length / 8);
   }, [team]);
-  // const visibleTeam = useMemo(() => {
-  //   const page = searchParams.get('page');
 
-  //   return getVisibleNews({ news: news, page });
-  // }, [searchParams, news]);
+  const visibleTeam = useMemo(() => {
+    const page = searchParams.get('page');
+
+    return getVisibleItems({ items: team, page, itemsPerPage: 8 });
+  }, [searchParams, team]);
+
+  if (loading) {
+    return <LoadingPage />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <>
       <AdminCatalog columns={TeamColumns} numberOfPages={numberOfPages}>
-        {team.map(item => (
+        {visibleTeam.map(item => (
           <AdminTeamCard item={item} key={item.id} />
         ))}
       </AdminCatalog>

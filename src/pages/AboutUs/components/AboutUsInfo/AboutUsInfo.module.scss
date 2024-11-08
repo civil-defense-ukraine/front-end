@@ -2,34 +2,36 @@
 
 .container {
   @include padding-inline;
-  padding-bottom: 35px;
+  padding-top: 50px;
+  padding-bottom: 125px;
 
   @include on-tablet {
-    padding-bottom: 38px;
+    padding-top: 88px;
+    padding-bottom: 164px;
   }
 
   @include on-desktop {
+    padding-top: 100px;
     padding-bottom: 150px;
-    padding-inline: 162px;
-    box-sizing: border-box;
+    @include max-width;
   }
 }
 
 .article {
-  padding: 16px;
+  padding: 8px;
   margin-bottom: 24px;
+  gap: 8px;
   display: flex;
   flex-direction: column;
 
   @include on-tablet {
-    gap: 32px;
+    gap: 24px;
     flex-direction: row;
-    align-items: center;
   }
 
   @include on-desktop {
-    padding: 24px;
     align-items: start;
+    max-width: 1116px;
   }
 
   &:nth-of-type(2) {
@@ -52,15 +54,13 @@
   }
 
   &__img {
-    //  height: 314px;
+    height: 314px;
 
     width: 100%;
     border-radius: 24px;
     object-fit: cover;
-    margin-bottom: 32px;
 
     @include on-tablet {
-      margin-bottom: 0;
       height: 295px;
       width: 311px;
     }

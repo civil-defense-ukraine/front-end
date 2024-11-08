@@ -1,40 +1,40 @@
 @import '../../styles/styles.scss';
 
 .container {
-  padding-inline: 18px;
-  padding-block: 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  @include gap-btw-blocks;
+  padding: 18px 18px 89px;
   @include max-width;
 
   @include on-tablet {
-    padding-inline: 69px;
+    padding: 32px 69px 72px;
   }
 
   @include on-desktop {
-    padding-inline: 48px;
+    padding: 40px 48px 85px;
   }
 
   @include max-width;
 }
 
 .latestArticle {
+  margin-bottom: 80px;
   @include on-tablet {
-    margin-bottom: 32px;
+    margin-bottom: 88px;
+    align-self: flex-start;
   }
 
   @include on-desktop {
-    align-self: flex-start;
+    margin-bottom: 100px;
   }
 }
 
 .heading {
   font-weight: 700;
-  padding: 10px;
-  padding-bottom: 24px;
+  padding-inline: 10px;
   text-align: left;
   align-self: start;
+  padding-bottom: 18px;
+
+  @include on-tablet {
+    padding-bottom: 32px;
+  }
 }

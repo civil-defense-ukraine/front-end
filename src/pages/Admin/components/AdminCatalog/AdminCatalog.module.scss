@@ -1,4 +1,4 @@
-@import '../../../styles/styles.scss';
+@import '../../../../styles/styles.scss';
 
 td {
   padding: 16px 8px;
@@ -61,7 +61,7 @@ td {
     min-width: 150px;
     box-sizing: border-box;
     overflow: hidden;
-    max-width: 400px;
+    max-width: 200px;
     flex-shrink: 1;
   }
 
@@ -76,7 +76,7 @@ td {
   }
 }
 
-.button {
+.button1 {
   max-width: 90px;
   box-sizing: border-box;
 }
