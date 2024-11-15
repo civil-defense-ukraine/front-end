@@ -91,7 +91,7 @@ export const ImageInput: React.FC<Props> = React.memo(
             id="file-preview"
           />
           <div
-            onClick={e => {
+            onClick={() => {
               setImagePreview(null);
               updateInput(null);
             }}

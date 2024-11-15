@@ -63,8 +63,12 @@ export const FilterItem: React.FC<Props> = ({
       updatedSearchParams.delete(name);
     } else {
       const normalized = newSelectedOption.toLowerCase();
+      updatedSearchParams.delete('page');
       updatedSearchParams.set(name, normalized);
     }
+
+
+
     setSelectedDropdown('');
     setSearchParams(updatedSearchParams);
     setSelectedOption(newSelectedOption);

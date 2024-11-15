@@ -49,7 +49,7 @@ export const TeamSection = () => {
   return (
     <section className={styles.container}>
       <h2 className={`${styles.header} heading--h2`}>Our Team</h2>
-      {loading && <Loader />}
+      {loading && (<div className={styles.loader}><Loader /></div>)}
       {error.length > 0 && <Error errorText={error} />}
 
       {error.length === 0 && !loading && (

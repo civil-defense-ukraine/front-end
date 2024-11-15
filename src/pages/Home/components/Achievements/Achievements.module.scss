@@ -63,19 +63,20 @@
   position: relative;
 
   @include on-tablet {
-    width: 335px;
+    min-width: 335px;
 
     &__last {
       grid-column: 1 / -1;
-      width: 100%;
     }
   }
 
   @include on-desktop {
-    width: 432px;
+    max-width: 432px;
+    align-items: stretch;
 
     &__last {
       grid-column: auto;
+      
     }
   }
 

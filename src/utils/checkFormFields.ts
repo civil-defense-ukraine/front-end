@@ -1,9 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+const disposableDomains = ["mailinator.com", "tempmail.com", "10minutemail.com"];
+
 type FormFields = {
   email: string;
   subject: string;
   message: string;
 };
+
+function isDisposableDomain(email: string) {
+  const domain = email.split("@")[1];
+  return disposableDomains.includes(domain);
+}
+
 
 export const checkFormField = (
   formField: FormFields | any,
@@ -18,6 +26,10 @@ export const checkFormField = (
 
   if (!pattern.test(email)) {
     error.email = 'Invalid email format.';
+  }
+
+  if (isDisposableDomain(email)) {
+    error.email = 'Please use a valid email address.';
   }
 
   if (formField.message.length < 5) {

@@ -7,15 +7,9 @@ h2 {
 }
 
 .info {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 0;
-  padding: 0;
   gap: 24px;
   margin-bottom: 46px;
-  font-size: 20px;
 
   @include on-tablet {
     padding-bottom: 0;
@@ -23,10 +17,11 @@ h2 {
     margin-bottom: 77px;
   }
 
-  &__text {
-    color: $white;
-    text-decoration: none;
-    display: flex;
+  @include on-desktop {
+    margin-bottom: 0;
+  }
+
+  & > li > a {
     flex-direction: column;
     align-items: center;
     gap: 16px;
@@ -34,11 +29,6 @@ h2 {
     @include on-tablet {
       flex-direction: row;
       text-align: left;
-    }
-
-    &:hover > div {
-      background-color: $yellow;
-      transform: scale(1.2);
     }
   }
 }

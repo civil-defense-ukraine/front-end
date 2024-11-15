@@ -10,16 +10,21 @@ import { NewsCard } from '../NewsCard';
 import { Error } from '../Error';
 import { SkeletonNewsCard } from '../NewsCard/SkeletonNewsCard';
 import { MobileSwiper } from '../MobileSwiper';
+import { News } from '../../types/News';
 
-export const LatestNews = () => {
+type Props = {
+  newsToDisplay?: News[]
+}
+
+export const LatestNews: React.FC<Props> = ({newsToDisplay=[]}) => {
   const [displayIndex, setDisplayIndex] = useState(0);
   const { isVisible, container } = useElementOnScreen();
   const { news, loading, error } = useAppSelector(state => state.news);
 
   const width = useWidth();
   const currentNews = useMemo(() => {
-    return news.slice(0, 10);
-  }, [news]);
+    return newsToDisplay.length > 0 ? newsToDisplay : news.slice(0, 10);
+  }, [news, newsToDisplay]);
   const itemsPerPage = useMemo(() => (width >= 834 ? 2 : 1), [width]);
 
   const handleIncrease = (step = 1) => {

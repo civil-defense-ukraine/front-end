@@ -34,9 +34,10 @@
   align-self: stretch;
   display: flex;
 
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding-left: 43px;
+  text-wrap: nowrap;
+  gap: 20px;
 
   @include on-tablet {
     padding-left: 0;

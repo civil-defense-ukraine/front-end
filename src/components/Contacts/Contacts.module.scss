@@ -1,0 +1,38 @@
+@import '../../styles/styles.scss';
+
+.info {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    gap: 16px;
+  
+
+  @include on-desktop {
+    padding-bottom: 0;
+  }
+
+  &__text {
+    color: $white;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    gap: 16px;
+
+    &:hover  {
+      color: $yellow;
+
+      div {
+        background-color: $yellow;
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  &__icon {
+    background-color: $white;
+  }
+}

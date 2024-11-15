@@ -8,6 +8,7 @@
   align-items: center;
   text-align: center;
   gap: 48px;
+  margin-top: $header-height;
 
   @include on-tablet {
     flex-direction: row;
@@ -48,11 +49,16 @@
 .button {
   margin-top: 48px;
   text-decoration: none;
-  display: block;
-  margin-inline: auto;
   text-align: center;
 
   @include on-desktop {
     margin-left: 0;
+  }
+
+  &__icon {
+    @include on-tablet {
+      height: 32px;
+      width: 32px;
+    }
   }
 }

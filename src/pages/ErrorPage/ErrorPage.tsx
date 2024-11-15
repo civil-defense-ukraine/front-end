@@ -12,9 +12,11 @@ export const ErrorPage = () => {
         </p>
         <Link
           to="/"
-          className={`${styles.button} button--secondary button--yellow`}
+          className={`${styles.button} button button--secondary button--yellow`}
         >
+          
           HOME
+          <div className={`${styles.button__icon} icon icon--medium icon--arrow--left`}></div>
         </Link>
       </div>
     </section>

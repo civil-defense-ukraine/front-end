@@ -62,10 +62,14 @@
     display: flex;
     gap: 16px;
 
-    &:hover > div {
+    &:hover  div {
       background-color: $yellow;
       transform: scale(1.2);
     }
+  }
+
+  &__icon {
+    background-color: $white;
   }
 }
 
@@ -142,6 +146,7 @@
 .fixedButton {
   @include on-tablet {
     position: fixed;
+    z-index: 5;
     right: 24px;
     bottom: 24px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;

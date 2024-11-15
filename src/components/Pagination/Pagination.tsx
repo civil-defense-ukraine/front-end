@@ -30,13 +30,14 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
 
   return (
     <div className={styles.container}>
-      <div
+      <button
         className={classNames(`${styles.arrowButton}`, {
           [styles.arrowButton__disabled]: currentPage <= 1,
         })}
         onClick={() => {
           handleClick(currentPage - 1 >= 1 ? currentPage - 1 : 1);
         }}
+        disabled={currentPage <= 1}
       >
         <div
           className={classNames(
@@ -47,7 +48,7 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
           )}
         ></div>
         {width > 540 && <p>Previous</p>}
-      </div>
+      </button>
       <div className={styles.buttons}>
         {pages.map(page => {
           return (
@@ -66,10 +67,11 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
           );
         })}
       </div>
-      <div
+      <button
         className={classNames(`${styles.arrowButton}`, {
           [styles.arrowButton__disabled]: currentPage >= numberOfPages,
         })}
+        disabled={currentPage >= numberOfPages}
         onClick={() => {
           handleClick(
             currentPage + 1 >= numberOfPages ? numberOfPages : currentPage + 1,
@@ -86,7 +88,7 @@ export const Pagination = ({ numberOfPages }: { numberOfPages: number }) => {
             },
           )}
         ></div>
-      </div>
+      </button>
     </div>
   );
 };

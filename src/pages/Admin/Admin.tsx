@@ -1,7 +1,7 @@
 import styles from './Admin.module.scss';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AdminSearch } from './components/AdminSearch';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { Suspense, useEffect } from 'react';
 import { loadNews } from '../../features/newsSlice';
 import { loadTeam } from '../../features/teamSlice';

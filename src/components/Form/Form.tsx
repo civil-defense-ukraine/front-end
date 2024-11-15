@@ -90,7 +90,7 @@ export const Form = () => {
             type="email"
             name="email"
             id="email"
-            placeholder="email@gmail.com"
+            placeholder="email@example.com"
           />
           {errors.email && (
             <p className="formField__notValid--text">{errors.email}</p>

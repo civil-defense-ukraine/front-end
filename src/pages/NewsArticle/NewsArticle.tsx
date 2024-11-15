@@ -5,21 +5,24 @@ import { LatestNews } from '../../components/LatestNews';
 import { getNormalized } from '../../utils/getNormalized';
 import { SocialMedia } from '../../components/SocialMedia';
 import { News } from '../../types/News';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { loadArticle } from '../../features/articleSlice';
 import { Error } from '../../components/Error';
 import { LoadingPage } from '../LoadingPage/LoadingPage';
 import classNames from 'classnames';
+import { sortNewsByDate } from '../../utils/getSortedNews';
 
 const NewsArticle = () => {
   const { newsId } = useParams();
+  const { news } = useAppSelector(state => state.news);
   const [loaded, setLoaded] = useState(false);
+  const dispatch = useAppDispatch();
+  const copyButton = useRef<HTMLButtonElement>(null);
+  const [copied, setCopied] = useState(false);
+
   if (!newsId) {
     return <p>No such article</p>;
   }
-
-  const dispatch = useAppDispatch();
-  const copyButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     dispatch(loadArticle(newsId));
@@ -28,9 +31,22 @@ const NewsArticle = () => {
       left: 0,
       behavior: 'smooth',
     });
+    setCopied(false);
+    
   }, [newsId]);
 
   const { article, loading, error } = useAppSelector(state => state.article);
+  const recentArticles = useMemo(() => {
+    const latestNewsToDisplay = news.filter((newsItem) => {
+      if (article) {
+        return newsItem.id !== article.id;
+      }
+
+      return true;
+    });
+    
+    return latestNewsToDisplay.sort(sortNewsByDate).slice(0, 10);
+  }, [article, news])
 
   if (loading) {
     return <LoadingPage />;
@@ -46,7 +62,7 @@ const NewsArticle = () => {
     const currentLocation = window.location.href;
     navigator.clipboard.writeText(currentLocation).then(() => {
       if (copyButton.current) {
-        copyButton.current.classList.add('copyLink--coppied');
+        setCopied(true);
       }
     });
   };
@@ -91,23 +107,17 @@ const NewsArticle = () => {
           Share
           <button
             ref={copyButton}
-            onClick={() => {
-              copyLink();
-            }}
-            onTransitionEnd={() => {
-              if (copyButton.current) {
-                copyButton.current.classList.remove('copyLink--coppied');
-              }
-            }}
-            className={`${styles.share__button} copyLink`}
+            onClick={copyLink}
+            
+            className={`${styles.share__button}`}
           >
-            COPY LINK
+            {!copied ? 'COPY LINK' : 'COPIED'}
           </button>
           <SocialMedia />
         </div>
       </article>
 
-      <LatestNews />
+      <LatestNews newsToDisplay={recentArticles} />
     </div>
   );
 };

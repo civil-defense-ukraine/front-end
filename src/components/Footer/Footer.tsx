@@ -5,6 +5,7 @@ import { SocialMedia } from '../SocialMedia';
 import styles from './Footer.module.scss';
 import { useEffect, useState } from 'react';
 import { DonateButton } from '../Buttons/ReadMore/DonateButton';
+import { Contacts } from '../Contacts/Contacts';
 
 export const Footer = () => {
   const { pathname } = useLocation();
@@ -40,51 +41,7 @@ export const Footer = () => {
 
         <div className={styles.info}>
           <h2 className="heading--h3">Our Contacts</h2>
-          <ul className={styles.info__content}>
-            <li className={styles.info__item}>
-              <a
-                className={styles.info__text}
-                target="_blank"
-                href="https://maps.app.goo.gl/h8cHAbw1dy66wZv37"
-                rel="noreferrer"
-              >
-                <div
-                  className={`${styles.info__icon} icon icon--small icon--hover icon--location`}
-                ></div>
-                <p className={`${styles.info__text} link`}>
-                  7000 Fredericia, Denmark
-                </p>
-              </a>
-            </li>
-            <li className={styles.info__item}>
-              <a
-                className={styles.info__text}
-                target="_blank"
-                href="tel:+4540688222"
-                rel="noreferrer"
-              >
-                <div
-                  className={`${styles.info__icon} icon icon--small  icon--hover icon--phone`}
-                ></div>
-                <p className={`${styles.info__text} link`}>+45 40 68 82 22</p>
-              </a>
-            </li>
-            <li className={styles.info__item}>
-              <a
-                className={styles.info__text}
-                target="_blank"
-                href="mailto:cdefenseukraine@gmail.com"
-                rel="noreferrer"
-              >
-                <div
-                  className={`${styles.info__icon} icon icon--small icon--hover icon--email`}
-                ></div>
-                <p className={`${styles.info__text} link`}>
-                  cdefenseukraine@gmail.com
-                </p>
-              </a>
-            </li>
-          </ul>
+          <Contacts />
         </div>
         <div className={styles.socialMedia}>
           <p className="heading--h3">Follow Us</p>
@@ -92,13 +49,14 @@ export const Footer = () => {
         </div>
 
         <div className={styles.registration}>
-          <div className={`icon icon--small icon--hover icon--globe`}></div>
+          
           <a
             target="_blank"
             href="https://www.civilstyrelsen.dk/sagsomraader/indsamlingsnaevnet/godkendte-indsamlinger/2022/komite-ukraine-hjaelp-04827?fbclid=IwY2xjawGV8VRleHRuA2FlbQIxMAABHThFQDXLzMrr7osQ-eMbTLEMqbRNr9zduyTXbymAh83tqii8CzDaaaGbxg_aem_RFZB_sLDOm8NZyM2JRDajQ"
             className={`${styles.info__text} link heading--h3`}
           >
-            Registration Info
+            <div className={`${styles.info__icon} icon icon--small icon--globe`}></div>
+            <p>Registration Info</p>
           </a>
         </div>
 

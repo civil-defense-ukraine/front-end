@@ -38,11 +38,18 @@
   gap: 10px;
   line-height: 32px;
   cursor: pointer;
+  background-color:#fff;
+  border: none;
 
   &:first-child {
     & :first-child {
       transform: rotate(180deg);
     }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $grey;
   }
 
   &__icon {
@@ -55,8 +62,5 @@
     }
   }
 
-  &__disabled {
-    cursor: not-allowed;
-    color: $grey;
-  }
+
 }
