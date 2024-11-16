@@ -52,6 +52,7 @@
     padding-bottom: 2px;
     max-width: 305px;
     font-weight: 500;
+    text-align: center;
 
     @include on-tablet {
       max-width: 885px;
@@ -78,8 +79,7 @@
   }
 
   &__text {
-    @include on-desktop {
-      font-size: 16px;
-    }
+    font-size: 20px;
+    text-align: center;
   }
 }

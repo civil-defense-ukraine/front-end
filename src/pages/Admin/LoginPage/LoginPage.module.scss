@@ -1,4 +1,7 @@
+@import '../../../styles/styles.scss';
+
 .container {
+  margin-top: $header-height;
   padding-block: 130px;
   display: flex;
   flex-direction: column;

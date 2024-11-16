@@ -21,6 +21,13 @@ export const TopBar = React.memo(() => {
     classNames(`${styles.bar} ${styles[`bar__${order}`]}`, {
       [styles[`bar__${order}__selected`]]: showMenu,
     });
+  const handleLinkClick = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <div
@@ -42,22 +49,22 @@ export const TopBar = React.memo(() => {
         </Link>
         <ul className={`${styles.topBar__nav} ${styles.nav}`}>
           <li className={styles.nav__item}>
-            <NavLink to="/" className={getLinkClass}>
+            <NavLink to="/" className={getLinkClass} onClick={handleLinkClick}>
               Home
             </NavLink>
           </li>
           <li className={styles.nav__item}>
-            <NavLink to="about-us" className={getLinkClass}>
+            <NavLink to="about-us" className={getLinkClass} onClick={handleLinkClick}>
               About Us
             </NavLink>
           </li>
           <li className={styles.nav__item}>
-            <NavLink to="news" className={getLinkClass}>
+            <NavLink to="news" className={getLinkClass} onClick={handleLinkClick}>
               News
             </NavLink>
           </li>
           <li className={styles.nav__item}>
-            <NavLink to="reports" className={getLinkClass}>
+            <NavLink to="reports" className={getLinkClass} onClick={handleLinkClick}>
               Reports
             </NavLink>
           </li>
