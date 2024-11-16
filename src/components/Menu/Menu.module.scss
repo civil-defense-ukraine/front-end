@@ -3,6 +3,7 @@
 .container {
   min-height: calc(100vh - $header-height);
   padding-block: 140px 60px;
+  font-family: 'Figtree', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -11,7 +12,7 @@
   background-color: $white;
   box-sizing: border-box;
   color: $grey--secondary;
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 3;
 }

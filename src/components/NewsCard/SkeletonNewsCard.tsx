@@ -13,12 +13,7 @@ export const SkeletonNewsCard: React.FC<Props> = ({ showInRow = false }) => {
       <div className={`${styles.img} skeleton`}></div>
       <div className={styles.cardSkeleton__info}>
         <div className={`${styles.cardSkeleton__tag} skeleton`}></div>
-        <div className={`${styles.cardSkeleton__header}`}>
-          <div
-            className={`${styles.heading} ${styles.cardSkeleton__heading} heading--h3 skeleton`}
-          ></div>
-          <div className={`${styles.cardSkeleton__date} skeleton`}> </div>
-        </div>
+        <div className={`${styles.cardSkeleton__text} skeleton`}></div>
         <div className={`${styles.cardSkeleton__text} skeleton`}></div>
         <div className={`${styles.cardSkeleton__text} skeleton`}></div>
         <div className={`${styles.cardSkeleton__text} skeleton`}></div>

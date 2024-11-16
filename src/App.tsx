@@ -10,6 +10,7 @@ import { Menu } from './components/Menu';
 import ErrorBoundary from './pages/ErrorBoundary/ErrorBoundary';
 import { LoadingPage } from './pages/LoadingPage/LoadingPage';
 import { Error } from './components/Error';
+import { createPortal } from 'react-dom';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +25,10 @@ export const App = () => {
       <TopBar />
       <ErrorBoundary fallback={<Error />}>
         <Suspense fallback={<LoadingPage />}>
-          {showMenu && <Menu />}
+          {showMenu && (createPortal(
+              <Menu />,
+              document.body,
+            ))}
           <Outlet />
         </Suspense>
       </ErrorBoundary>
