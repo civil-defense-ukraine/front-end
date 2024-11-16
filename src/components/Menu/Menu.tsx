@@ -29,7 +29,15 @@ export const Menu = () => {
     };
   }, [width]);
 
-  const linkClick = () => setShowMenu(false);
+  const linkClick = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    setShowMenu(false)
+  };
+
 
   return (
     <section id="menu" className={`${styles.container}`}>
