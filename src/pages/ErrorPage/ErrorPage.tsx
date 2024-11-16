@@ -6,7 +6,7 @@ export const ErrorPage = () => {
     <section className={styles.container}>
       <div className={styles.img}></div>
       <div className={styles.info}>
-        <h2 className="heading--h1">Somesing went wrong...</h2>
+        <h2 className="heading--h1">Something went wrong...</h2>
         <p className={styles.text}>
           Sorry, but the page you looking for could not be found.
         </p>
