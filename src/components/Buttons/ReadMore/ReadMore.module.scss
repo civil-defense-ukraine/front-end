@@ -12,7 +12,12 @@
   width: 121px;
   height: 24px;
   line-height: 24px;
-  transition: width 500ms;
+  transition:
+    width 500ms,
+    border-color 500ms;
+  padding-inline: 10px;
+  border: 1px solid #fff;
+  border-radius: 24px;
 
   &__icon {
     width: 5px;
@@ -22,10 +27,8 @@
   }
 
   &:hover {
-    border: 1px solid $blue;
     border-color: $blue;
-    border-radius: 24px;
-    padding-inline: 10px;
+
     width: 127px;
   }
 

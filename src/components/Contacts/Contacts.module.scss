@@ -1,13 +1,12 @@
 @import '../../styles/styles.scss';
 
 .info {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    gap: 16px;
-  
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 16px;
 
   @include on-desktop {
     padding-bottom: 0;
@@ -22,7 +21,7 @@
     display: flex;
     gap: 16px;
 
-    &:hover  {
+    &:hover {
       color: $yellow;
 
       div {

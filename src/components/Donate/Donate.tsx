@@ -1,8 +1,9 @@
 import { useLocation } from 'react-router-dom';
+import classNames from 'classnames';
+
 import { useElementOnScreen } from '../../hooks/useElementOnScreen';
 import { Breadcrumbs } from '../Breadcrumbs';
 import styles from './Donate.module.scss';
-import classNames from 'classnames';
 
 export const Donate = () => {
   const { isVisible, container } = useElementOnScreen();

@@ -16,7 +16,7 @@ type Props = {
   newsToDisplay?: News[]
 }
 
-export const LatestNews: React.FC<Props> = ({newsToDisplay=[]}) => {
+export const LatestNews: React.FC<Props> = ({ newsToDisplay = [] }) => {
   const [displayIndex, setDisplayIndex] = useState(0);
   const { isVisible, container } = useElementOnScreen();
   const { news, loading, error } = useAppSelector(state => state.news);

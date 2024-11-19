@@ -1,9 +1,10 @@
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import styles from './Footer.module.scss';
+
 import { bankDetails, mobilePay } from '../../constants/bankDetails';
 import { Logo } from '../Logo';
 import { SocialMedia } from '../SocialMedia';
-import styles from './Footer.module.scss';
-import { useEffect, useState } from 'react';
 import { DonateButton } from '../Buttons/ReadMore/DonateButton';
 import { Contacts } from '../Contacts/Contacts';
 
@@ -49,7 +50,7 @@ export const Footer = () => {
         </div>
 
         <div className={styles.registration}>
-          
+
           <a
             target="_blank"
             href="https://www.civilstyrelsen.dk/sagsomraader/indsamlingsnaevnet/godkendte-indsamlinger/2022/komite-ukraine-hjaelp-04827?fbclid=IwY2xjawGV8VRleHRuA2FlbQIxMAABHThFQDXLzMrr7osQ-eMbTLEMqbRNr9zduyTXbymAh83tqii8CzDaaaGbxg_aem_RFZB_sLDOm8NZyM2JRDajQ"

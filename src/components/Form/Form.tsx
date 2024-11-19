@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import styles from './Form.module.scss';
 import classNames from 'classnames';
+
 import { checkFormField } from '../../utils/checkFormFields';
 import { form } from '../../services/public/form';
 import { FormFields } from '../../types/FormFields';
@@ -111,7 +112,7 @@ export const Form = () => {
               updateInput('subject', e.target.value);
             }}
             id="suject"
-            placeholder="Type the topic of your request"
+            placeholder="Type the subject"
           />
           {errors.subject && (
             <p className="formField__notValid--text">{errors.subject}</p>
@@ -130,13 +131,13 @@ export const Form = () => {
           I want to become your volunteer
         </label>
         <label htmlFor="messageText">
-          Description
+          Message
           <br />
           <textarea
             className={classNames(`form__textArea formField`, {
               formField__notValid: errors.message,
             })}
-            placeholder="Type your notes..."
+            placeholder="Type your message..."
             value={field.message}
             onChange={e => {
               updateInput('message', e.target.value);

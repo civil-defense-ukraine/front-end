@@ -48,9 +48,6 @@ export const DonatePage = () => {
                     onClick={() => {
                       copyLink(value);
                     }}
-                    onTransitionEnd={() => {
-                      setCoppiedText('');
-                    }}
                   ></div>
                 </div>
               </div>
