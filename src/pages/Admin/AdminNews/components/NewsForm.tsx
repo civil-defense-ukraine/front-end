@@ -90,6 +90,10 @@ export const NewsForm = () => {
       setAuthorized(false);
       navigate('/login');
     }
+
+    console.log('works', err);
+    
+
     setFormError('Something went wrong! Try again later!');
   };
 

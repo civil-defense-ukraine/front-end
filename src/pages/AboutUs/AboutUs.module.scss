@@ -8,7 +8,7 @@
   padding-top: 26px;
   padding-left: 18px;
   background-color: $blue;
-  margin-top: $header-height;
+  @include gap-for-sticky-header;
 
   @include on-tablet {
     background-image: url('../../imgs/about-us/bg-tablet.png');

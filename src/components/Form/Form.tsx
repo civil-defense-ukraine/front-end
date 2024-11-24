@@ -119,7 +119,7 @@ export const Form = () => {
           )}
         </label>
 
-        <label htmlFor="volunteer" className="form__checkbox--label">
+        <div className="form__checkbox--label">
           <input
             type="checkbox"
             name="volunteer"
@@ -128,8 +128,8 @@ export const Form = () => {
             className={styles.checkbox}
             onChange={() => updateInput('isVolunteer', !field.isVolunteer)}
           />
-          I want to become your volunteer
-        </label>
+          <label htmlFor="volunteer" >I want to become your volunteer</label>
+        </div>
         <label htmlFor="messageText">
           Message
           <br />

@@ -2,7 +2,8 @@
 
 .container {
   position: relative;
-  margin-top: $header-height;
+  
+  @include gap-for-sticky-header;
 }
 
 .header {

@@ -54,7 +54,7 @@
 .heading {
   font-size: 24px;
   font-weight: 600;
-  height: 63px;
+  height: 2em;
   display: flex;
   align-items: end;
   
@@ -146,9 +146,14 @@
     @include on-tablet {
       flex-direction: row;
       min-width: 700px;
+      height: auto;
 
       & > * {
         flex-grow: 1;
+      }
+
+      @include on-desktop {
+        min-width: 1000px;
       }
     }
   }

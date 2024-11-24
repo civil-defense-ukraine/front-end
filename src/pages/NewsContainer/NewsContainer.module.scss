@@ -9,7 +9,7 @@
   padding-top: 26px;
   padding-left: 18px;
   box-sizing: border-box;
-  margin-top: $header-height;
+  @include gap-for-sticky-header;
 
   @include on-tablet {
     background-image: url('../../imgs/news/bg-tablet.png');

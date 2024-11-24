@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# Civil Defence Ukraine Website
+Civil Defence Ukraine is a charitable organization which raises funds for the people in Ukraine what are fighting for freedom.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo
+https://react-todo-app-lac-chi.vercel.app/
 
-## Available Scripts
+## Tech Stack
+React, JavaScript, CSS, Bulma, React Transition Group, REST API.
 
-In the project directory, you can run:
+## Features
+1. Add Todo: Create new tasks and save them to the API.
+2. Edit Todo: Update existing tasks directly from the UI.
+3. Mark as Completed: Toggle tasks between completed and pending states.
+4. Delete Todo: Remove tasks from the list and API.
+5. Persistent Data: All changes are synced with the API for persistence.
+6. Responsive Design: Adapted for all screen sizes using Bulma.
+7. Smooth Animations: Dynamic animations for adding, editing, and deleting todos using React Transition Group.
 
-### `npm start`
+## 🔗 Link
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tanya-bukhenko-9898871a5/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Run Locally
 
-### `npm run build`
+Clone the project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  https://github.com/TetianaBukhenko/react-todo-app.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to the project directory
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+  cd react-todo-app
+```
 
-### `npm run eject`
+Install dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+  npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  npm run start
+```

@@ -56,3 +56,11 @@
   flex-direction: column;
   margin-inline: auto;
 }
+
+@mixin gap-for-sticky-header {
+  margin-top: $header-height;
+
+  @include on-tablet {
+    margin-top: 0;
+  }
+}

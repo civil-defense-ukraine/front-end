@@ -8,7 +8,8 @@
   align-items: center;
   text-align: center;
   gap: 48px;
-  margin-top: $header-height;
+  
+  @include gap-for-sticky-header;
 
   @include on-tablet {
     flex-direction: row;

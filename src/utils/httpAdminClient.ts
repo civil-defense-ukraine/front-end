@@ -1,4 +1,4 @@
-//const BASE_URL = 'https://cdu-backend-5gvnird6ya-lz.a.run.app/api/admin';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const BASE_URL = 'https://cdu-backend-service-latest.onrender.com/api/admin';
 
 export async function request<T>(
@@ -6,7 +6,7 @@ export async function request<T>(
   token: string,
   method = 'GET',
   data?: FormData,
-): Promise<T> {
+): Promise<T | any> {
   const options: RequestInit = {
     method,
     headers: {
@@ -19,15 +19,21 @@ export async function request<T>(
   }
 
   return fetch(`${BASE_URL}/${path}`, options).then(async response => {
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText || response.statusText);
-    }
+    const responseText = await response.text();
 
+    if (!response.ok) {
+      throw new Error(responseText || response.statusText);
+    }
+    
+    
     const contentType = response.headers.get('content-type');
 
     if (contentType && contentType.includes('application/json')) {
-      return response.json();
+      try {
+        return JSON.parse(responseText);
+      } catch {
+        throw new Error('Failed to parse JSON response');
+      }
     }
 
     return response.status;

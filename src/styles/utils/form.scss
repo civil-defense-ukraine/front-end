@@ -18,11 +18,9 @@
   }
 
   &__checkbox {
-    height: 24px;
-    width: 24px;
-
     &--label {
-      display: flex;
+      flex-grow: 0;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
     }
