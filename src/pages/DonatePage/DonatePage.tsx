@@ -29,7 +29,7 @@ export const DonatePage = () => {
 
       <div className={styles.details}>
         <h3 className="heading--h2">Bank payment Details</h3>
-        <p>Click on a text row to copy it</p>
+        <p>Click on the icon to copy</p>
         <div className={styles.details__container}>
           {Object.entries(bankDetails).map(([name, value]) => {
             return (
