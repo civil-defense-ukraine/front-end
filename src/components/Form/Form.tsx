@@ -20,6 +20,7 @@ export const Form = () => {
     subject: '',
     message: '',
   });
+  const hasErrors = (errors: {[key: string]: string}) => Object.values(errors).some((value: string) => value.length > 0);
   const [formError, setFormError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -34,19 +35,23 @@ export const Form = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+
     const normalizedField = {
       email: field.email.trim(),
       subject: field.subject.trim(),
       message: field.message.trim(),
     };
 
-    setErrors(checkFormField(normalizedField));
-    if (errors.email || errors.message || errors.subject) {
-      setLoading(false);
+   
+    const currentErrors = checkFormField(normalizedField);
+    setErrors(currentErrors);
+    const checkErrors = hasErrors(currentErrors);
+
+    if (checkErrors) {
       return;
     }
 
+    setLoading(true);
     form
       .post({ ...normalizedField, isVolunteer: field.isVolunteer })
       .then(() => {
@@ -167,6 +172,7 @@ export const Form = () => {
           <button
             type="submit"
             className={`button button--yellow form__button button--secondary`}
+            disabled={hasErrors(errors)}
           >
             <p>SUBMIT</p>
             <div className="icon icon--button icon--send icon--send--black"></div>

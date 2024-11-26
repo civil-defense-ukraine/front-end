@@ -14,8 +14,8 @@ function isDisposableDomain(email: string) {
 
 
 export const checkFormField = (
-  formField: FormFields | any,
-): FormFields | any => {
+  formField: FormFields,
+): FormFields => {
   const { email } = formField;
   const error: FormFields = {
     email: '',

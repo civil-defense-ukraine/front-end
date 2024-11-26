@@ -44,6 +44,16 @@
     &:active {
       background-color: $yellow--dark;
     }
+    &:disabled {
+      background-color: $grey;
+      border-color: $grey;
+      cursor: not-allowed;
+      color: white;
+
+      & > div {
+        background-color: $white;
+      }
+    }
   }
 
   &--transparent {

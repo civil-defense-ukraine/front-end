@@ -35,7 +35,9 @@ export const Achievements = () => {
                 <div className={classNames(`${styles.item}`, {
                   [styles.item__first]: index === 0,
                   [styles.item__last]: index === 2
-                })}>
+                })}
+                key={title}
+                >
                 <CounterUpPage startValue={startValue}  endValue={endValue} />
                 <div
                   className={`${styles.item__icon} icon icon--medium ${icon}`}
