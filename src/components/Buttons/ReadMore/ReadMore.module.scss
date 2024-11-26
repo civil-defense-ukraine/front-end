@@ -14,8 +14,9 @@
   line-height: 24px;
   transition:
     width 500ms,
-    border-color 500ms;
-  padding-inline: 10px;
+    border-color 500ms,
+    padding-inline 500ms;
+
   border: 1px solid #fff;
   border-radius: 24px;
 
@@ -28,7 +29,7 @@
 
   &:hover {
     border-color: $blue;
-
+    padding-inline: 10px;
     width: 127px;
   }
 

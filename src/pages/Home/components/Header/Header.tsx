@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 import { useElementOnScreen } from '../../../../hooks/useElementOnScreen';
 import { SocialMedia } from '../../../../components/SocialMedia';
-import { DonateButton } from '../../../../components/Buttons/ReadMore/DonateButton';
+import { DonateButton } from '../../../../components/Buttons/DonateButton';
 
 export const Header = () => {
   const { isVisible, container } = useElementOnScreen();

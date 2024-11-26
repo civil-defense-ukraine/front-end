@@ -43,6 +43,11 @@
     padding-left: 0;
   }
 
+  &__name {
+    width: min-content;
+    inline-size: min-content;
+  }
+
   &__item {
     position: relative;
     width: 270px;

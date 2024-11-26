@@ -20,7 +20,9 @@ const AdminTeam = () => {
   const visibleTeam = useMemo(() => {
     const page = searchParams.get('page');
 
-    return getVisibleItems({ items: team, page, itemsPerPage: 8 });
+    return getVisibleItems({ items: team, page, itemsPerPage: 8 }).sort((person1, person2) => {
+      return person1.id - person2.id;
+    });
   }, [searchParams, team]);
 
   if (loading) {

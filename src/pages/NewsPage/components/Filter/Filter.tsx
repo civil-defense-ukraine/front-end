@@ -18,7 +18,7 @@ export const Filter = () => {
         />
       </div>
       <div className={styles.sort}>
-        <p>Sort by:</p>
+        <p className={styles.sort__name}>Sort by:</p>
         <div className={styles.sort__item}>
           <FilterItem
             options={sortBy}

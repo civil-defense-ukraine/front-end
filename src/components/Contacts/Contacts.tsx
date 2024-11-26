@@ -1,4 +1,4 @@
-import { contacts } from '../../constants/contacts';
+import { getNormalized } from '../../utils/getNormalized';
 import styles from './Contacts.module.scss';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 export const Contacts: React.FC<Props> = ({ className = '', showCVR = false }) => {
 
-  const { address, phoneNumber, email, CVRnumber } = contacts;
+  const { address, phoneNumber, email, CVRnumber } = getNormalized.contacts;
   return (
     <ul className={`${styles.info} ${className}`}>
       <li>

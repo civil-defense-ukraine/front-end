@@ -7,13 +7,16 @@ import { useState } from 'react';
 type Props = {
   person: TeamMember;
 };
+const charactersPerString = 52;
 
 export const TeamCard: React.FC<Props> = ({ person }) => {
   const { id, image, name, position, description } = person;
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <article className={styles.article} key={id}>
+    <article className={classNames(`${styles.article}`, {
+      [styles.article__hover]: description.trim().length > 2
+    })} key={id}>
       <div className={`${styles.article__container} ${styles.article}`}>
         <div
           className={classNames(styles.article__img, {
@@ -47,16 +50,16 @@ export const TeamCard: React.FC<Props> = ({ person }) => {
         </div>
 
         <p className={`${styles.article__name} heading--h3`}>{name}</p>
-        {description.length >= 2 && (
+        {description.trim().length >= 2 && (
           <div
             className={styles.article__quote}
             style={
               {
-                '--hover-height': `${description.length * 0.5}px`,
+                '--hover-height': `${description.trim().length / charactersPerString}em`,
               } as React.CSSProperties
             }
           >
-            <p>{`"${description}"`}</p>
+            {`"${description.length}"`}
           </div>
         )}
         <p className={styles.article__text}>{position}</p>

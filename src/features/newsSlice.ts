@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { News } from '../types/News';
 import { publicNews } from '../services/public/publicNews';
-import { sortNewsByDate } from '../utils/getSortedNews';
+import { sort } from '../utils/sortItems';
 
 type InitialState = {
   loading: boolean;
@@ -45,7 +45,7 @@ export const newsSlice = createSlice({
         if (action.payload.length === 0) {
           state.error = 'Currently there are no news!';
         } else {
-          const sortedNews = action.payload.sort(sortNewsByDate);
+          const sortedNews = action.payload.sort(sort.newsByDate);
 
           state.news = sortedNews;
           state.loading = false;

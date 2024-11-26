@@ -5,8 +5,9 @@ import styles from './Footer.module.scss';
 import { bankDetails, mobilePay } from '../../constants/bankDetails';
 import { Logo } from '../Logo';
 import { SocialMedia } from '../SocialMedia';
-import { DonateButton } from '../Buttons/ReadMore/DonateButton';
+import { DonateButton } from '../Buttons/DonateButton';
 import { Contacts } from '../Contacts/Contacts';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   const { pathname } = useLocation();
@@ -38,8 +39,15 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <section className={styles.container}>
-        <Logo classname={'logo logo--big'} />
-
+        <Link to="/" onClick={() => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          });
+        }}>
+          <Logo classname={'logo logo--big'} />
+        </Link>
         <div className={styles.info}>
           <h2 className="heading--h3">Our Contacts</h2>
           <Contacts />

@@ -49,7 +49,7 @@ export const NewsCard: React.FC<Props> = ({ newsData, style }) => {
           <h3 className={`heading--h3`}>
             {getNormalized.slicedText(
               getNormalized.title(title),
-              width < 1240 ? 48 : 68,
+              width < 1240 ? 48 : 65,
             )}
           </h3>
           </div>

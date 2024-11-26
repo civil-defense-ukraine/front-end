@@ -91,10 +91,6 @@
     flex-direction: row;
     justify-content: space-between;
   }
-
-  @include on-desktop {
-    max-height: 185px;
-  }
 }
 
 .block {

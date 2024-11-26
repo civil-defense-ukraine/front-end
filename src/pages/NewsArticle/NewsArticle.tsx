@@ -10,7 +10,7 @@ import { loadArticle } from '../../features/articleSlice';
 import { Error } from '../../components/Error';
 import { LoadingPage } from '../LoadingPage/LoadingPage';
 import classNames from 'classnames';
-import { sortNewsByDate } from '../../utils/getSortedNews';
+import { sort } from '../../utils/sortItems';
 
 const NewsArticle = () => {
   const { newsId } = useParams();
@@ -45,7 +45,7 @@ const NewsArticle = () => {
       return true;
     });
     
-    return latestNewsToDisplay.sort(sortNewsByDate).slice(0, 10);
+    return latestNewsToDisplay.sort(sort.newsByDate).slice(0, 10);
   }, [article, news])
 
   if (loading) {
@@ -80,7 +80,7 @@ const NewsArticle = () => {
             <div className={styles.date__icon}>
               <div className={`icon icon--small icon--calendar`}></div>
             </div>
-            <p> {getNormalized.date(date)} </p>
+            <p className={styles.date__text}> {getNormalized.date(date)} </p>
           </div>
         </div>
         <div

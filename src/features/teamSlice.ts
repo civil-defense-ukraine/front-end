@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TeamMember } from '../types/TeamMember';
 import { team } from '../services/public/team';
+import { sort } from '../utils/sortItems';
 
 type InitialState = {
   loading: boolean;
@@ -48,9 +49,7 @@ export const teamSlice = createSlice({
     builder.addCase(
       loadTeam.fulfilled,
       (state, action: PayloadAction<TeamMember[]>) => {
-        state.team = action.payload.sort((person1, person2) =>
-          person1.position.localeCompare(person2.position),
-        );
+        state.team = action.payload.sort(sort.teamMembers);
 
         if (action.payload.length === 0) {
           state.error = 'Currently no team members have been added!';

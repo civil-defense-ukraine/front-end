@@ -97,6 +97,11 @@
   align-items: center;
   gap: 8px;
 
+  &__text {
+    width: min-content;
+    inline-size: min-content;
+  }
+
   &__icon {
     padding: 10px;
     height: 44px;

@@ -1,6 +1,6 @@
 import { News } from '../types/News';
-import { sortNewsByDate } from './getSortedNews';
 import { getNormalized } from './getNormalized';
+import { sort } from './sortItems';
 type Props = {
   news: News[];
   category: string;
@@ -34,7 +34,7 @@ export const getFilteredNews = ({
           return true;
       }
     })
-    .sort(sortNewsByDate);
+    .sort(sort.newsByDate);
 
   if (query) {
     filteredNews = filteredNews.filter(newsArticle => {

@@ -1,3 +1,5 @@
+import { contacts } from "../constants/contacts";
+
 export const getNormalized = {
   slicedText(text: string, maxLengthOfText = 270) {
     if (text.length <= maxLengthOfText) {
@@ -57,4 +59,38 @@ export const getNormalized = {
     const date = new Date(`${year}-${month}-${day}T08:33:51.074Z`);
     return date.toISOString();
   },
+
+  contacts: {
+    address: {
+      text: contacts.address,
+      link: contacts.googleMapsLink
+    }, 
+    phoneNumber: {
+      get link() {
+        const normalizedPhone = contacts.phoneNumber.slice(1).split('').filter((ch) => ch !== ' ').join('');
+        return `tel:+ ${normalizedPhone}`;
+      },
+      get text() {
+        const normalizedPhone = contacts.phoneNumber.slice(1).split('').filter((ch) => ch !== ' ').map((n, index) => {
+          return index % 2 === 0 && index !== 0 ? ` ${n}` : n;
+        }).join('');
+        return `+${normalizedPhone}`;
+      } 
+    },
+  
+    email: {
+      text: contacts.email,
+      get link() {
+        return `mailto:${this.text}`;
+      } 
+    },
+  
+    CVRnumber: {
+      get text () {
+        const normalizedCVR = contacts.CVRnumber.slice(1).split('').filter((ch) => ch !== ' ').join('');
+        return `CVR No: ${normalizedCVR}`;
+      } 
+    }
+  
+  }
 };
