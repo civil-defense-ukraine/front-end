@@ -61,7 +61,7 @@ export const NewsForm = () => {
       image:
         selectedItem && 'image' in selectedItem ? selectedItem.image : null,
       text: selectedItem && 'title' in selectedItem ? selectedItem.text : '',
-      type: selectedItem && 'type' in selectedItem ? selectedItem.type : 'news',
+      type: selectedItem && 'type' in selectedItem ? selectedItem.type : 'NEWS',
     };
   }, [selectedItem]);
 
@@ -170,7 +170,7 @@ export const NewsForm = () => {
       })}
     >
       <div
-        className={`${styles.backButton} button--transparent`}
+        className={`${styles.backButton} button--transparent button`}
         onClick={() => setDisplayForm(false)}
       >
         <div

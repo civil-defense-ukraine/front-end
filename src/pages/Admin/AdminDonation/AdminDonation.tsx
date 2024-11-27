@@ -90,13 +90,13 @@ export const AdminDonation = () => {
           <div className={styles.buttons}>
             <button
               type="submit"
-              className={`${styles.button} button--yellow button--secondary`}
+              className={`${styles.button} button button--yellow button--secondary`}
             >
               SAVE
             </button>
 
             <button
-              className={`${styles.button} button--transparent button--secondary`}
+              className={`${styles.button} button button--transparent button--secondary`}
               onClick={e => {
                 e.preventDefault();
                 setFormField(null);

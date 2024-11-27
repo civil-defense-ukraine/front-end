@@ -7,7 +7,7 @@ export const Logo: React.FC<Props> = ({ classname = 'logo' }) => {
     <img
       className={classname}
       loading="lazy"
-      src={require('../../imgs/logo.png')}
+      src='./imgs/logo-yellow.svg'
       alt="CDU logo"
     />
   );

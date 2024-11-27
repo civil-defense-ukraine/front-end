@@ -42,7 +42,7 @@ export const TopBar = React.memo(() => {
           ) : (
             <img
               className="logo"
-              src={require('../../imgs/logo-blue.png')}
+              src='./imgs/logo-blue.svg'
               alt="CDU logo"
             />
           )}

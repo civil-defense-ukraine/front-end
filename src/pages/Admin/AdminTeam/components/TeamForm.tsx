@@ -149,7 +149,7 @@ export const TeamForm = () => {
       })}
     >
       <div
-        className={`${styles.backButton} button--transparent`}
+        className={`${styles.backButton} button button--transparent`}
         onClick={() => setDisplayForm(false)}
       >
         <div
