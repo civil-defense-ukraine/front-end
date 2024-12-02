@@ -17,7 +17,7 @@ export const AboutUsInfo = () => {
             }}
             loading="lazy"
             src="./imgs/about-us-page/founders.png"
-            alt="Civil Defence Founders"
+            alt="Civil Defense Founders"
           />
         </div>
         <span>

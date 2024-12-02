@@ -14,7 +14,7 @@ export const Location = () => {
         >
           <div>
             <h2 className={`${styles.location__header} heading--h1`}>
-              Civil Defence Ukraine
+              Civil Defense Ukraine
             </h2>
             <Contacts className={styles.info} showCVR={true} />
           </div>

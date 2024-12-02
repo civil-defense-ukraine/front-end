@@ -1,6 +1,6 @@
 
-# Civil Defence Ukraine Website
-The Civil Defence Ukraine website is a centralized platform designed to highlight the organization's mission, activities and latest updates, which will help raise funds for Ukraine's defenders.
+# Civil Defense Ukraine Website
+The Civil Defense Ukraine website is a centralized platform designed to highlight the organization's mission, activities and latest updates, which will help raise funds for Ukraine's defenders.
 
 ## Demo
 https://cdu-website.vercel.app/

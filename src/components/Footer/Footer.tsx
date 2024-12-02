@@ -88,7 +88,7 @@ export const Footer = () => {
         <div className={styles.line}></div>
 
         <p className={styles.copyright}>
-          Copyright @ 2024 Civil Defence Ukraine
+          Copyright @ 2024 Civil Defense Ukraine
         </p>
       </section>
     </footer>
