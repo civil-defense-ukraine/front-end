@@ -15,8 +15,8 @@ export const achievements = [
 
   {
     title: 'Danish Krones were raised for the Ukrainian defenders',
-    startValue: 100,
-    endValue: 14000,
+    startValue: 1000,
+    endValue: 1400000,
     icon: 'icon--helmet'
   },
 ]
