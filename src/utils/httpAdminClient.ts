@@ -18,25 +18,21 @@ export async function request<T>(
     options.body = data;
   }
 
-  return fetch(`${BASE_URL}/${path}`, options).then(async response => {
-    const responseText = await response.text();
-
+  return fetch(`${BASE_URL}/${path}`, options).then(response => {
     if (!response.ok) {
-      throw new Error(responseText || response.statusText);
+      throw new Error(response.statusText|| 'Unknown error occurred');
     }
     
     
     const contentType = response.headers.get('content-type');
 
     if (contentType && contentType.includes('application/json')) {
-      try {
-        return JSON.parse(responseText);
-      } catch {
+      return response.json().catch(() => {
         throw new Error('Failed to parse JSON response');
-      }
+      });
     }
 
-    return response.status;
+    return response.text();
   });
 }
 

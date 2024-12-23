@@ -10,6 +10,5 @@ export const store = configureStore({
     article: articleSlice.reducer,
   },
 });
-
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
