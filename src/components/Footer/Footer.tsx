@@ -77,7 +77,9 @@ export const Footer = () => {
             <p>{mobilePay}</p>
           </div>
           <div className={styles.block}>
-            <div className={`${styles.icon} ${styles.icon__danskeBank}`}></div>
+            <div className={`heading--h3`}>
+              <p>Bank Details</p>
+            </div>
             <p>
               Reg. {bankDetails['Registration number']}
               <br /> IBAN: {bankDetails.IBAN} <br /> SWIFT: {bankDetails.SWIFT}

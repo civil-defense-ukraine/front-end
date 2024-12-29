@@ -122,8 +122,8 @@
 .hamburger {
   position: relative;
   cursor: pointer;
-  height: 10px;
-  width: 14px;
+  height: 13px;
+  width: 16px;
 
   &__selected {
     height: 16px;
@@ -138,7 +138,7 @@
 .bar {
   position: absolute;
   display: block;
-  height: 1.5px;
+  height: 2px;
   width: 16px;
   background-color: #eee;
   border-radius: 4px;
@@ -155,7 +155,7 @@
   }
 
   &__1 {
-    top: 40%;
+    top: 41%;
 
     &__selected {
       transform: translateX(-100%);
@@ -164,7 +164,7 @@
   }
 
   &__2 {
-    top: 40%;
+    top: 41%;
 
     &__selected {
       transform: translateX(100%);
