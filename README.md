@@ -22,7 +22,7 @@ Typescript, JavaScript, React, React Hooks, React Custom Hooks,  React Router, R
 Clone the project
 
 ```bash
-  https://github.com/TetianaBukhenko/cdu-website.git
+https://github.com/civil-defense-ukraine/front-end.git
 ```
 
 Go to the project directory
