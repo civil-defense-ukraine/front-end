@@ -40,6 +40,8 @@ const defaultNews = {
   type: 'news',
 };
 
+
+
 export const NewsForm = () => {
   const { displayForm, setDisplayForm, selectedItem } = useContext(FormContext);
   const [errors, setErrors] = useState<{ [key: string]: string }>(

@@ -48,8 +48,8 @@ export const newsSlice = createSlice({
           const sortedNews = action.payload.sort(sort.newsByDate);
 
           state.news = sortedNews;
-          state.loading = false;
         }
+        state.loading = false;
       },
     );
 

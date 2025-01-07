@@ -13,6 +13,8 @@ export const TeamSection = () => {
   const [showAllTeam, setShowAllTeam] = useState(false);
   const { team, loading, error } = useAppSelector(state => state.team);
 
+  console.log(team);
+
   const width = useWidth();
 
   const dispath = useAppDispatch();

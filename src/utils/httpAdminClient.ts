@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const BASE_URL = 'https://cdu-backend-service-latest.onrender.com/api/admin';
+const BASE_URL = 'https://cdu-backend-service-latest-ed3x.onrender.com/api/admin';
 
 export async function request<T>(
   path: string,
