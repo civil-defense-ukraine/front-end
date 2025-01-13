@@ -5,7 +5,7 @@ export const bankDetails = {
   'Account number': '0001652225',
   'Account name': 'Ukraine',
   IBAN: 'DK5054930001652225',
-  SWIFT: 'test',
+  SWIFT: 'test234',
 };
 
 export const mobilePay = ' 51 71 86 16';
