@@ -3,7 +3,7 @@
 The Civil Defense Ukraine website is a centralized platform designed to highlight the organization's mission, activities and latest updates, which will help raise funds for Ukraine's defenders.
 
 ## Demo
-https://cdu-website.vercel.app/
+[https://cdu-website.vercel.app/](https://civil-defense-ukraine.vercel.app/)
 
 ## Tech Stack
 Typescript, JavaScript, React, React Hooks, React Custom Hooks,  React Router, Redux, Redux Toolkit, SCSS, SCSS Module, REST API.
@@ -17,15 +17,12 @@ Typescript, JavaScript, React, React Hooks, React Custom Hooks,  React Router, R
 - Copying to clipboard: that allows users to easily copy text or important information (e.g., donation details or addresses) with a single click.
 - Filtering data: this feature allows user to find needed information faster therefore improves user-experience.
 
-## 🔗 Link
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tanya-bukhenko-9898871a5/)
-
 ## Run Locally
 
 Clone the project
 
 ```bash
-  https://github.com/TetianaBukhenko/cdu-website.git
+https://github.com/civil-defense-ukraine/front-end.git
 ```
 
 Go to the project directory
