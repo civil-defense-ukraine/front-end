@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const BASE_URL = 'https://cdu-backend-service-latest-ed3x.onrender.com/api/public';
+const BASE_URL = 'https://cdu-backend-service-latest-am7e.onrender.com/api/public';
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export async function request<T>(
